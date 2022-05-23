@@ -4,7 +4,7 @@ class Products {
   final String baseprice;
   final String bigprice;
   final String? originalprice;
-  final String item_promotion;
+  final String? item_promotion;
   final String store;
   final String store_product_id;
 

@@ -1,4 +1,3 @@
-import 'package:cache_image/cache_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:selecteat_app/viewmodels/products_view_model.dart';
@@ -19,7 +18,10 @@ class ProductsGrid extends StatelessWidget {
         var product = productsList[index];
 
         return GridTile(
-          child: Image(fit: BoxFit.cover, image: CacheImage(product.image_url)),
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+            child: Text(product.name),
+          ),
           // Image.network(listViewModel.productsList[index].image_url),
         );
       },
