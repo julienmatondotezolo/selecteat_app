@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:selecteat_app/utils/constants.dart';
 import 'package:selecteat_app/viewmodels/products_view_model.dart';
 
 class ProductsGrid extends StatelessWidget {
@@ -49,7 +50,7 @@ class ProductsGrid extends StatelessWidget {
                       style: const TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
-                        color: Colors.green,
+                        color: brandPrimaryColor,
                       ),
                     ),
                   ]
