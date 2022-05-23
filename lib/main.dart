@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:selecteat_app/screens/product_screen.dart';
+import 'package:selecteat_app/view/screens/product_screen.dart';
 import 'package:selecteat_app/viewmodels/products_list_view_model.dart';
 
 void main() {
