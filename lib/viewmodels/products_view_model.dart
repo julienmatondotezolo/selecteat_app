@@ -3,11 +3,7 @@ import 'package:selecteat_app/models/products.dart';
 class ProductViewModel {
   final Products _products;
 
-  ProductViewModel({required Products products}) : _products = products;
-
-  String get title {
-    return _products.id;
-  }
+  ProductViewModel({required Products product}) : _products = product;
 
   String get name {
     return _products.name;
@@ -25,15 +21,15 @@ class ProductViewModel {
     return _products.bigprice;
   }
 
-  String get originalprice {
+  String? get originalprice {
     return _products.originalprice;
   }
 
-    String get item_promotion {
+  String? get item_promotion {
     return _products.item_promotion;
   }
 
-    String get store {
+  String get store {
     return _products.store;
   }
 
