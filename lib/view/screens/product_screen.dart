@@ -23,7 +23,6 @@ class _ProductScreenState extends State<ProductScreen> {
     var listViewModel = Provider.of<ProductsListViewModel>(context);
 
     return Scaffold(
-      appBar: AppBar(),
       body: ProductsGrid(productsList: listViewModel.productsList,)
     );
   }

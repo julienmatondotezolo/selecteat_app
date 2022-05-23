@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:selecteat_app/viewmodels/products_view_model.dart';
@@ -20,9 +21,26 @@ class ProductsGrid extends StatelessWidget {
         return GridTile(
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-            child: Text(product.name),
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              border: Border.all(width: 3, color: Colors.black),
+              borderRadius: const BorderRadius.all(Radius.circular(6)),
+              color: Colors.black,
+              boxShadow: const [
+                BoxShadow(color: Colors.black87, blurRadius: 6),
+              ]
+            ),
+            child: Text(product.name)
+            
+            // Column(
+            //   crossAxisAlignment: CrossAxisAlignment.stretch,
+            //   mainAxisSize: MainAxisSize.min,
+            //   children: [
+            //     CachedNetworkImage(imageUrl: product.image_url),
+            //     Text(product.name)
+            //   ],
+            // ),
           ),
-          // Image.network(listViewModel.productsList[index].image_url),
         );
       },
     );
