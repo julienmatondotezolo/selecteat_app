@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:selecteat_app/utils/constants.dart';
+import 'package:selecteat_app/view/widgets/products_grid.dart';
 import 'package:selecteat_app/view/widgets/search_bar.dart';
 import 'package:selecteat_app/viewmodels/products_list_view_model.dart';
 
@@ -65,11 +66,23 @@ class _HomeScreenState extends State<HomeScreen> {
                       .textTheme.headline5!
                       .copyWith(fontWeight: FontWeight.bold)
                   ),
+                  const SizedBox(height: 10),
                   const Text(
                     "Explore new meals and select the best ingredients for you.",
                   ),
                   const SizedBox(height: 20),
-                  const search_bar()
+                  const search_bar(),
+                  Text(
+                    "Products", 
+                    style: Theme.of(context)
+                      .textTheme.headline5!
+                      .copyWith(fontWeight: FontWeight.bold)
+                  ),
+                  Expanded(
+                    child: ProductsGrid(
+                      productsList: listViewModel.productsList,
+                    ),
+                  ),
                 ],
               ),
             ),
