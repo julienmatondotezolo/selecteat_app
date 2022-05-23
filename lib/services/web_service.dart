@@ -4,7 +4,7 @@ import 'package:selecteat_app/models/products.dart';
 class WebService {
   var dio = Dio();
 
-  Future<List<Products>> fetchTopHeadlines() async {
+  Future<List<Products>> fetchProducts() async {
     String url = "https://3cli754824.execute-api.eu-west-3.amazonaws.com/dev/product";
 
     final response = await dio.get(url);
