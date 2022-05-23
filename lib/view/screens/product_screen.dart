@@ -15,7 +15,7 @@ class _ProductScreenState extends State<ProductScreen> {
   @override
   void initState() {
     super.initState();
-    Provider.of<ProductsListViewModel>(context, listen: false).topHeadlines();
+    Provider.of<ProductsListViewModel>(context, listen: false).allProducts();
   }
 
   @override

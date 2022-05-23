@@ -13,7 +13,7 @@ class ProductsListViewModel with ChangeNotifier {
   LoadingStatus loadingStatus = LoadingStatus.searching;
   List<ProductViewModel> productsList = <ProductViewModel>[];
 
-  void topHeadlines() async {
+  void allProducts() async {
     List<Products> allProducts = await WebService().fetchProducts();
     notifyListeners();
 
