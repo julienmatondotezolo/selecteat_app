@@ -10,16 +10,15 @@ enum LoadingStatus {
 }
 
 class ProductsListViewModel with ChangeNotifier {
-  LoadingStatus loadingStatus = LoadingStatus.empty;
+  LoadingStatus loadingStatus = LoadingStatus.searching;
   List<ProductViewModel> productsList = <ProductViewModel>[];
 
   void topHeadlines() async {
     List<Products> allProducts = await WebService().fetchProducts();
-    loadingStatus = LoadingStatus.searching;
     notifyListeners();
 
     productsList = allProducts
-        .map((product) => ProductViewModel(products: product))
+        .map((product) => ProductViewModel(product: product))
         .toList();
 
     if (productsList.isEmpty) {

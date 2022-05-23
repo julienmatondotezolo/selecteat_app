@@ -12,7 +12,7 @@ class WebService {
     if (response.statusCode == 200) {
       final result = response.data;
       Iterable list = result['body'];
-      return list.map((result) => Products.fromJson(result)).toList();
+      return list.map((product) => Products.fromJson(product)).toList();
     } else {
       throw Exception("Failled to get product data");
     }
