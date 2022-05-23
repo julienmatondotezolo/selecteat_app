@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:selecteat_app/models/products.dart';
 
-class WebService {
+class ProductService {
   var dio = Dio();
 
   Future<List<Products>> fetchProducts() async {

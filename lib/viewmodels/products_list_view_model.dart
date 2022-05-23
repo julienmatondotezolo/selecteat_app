@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:selecteat_app/models/products.dart';
-import 'package:selecteat_app/services/web_service.dart';
+import 'package:selecteat_app/services/product_service.dart';
 import 'package:selecteat_app/viewmodels/products_view_model.dart';
 
 enum LoadingStatus {
@@ -14,7 +14,7 @@ class ProductsListViewModel with ChangeNotifier {
   List<ProductViewModel> productsList = <ProductViewModel>[];
 
   void allProducts() async {
-    List<Products> allProducts = await WebService().fetchProducts();
+    List<Products> allProducts = await ProductService().fetchProducts();
     notifyListeners();
 
     productsList = allProducts
@@ -27,5 +27,9 @@ class ProductsListViewModel with ChangeNotifier {
       loadingStatus = LoadingStatus.completed;
     }
     notifyListeners();
+  }
+
+  void similarProducts() async {
+    //
   }
 }
