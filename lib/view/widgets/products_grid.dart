@@ -24,7 +24,7 @@ class ProductsGrid extends StatelessWidget {
             Flexible(
               child: Container(
                 margin:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                    const EdgeInsets.symmetric(horizontal: 5, vertical: 20),
                 padding: const EdgeInsets.all(15),
                 decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -37,7 +37,9 @@ class ProductsGrid extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     CachedNetworkImage(
-                        height: 120, imageUrl: product.image_url),
+                        height: 120, 
+                        imageUrl: product.image_url,
+                    ),
                     const SizedBox(height: 5),
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -50,7 +52,9 @@ class ProductsGrid extends StatelessWidget {
                           Text(
                             // product.name,
                             // overflow: TextOverflow.ellipsis,
-                            product.name.length > 13 ? product.name.substring(0, 13)+'...' : product.name,
+                            product.name.length > 13
+                                ? product.name.substring(0, 13) + '...'
+                                : product.name,
                             softWrap: false,
                             style: const TextStyle(fontWeight: FontWeight.bold),
                           ),

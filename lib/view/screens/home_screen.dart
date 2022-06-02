@@ -71,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     "Explore new meals and select the best ingredients for you.",
                   ),
                   const SizedBox(height: 20),
-                  const search_bar(),
+                  const SearchBar(),
                   Text(
                     "Products", 
                     style: Theme.of(context)
