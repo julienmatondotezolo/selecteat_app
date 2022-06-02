@@ -13,52 +13,68 @@ class ProductsGrid extends StatelessWidget {
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        childAspectRatio: .6,
+        childAspectRatio: .7,
       ),
       itemCount: productsList.length,
       itemBuilder: (BuildContext context, int index) {
         var product = productsList[index];
 
-        return GridTile(
-          child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-            padding: const EdgeInsets.all(15),
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(5)),
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(color: Colors.grey, blurRadius: 6),
-              ]
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                CachedNetworkImage(imageUrl: product.image_url ),
-                Column(
+        return Stack(
+          children: [
+            Flexible(
+              child: Container(
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                padding: const EdgeInsets.all(15),
+                decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(color: Colors.black12, blurRadius: 10),
+                    ]),
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisSize: MainAxisSize.max,
                   children: [
-                    Text(
-                      product.name,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold
-                      ),
-                    ),
-                    const SizedBox(height: 5),
-                    Text(product.bigprice,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                        color: brandPrimaryColor,
-                      ),
-                    ),
-                  ]
-                )
-              ],
+                    CachedNetworkImage(imageUrl: product.image_url),
+                    Column(crossAxisAlignment: CrossAxisAlignment.stretch,
+                        // mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            product.store,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(fontSize: 10),
+                          ),
+                          const SizedBox(height: 5),
+                          Text(
+                            product.name,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          // const SizedBox(height: 5),
+                          Text(
+                            '€ ' + product.baseprice.replaceAll('.', ','),
+                            style: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: brandPrimaryColor,
+                            ),
+                          ),
+                        ])
+                  ],
+                ),
+              ),
             ),
-            
-          ),
+            const Positioned(
+              child: Icon(
+                Icons.add_box_sharp,
+                color: brandPrimaryColor,
+                size: 35,
+              ),
+              top: 20,
+              right: 10,
+            ),
+          ],
         );
       },
     );
