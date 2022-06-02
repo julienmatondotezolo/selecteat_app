@@ -73,18 +73,16 @@ class _NearbyStoreScreenState extends State<NearbyStoreScreen> {
                               'pk.eyJ1IjoianVsaWVubXQiLCJhIjoiY2s5aGlyNTllMHY3dzNlanczdnRldnFzaCJ9.XzX5C2Y_iiX7Ob33KunkfQ',
                           'id': 'mapbox.mapbox-streets-v11'
                         }),
-                    // MarkerLayerOptions(
-                    //   markers: [
-                    //     Marker(
-                    //       width: 80.0,
-                    //       height: 80.0,
-                    //       point: LatLng(51.5, -0.09),
-                    //       builder: (ctx) => Container(
-                    //         child: FlutterLogo(),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
+                    MarkerLayerOptions(
+                      markers: [
+                        Marker(
+                          width: 50.0,
+                          height: 50.0,
+                          point: LatLng(50.841701, 4.32155),
+                          builder: (ctx) => const FlutterLogo(),
+                        ),
+                      ],
+                    ),
                   ],
                 )
               : Container(
