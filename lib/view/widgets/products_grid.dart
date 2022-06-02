@@ -36,22 +36,25 @@ class ProductsGrid extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    CachedNetworkImage(imageUrl: product.image_url),
-                    Column(crossAxisAlignment: CrossAxisAlignment.stretch,
-                        // mainAxisAlignment: MainAxisAlignment.end,
+                    CachedNetworkImage(
+                        height: 120, imageUrl: product.image_url),
+                    const SizedBox(height: 5),
+                    Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           Text(
                             product.store,
-                            overflow: TextOverflow.ellipsis,
                             style: const TextStyle(fontSize: 10),
                           ),
                           const SizedBox(height: 5),
                           Text(
-                            product.name,
-                            overflow: TextOverflow.ellipsis,
+                            // product.name,
+                            // overflow: TextOverflow.ellipsis,
+                            product.name.length > 13 ? product.name.substring(0, 13)+'...' : product.name,
+                            softWrap: false,
                             style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
-                          // const SizedBox(height: 5),
+                          const SizedBox(height: 2),
                           Text(
                             '€ ' + product.baseprice.replaceAll('.', ','),
                             style: const TextStyle(
