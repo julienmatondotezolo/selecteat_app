@@ -85,8 +85,7 @@ class _NearbyStoreScreenState extends State<NearbyStoreScreen> {
                     ),
                   ],
                 )
-              : Container(
-                  height: size.height, color: brandPrimaryLightColor),
+              : Container(height: size.height, color: brandPrimaryLightColor),
           Positioned(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
@@ -102,8 +101,38 @@ class _NearbyStoreScreenState extends State<NearbyStoreScreen> {
               ],
             ),
             right: 20,
-            bottom: 100,
+            bottom: size.height / 2,
           ),
+          Positioned(
+            child: Container(
+              width: size.width,
+              color: brandPrimaryColor,
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                      Text("Colruyr Anderlecht"),
+                      Text("Adresss bla bla bla"),
+                      Text("Distance: 10meters"),
+                    ]),
+                    const TextButton(
+                      onPressed: null,
+                      child: Icon(
+                        Icons.arrow_circle_right,
+                        color: Colors.white,
+                        size: 50,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            bottom: size.height / 3,
+          )
         ],
       ),
     );
