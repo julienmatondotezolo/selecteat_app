@@ -110,7 +110,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         const SizedBox(height: 10),
                         SizedBox(
                           height: size.height / 4.5,
-                          child: MealsSlider(gridList: mealListViewModel.mealsList)
+                          child: MealsSlider(
+                            gridList: mealListViewModel.mealsList
+                          ),
                         ),
                         const SizedBox(height: 40),
                         Row(

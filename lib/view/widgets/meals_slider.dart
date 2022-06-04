@@ -5,6 +5,10 @@ import 'package:selecteat_app/viewmodels/meals_view_model.dart';
 class MealsSlider extends StatelessWidget {
   final List<MealViewModel> gridList;
 
+  void _mealDetailPage() async {
+    return null;
+  }
+
   const MealsSlider({Key? key, required this.gridList}) : super(key: key);
 
   @override
@@ -37,11 +41,11 @@ class MealsSlider extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                     gradient: LinearGradient(
                       colors: [
-                        Color(0x2626D16D),
+                        Color(0x4926D16D),
                         Color(0xB3000000),
                       ],
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.topCenter,
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
                       stops: [0.0, 1.0],
                     ),
                   ),
@@ -61,12 +65,31 @@ class MealsSlider extends StatelessWidget {
                             style: const TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 24),
+                                fontSize: 24,
+                                shadows: [
+                                  Shadow(
+                                    color: Colors.black38,
+                                    offset: Offset.zero,
+                                    blurRadius: 10,
+                                  )
+                                ]
+                            ),
                           ),
-                          const ElevatedButton(
-                            onPressed: null,
-                            child: Text("Start meal"),
-                          ),
+                          SizedBox(height: size.height / 40),
+                          TextButton(
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: brandPrimaryColor,
+                              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15)
+                            ),
+                            onPressed: _mealDetailPage,
+                            child: const Text(
+                              'Start meal',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                            ),
+                            ),
+                          )
                         ],
                       )
                     ],
