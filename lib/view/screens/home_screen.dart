@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:selecteat_app/utils/constants.dart';
+import 'package:selecteat_app/view/widgets/meals_slider.dart';
 import 'package:selecteat_app/view/widgets/products_grid.dart';
 import 'package:selecteat_app/view/widgets/search_bar.dart';
+import 'package:selecteat_app/viewmodels/meals_list_view_model.dart';
 import 'package:selecteat_app/viewmodels/products_list_view_model.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -18,12 +20,14 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     Provider.of<ProductsListViewModel>(context, listen: false).allProducts();
+    Provider.of<MealsListViewModel>(context, listen: false).allMeals();
   }
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    var listViewModel = Provider.of<ProductsListViewModel>(context);
+    var productListViewModel = Provider.of<ProductsListViewModel>(context);
+    var mealListViewModel = Provider.of<MealsListViewModel>(context);
 
     return Scaffold(
       body: Stack(
@@ -73,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Container(
               height: size.height * .66,
               width: size.width,
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -89,6 +93,26 @@ class _HomeScreenState extends State<HomeScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        Text("Top meals this week",
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline6!
+                                .copyWith(fontWeight: FontWeight.bold)),
+                        const Text(
+                          "see all",
+                          style:
+                              TextStyle(fontSize: 12, color: brandPrimaryColor),
+                        ),
+                      ],
+                    ),
+                    Expanded(
+                        child: MealsSlider(
+                          gridList: mealListViewModel.mealsList)
+                        ),
+                    const SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
                         Text("Products",
                             style: Theme.of(context)
                                 .textTheme
@@ -96,17 +120,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                 .copyWith(fontWeight: FontWeight.bold)),
                         const Text(
                           "see all",
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: brandPrimaryColor
-                          ),
+                          style:
+                              TextStyle(fontSize: 12, color: brandPrimaryColor),
                         ),
                       ],
                     ),
                     const SizedBox(height: 10),
                     Expanded(
                       child: ProductsGrid(
-                        productsList: listViewModel.productsList,
+                        productsList: productListViewModel.productsList,
                       ),
                     ),
                   ],

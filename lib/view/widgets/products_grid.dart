@@ -1,12 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+
 import 'package:selecteat_app/utils/constants.dart';
 import 'package:selecteat_app/viewmodels/products_view_model.dart';
 
 class ProductsGrid extends StatelessWidget {
   final List<ProductViewModel> productsList;
 
-  const ProductsGrid({required this.productsList});
+  const ProductsGrid({
+    Key? key,
+    required this.productsList,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

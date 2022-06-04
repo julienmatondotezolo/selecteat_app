@@ -26,7 +26,7 @@ class ProductService {
 
     if (response.statusCode == 200) {
       final result = response.data;
-      Iterable list = result['body'];
+      Iterable list = result['recipeList'];
       return list.map((meal) => Meals.fromJson(meal)).toList();
     } else {
       throw Exception("Failled to get product data");
