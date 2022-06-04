@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:selecteat_app/utils/constants.dart';
 import 'package:selecteat_app/view/screens/home_screen.dart';
 import 'package:selecteat_app/view/screens/nearby_stores_screen.dart';
+import 'package:selecteat_app/view/screens/product_screen.dart';
 import 'package:selecteat_app/viewmodels/products_list_view_model.dart';
 
 void main() {
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
             create: (_) => ProductsListViewModel(),
           ),
         ], 
-        child: const NearbyStoreScreen()
+        child: const HomeScreen()
       ),
     );
   }
