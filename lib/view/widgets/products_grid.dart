@@ -15,11 +15,15 @@ class ProductsGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
+      physics: const NeverScrollableScrollPhysics(),
+      primary: false,
+      shrinkWrap: true, 
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         childAspectRatio: .7,
       ),
-      itemCount: productsList.length,
+      // itemCount: productsList.length,
+      itemCount: 10,
       itemBuilder: (BuildContext context, int index) {
         var product = productsList[index];
 

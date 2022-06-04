@@ -88,48 +88,50 @@ class _HomeScreenState extends State<HomeScreen> {
                     BoxShadow(color: Colors.black12, blurRadius: 10),
                   ]),
               child: SafeArea(
-                child: Column(
+                child: ListView(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    Column(
                       children: [
-                        Text("Top meals this week",
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline6!
-                                .copyWith(fontWeight: FontWeight.bold)),
-                        const Text(
-                          "see all",
-                          style:
-                              TextStyle(fontSize: 12, color: brandPrimaryColor),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("Top meals this week",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline6!
+                                    .copyWith(fontWeight: FontWeight.bold)),
+                            const Text(
+                              "see all",
+                              style: TextStyle(
+                                  fontSize: 12, color: brandPrimaryColor),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 10),
+                        SizedBox(
+                          height: size.height / 4.5,
+                          child: MealsSlider(gridList: mealListViewModel.mealsList)
+                        ),
+                        const SizedBox(height: 40),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("Products",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline6!
+                                    .copyWith(fontWeight: FontWeight.bold)),
+                            const Text(
+                              "see all",
+                              style: TextStyle(
+                                  fontSize: 12, color: brandPrimaryColor),
+                            ),
+                          ],
+                        ),
+                        ProductsGrid(
+                          productsList: productListViewModel.productsList,
                         ),
                       ],
-                    ),
-                    Expanded(
-                        child: MealsSlider(
-                          gridList: mealListViewModel.mealsList)
-                        ),
-                    const SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("Products",
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline6!
-                                .copyWith(fontWeight: FontWeight.bold)),
-                        const Text(
-                          "see all",
-                          style:
-                              TextStyle(fontSize: 12, color: brandPrimaryColor),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 10),
-                    Expanded(
-                      child: ProductsGrid(
-                        productsList: productListViewModel.productsList,
-                      ),
                     ),
                   ],
                 ),

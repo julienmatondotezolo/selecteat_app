@@ -12,41 +12,45 @@ class MealsSlider extends StatelessWidget {
     var size = MediaQuery.of(context).size;
 
     return ListView.builder(
+        primary: false,
+        shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemCount: gridList.length,
         itemBuilder: (context, index) {
           var meal = gridList[index];
           return Container(
             width: size.width / 1.3,
-            margin: const EdgeInsets.only(right: 20),
+            margin: const EdgeInsets.only(top: 20, right: 20),
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              boxShadow: const [
+                BoxShadow(color: Colors.black12, blurRadius: 10),
+              ],
+              image: DecorationImage(
+                  image: NetworkImage(meal.image), fit: BoxFit.cover),
+            ),
             child: Stack(
               children: [
                 Container(
                   padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                      color: brandPrimaryColor,
-                      gradient: const LinearGradient(
-                        colors: [
-                          Color(0x9026D16D),
-                          Color(0x0026D16D),
-                        ],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        stops: [0.0, 0.8],
-                      ),
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: const [
-                        BoxShadow(color: Colors.black12, blurRadius: 10),
-                      ]),
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    gradient: LinearGradient(
+                      colors: [
+                        Color(0x2626D16D),
+                        Color(0xB3000000),
+                      ],
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                      stops: [0.0, 1.0],
+                    ),
+                  ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(right: 20),
                   padding: const EdgeInsets.all(20),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
@@ -59,7 +63,7 @@ class MealsSlider extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                                 fontSize: 24),
                           ),
-                          const TextButton(
+                          const ElevatedButton(
                             onPressed: null,
                             child: Text("Start meal"),
                           ),
