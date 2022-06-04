@@ -21,7 +21,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Select Eat App',
       theme: ThemeData(
-        textTheme: Theme.of(context).textTheme.apply(displayColor: brandDarkColor)
+        primaryColor: brandPrimaryColor,
+        textTheme: Theme.of(context).textTheme.apply(displayColor: brandDarkColor),
       ),
       home: MultiProvider(
         providers: [
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
             create: (_) => MealsListViewModel(),
           ),
         ], 
-        child: const HomeScreen()
+        child: const ProductScreen()
       ),
     );
   }
