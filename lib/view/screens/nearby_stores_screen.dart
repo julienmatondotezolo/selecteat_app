@@ -86,53 +86,87 @@ class _NearbyStoreScreenState extends State<NearbyStoreScreen> {
                   ],
                 )
               : Container(height: size.height, color: brandPrimaryLightColor),
-          Positioned(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                _position != null
-                    ? Text('Location: ' + _position.toString())
-                    : const Text('No location data'),
-                FloatingActionButton(
-                  onPressed: _getCurrentLocation,
-                  child: const Icon(Icons.my_location),
-                  backgroundColor: brandPrimaryColor,
-                ),
-              ],
-            ),
-            right: 20,
-            bottom: size.height / 2,
-          ),
-          Positioned(
-            child: Container(
-              width: size.width,
-              color: brandPrimaryColor,
-              child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                      Text("Colruyr Anderlecht"),
-                      Text("Adresss bla bla bla"),
-                      Text("Distance: 10meters"),
-                    ]),
-                    const TextButton(
-                      onPressed: null,
-                      child: Icon(
-                        Icons.arrow_circle_right,
-                        color: Colors.white,
-                        size: 50,
-                      ),
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  FloatingActionButton(
+                    onPressed: _getCurrentLocation,
+                    child: const Icon(Icons.my_location),
+                    backgroundColor: brandPrimaryColor,
+                  ),
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    height: size.height / 2.8,
+                    child: ListView.builder(
+                      itemCount: 5,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          padding: const EdgeInsets.all(15),
+                          margin: const EdgeInsets.symmetric(vertical: 5.0),
+                          height: 100,
+                          decoration: BoxDecoration(
+                            color: brandLightGreyColor,
+                            borderRadius: BorderRadius.circular(5),
+                            boxShadow: const [
+                              BoxShadow(color: Colors.black12, blurRadius: 10),
+                            ]
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Text(
+                                    "Colruyt Anderlecht",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const Text(
+                                      "Av. Marius Renard 21, 1070 Anderlecht"),
+                                  RichText(
+                                    text: const TextSpan(children: [
+                                      TextSpan(
+                                        text: "Distance: ",
+                                        style: TextStyle(
+                                          color: brandDarkColor,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: "1500m",
+                                        style: TextStyle(
+                                          color: brandDarkColor,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ]),
+                                  ),
+                                ],
+                              ),
+                              const TextButton(
+                                onPressed: null,
+                                child: Icon(
+                                  Icons.arrow_forward_rounded,
+                                  color: brandPrimaryColor,
+                                  size: 20,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-            bottom: size.height / 3,
-          )
+          ),
         ],
       ),
     );

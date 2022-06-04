@@ -79,8 +79,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       .copyWith(fontWeight: FontWeight.bold)
                   ),
                   Expanded(
-                    child: ProductsGrid(
-                      productsList: listViewModel.productsList,
+                    child: Container(
+                      color: brandPrimaryColor,
+                      child: ProductsGrid(
+                        productsList: listViewModel.productsList,
+                      ),
                     ),
                   ),
                 ],
