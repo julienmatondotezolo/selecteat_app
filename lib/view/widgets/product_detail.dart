@@ -46,6 +46,7 @@ class ProductDetail extends StatelessWidget {
                   height: size.height / 5,
                   decoration: const BoxDecoration(
                       color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
                       boxShadow: [
                         BoxShadow(color: Colors.black12, blurRadius: 10)
                       ]),
@@ -94,22 +95,27 @@ class ProductDetail extends StatelessWidget {
               children: [
                 SizedBox(
                   width: size.width / 1.4,
-                  child: Expanded(
-                    child: TextButton(
-                              style: TextButton.styleFrom(
-                              primary: Colors.white,
-                              backgroundColor: brandPrimaryColor,
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 40, vertical: 15)
-                              ),
-                    onPressed: _addProductToList,
-                    child: const Text(
-                      'Add to list +',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  )),
+                  child: Flex(
+                    direction: Axis.horizontal,
+                    children: [
+                      Expanded(
+                        child: TextButton(
+                                  style: TextButton.styleFrom(
+                                  primary: Colors.white,
+                                  backgroundColor: brandPrimaryColor,
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 40, vertical: 15)
+                                  ),
+                        onPressed: _addProductToList,
+                        child: const Text(
+                          'Add to list +',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      )),
+                    ],
+                  ),
                 ),
                 TextButton(
                   onPressed: _addProductToFavs,
