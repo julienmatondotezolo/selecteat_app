@@ -15,6 +15,11 @@ class ProductsGrid extends StatelessWidget {
 
   void _showProductDetails(context, productDetail) async {
     showModalBottomSheet(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(20),
+          ),
+        ),
         context: context,
         builder: (BuildContext context) {
           return ProductDetail(productList: productDetail);

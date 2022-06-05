@@ -21,6 +21,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Select Eat App',
       theme: ThemeData(
+        bottomSheetTheme:
+              const BottomSheetThemeData(backgroundColor: Colors.transparent),
         primaryColor: brandPrimaryColor,
         textTheme: Theme.of(context).textTheme.apply(displayColor: brandDarkColor),
       ),
