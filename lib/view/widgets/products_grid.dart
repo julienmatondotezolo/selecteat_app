@@ -32,6 +32,14 @@ class ProductsGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (productsList.isEmpty) {
+      return const Center(
+        child: CircularProgressIndicator(
+          color: brandPrimaryColor
+        ),
+      );
+    }
+
     return GridView.builder(
       physics: const NeverScrollableScrollPhysics(),
       primary: false,
@@ -42,7 +50,7 @@ class ProductsGrid extends StatelessWidget {
       ),
       // itemCount: productsList.length,
       itemCount: 20,
-      itemBuilder: (_, int index) {
+      itemBuilder: (_, index) {
         var product = productsList[index];
 
         return GestureDetector(
