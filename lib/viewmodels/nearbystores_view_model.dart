@@ -17,4 +17,26 @@ class NearbyStoresViewModel {
   Map get properties {
     return _nearbyStores.properties;
   }
+
+  String get distance {
+    var distance = properties["distance"].toString();
+    var formatDistance =
+        distance.length > 5 ? distance.substring(0, 5) : distance;
+
+    if (formatDistance.length < 4 && formatDistance.contains(".")) {
+      formatDistance = formatDistance + "00";
+    }
+
+    // return formatDistance;
+
+    if (formatDistance[0] == "0") {
+      return formatDistance.replaceAll('0.', ' ') + " m";
+    }
+
+    if (formatDistance.contains(".")) {
+      formatDistance = formatDistance.substring(0, formatDistance.length - 2);
+    }
+
+    return formatDistance.replaceAll('.', ',') + " km";
+  }
 }

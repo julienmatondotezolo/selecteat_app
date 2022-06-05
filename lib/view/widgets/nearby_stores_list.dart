@@ -10,6 +10,10 @@ class NearbyStoresList extends StatelessWidget {
     required this.nearbyStoresList,
   }) : super(key: key);
 
+  void _focusStoreOnMap() async {
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -33,12 +37,12 @@ class NearbyStoresList extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    nearbyStores.properties["commercialName"].length > 30
-                                ? nearbyStores.properties["commercialName"].substring(0, 30) + '...'
+                    nearbyStores.properties["commercialName"].length > 28
+                                ? nearbyStores.properties["commercialName"].substring(0, 28) + '...'
                                 : nearbyStores.properties["commercialName"],
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
@@ -54,7 +58,8 @@ class NearbyStoresList extends StatelessWidget {
                         ),
                       ),
                       TextSpan(
-                        text: nearbyStores.properties["distance"].toString(),
+                        // text: nearbyStores.properties["distance"].toString(),
+                        text: nearbyStores.distance,
                         style: const TextStyle(
                           color: brandDarkColor,
                           fontWeight: FontWeight.bold,
@@ -64,13 +69,21 @@ class NearbyStoresList extends StatelessWidget {
                   ),
                 ],
               ),
-              const TextButton(
-                onPressed: null,
-                child: Icon(
+               TextButton(
+                onPressed: _focusStoreOnMap,
+                child: const Icon(
                   Icons.arrow_forward_rounded,
-                  color: brandPrimaryColor,
+                  color: Colors.white,
                   size: 20,
                 ),
+                style: TextButton.styleFrom(
+                          backgroundColor: brandPrimaryColor,
+                          padding: EdgeInsets.zero,
+                          minimumSize: const Size(38, 38),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                      ),
               ),
             ],
           ),
