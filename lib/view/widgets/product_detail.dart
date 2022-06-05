@@ -105,14 +105,15 @@ class ProductDetail extends StatelessWidget {
                                   padding: const EdgeInsets.symmetric(
                                     horizontal: 40, vertical: 15)
                                   ),
-                        onPressed: _addProductToList,
-                        child: const Text(
-                          'Add to list +',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
+                          onPressed: _addProductToList,
+                          child: const Text(
+                            'Add to list +',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
-                      )),
+                      ),
                     ],
                   ),
                 ),
