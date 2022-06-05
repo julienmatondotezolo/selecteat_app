@@ -5,6 +5,7 @@ import 'package:selecteat_app/view/screens/home_screen.dart';
 import 'package:selecteat_app/view/screens/nearby_stores_screen.dart';
 import 'package:selecteat_app/view/screens/product_screen.dart';
 import 'package:selecteat_app/viewmodels/meals_list_view_model.dart';
+import 'package:selecteat_app/viewmodels/nearby_stores_list_view_model.dart';
 import 'package:selecteat_app/viewmodels/products_list_view_model.dart';
 
 void main() {
@@ -34,8 +35,11 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(
             create: (_) => MealsListViewModel(),
           ),
+          ChangeNotifierProvider(
+            create: (_) => NearbyStoresListViewModel(),
+          ),
         ], 
-        child: const HomeScreen()
+        child: const NearbyStoreScreen()
       ),
     );
   }

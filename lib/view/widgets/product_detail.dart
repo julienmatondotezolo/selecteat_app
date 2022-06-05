@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:selecteat_app/utils/constants.dart';
-import 'package:selecteat_app/viewmodels/products_view_model.dart';
 
 class ProductDetail extends StatelessWidget {
   final dynamic productList;

@@ -1,12 +1,16 @@
 import 'package:dio/dio.dart';
-import 'package:selecteat_app/models/products.dart';
+import 'package:selecteat_app/models/nearby.dart';
 
 class NearbyService {
   var dio = Dio();
-  var lat = "50.849050";
-  var long = "4.307520";
+  // var lat = "50.849050";
+  // var long = "4.307520";
+  // final dynamic lat;
+  // final dynamic long;
 
-  Future<List> fetchNearbyStores() async {
+  // NearbyService({required String this.lat, required String this.long});
+
+  Future<List> fetchNearbyStores(double lat, double long) async {
     String url =
         "https://3cli754824.execute-api.eu-west-3.amazonaws.com/dev/nearbystores/$lat/$long";
 
@@ -14,8 +18,11 @@ class NearbyService {
 
     if (response.statusCode == 200) {
       final result = response.data;
-      Iterable list = result['groceryObj'];
-      return list.map((product) => Products.fromJson(product)).toList();
+      Iterable list = result['groceryObj']['features'];
+
+      return list
+          .map((nearbyStores) => NearbyStores.fromJson(nearbyStores))
+          .toList();
     } else {
       throw Exception("Failled to get nearby stores");
     }

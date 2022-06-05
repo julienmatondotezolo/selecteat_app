@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:provider/provider.dart';
 import 'package:selecteat_app/utils/constants.dart';
+import 'package:selecteat_app/view/widgets/nearby_stores_list.dart';
+import 'package:selecteat_app/viewmodels/nearbyStores_view_model.dart';
+import 'package:selecteat_app/viewmodels/nearby_stores_list_view_model.dart';
 
 class NearbyStoreScreen extends StatefulWidget {
   const NearbyStoreScreen({Key? key}) : super(key: key);
@@ -19,7 +23,15 @@ class _NearbyStoreScreenState extends State<NearbyStoreScreen> {
     setState(() {
       _position = position;
     });
+
+    Provider.of<NearbyStoresListViewModel>(context, listen: false).allNearbyStores(position.latitude, position.longitude);
   }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   Provider.of<NearbyStoresListViewModel>(context, listen: false).allNearbyStores(_position!.latitude, _position!.longitude);
+  // }
 
   Future<Position> _determinePosition() async {
     bool serviceEnabled;
@@ -53,6 +65,7 @@ class _NearbyStoreScreenState extends State<NearbyStoreScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var nearbyStoreslistViewModel = Provider.of<NearbyStoresListViewModel>(context);
     var size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -100,68 +113,8 @@ class _NearbyStoreScreenState extends State<NearbyStoreScreen> {
                   ),
                   const SizedBox(height: 20),
                   SizedBox(
-                    height: size.height / 2.8,
-                    child: ListView.builder(
-                      itemCount: 5,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          padding: const EdgeInsets.all(15),
-                          margin: const EdgeInsets.symmetric(vertical: 5.0),
-                          height: 100,
-                          decoration: BoxDecoration(
-                            color: brandLightGreyColor,
-                            borderRadius: BorderRadius.circular(5),
-                            boxShadow: const [
-                              BoxShadow(color: Colors.black12, blurRadius: 10),
-                            ]
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const Text(
-                                    "Colruyt Anderlecht",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  const Text(
-                                      "Av. Marius Renard 21, 1070 Anderlecht"),
-                                  RichText(
-                                    text: const TextSpan(children: [
-                                      TextSpan(
-                                        text: "Distance: ",
-                                        style: TextStyle(
-                                          color: brandDarkColor,
-                                        ),
-                                      ),
-                                      TextSpan(
-                                        text: "1500m",
-                                        style: TextStyle(
-                                          color: brandDarkColor,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ]),
-                                  ),
-                                ],
-                              ),
-                              const TextButton(
-                                onPressed: null,
-                                child: Icon(
-                                  Icons.arrow_forward_rounded,
-                                  color: brandPrimaryColor,
-                                  size: 20,
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
+                    height: size.height / 2.2,
+                    child: NearbyStoresList(nearbyStoresList: nearbyStoreslistViewModel.nearbyStoresList),
                   ),
                 ],
               ),

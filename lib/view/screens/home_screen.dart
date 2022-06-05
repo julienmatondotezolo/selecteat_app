@@ -16,7 +16,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
-  @override
   void initState() {
     super.initState();
     Provider.of<ProductsListViewModel>(context, listen: false).allProducts();
