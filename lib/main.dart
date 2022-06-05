@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
             create: (_) => MealsListViewModel(),
           ),
         ], 
-        child: const ProductScreen()
+        child: const HomeScreen()
       ),
     );
   }

@@ -40,8 +40,8 @@ class ProductsGrid extends StatelessWidget {
         crossAxisCount: 2,
         childAspectRatio: .7,
       ),
-      itemCount: productsList.length,
-      // itemCount: 4,
+      // itemCount: productsList.length,
+      itemCount: 20,
       itemBuilder: (_, int index) {
         var product = productsList[index];
 

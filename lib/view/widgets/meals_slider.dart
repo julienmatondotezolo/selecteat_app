@@ -16,7 +16,6 @@ class MealsSlider extends StatelessWidget {
     var size = MediaQuery.of(context).size;
 
     return ListView.builder(
-        primary: false,
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemCount: gridList.length,
@@ -98,6 +97,7 @@ class MealsSlider extends StatelessWidget {
               ],
             ),
           );
-        });
+        }
+    );
   }
 }
