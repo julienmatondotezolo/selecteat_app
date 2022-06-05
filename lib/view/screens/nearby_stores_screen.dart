@@ -1,8 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong2/latlong.dart';
+import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
+
 import 'package:selecteat_app/utils/constants.dart';
 import 'package:selecteat_app/view/widgets/nearby_stores_list.dart';
 import 'package:selecteat_app/viewmodels/nearbyStores_view_model.dart';
@@ -24,7 +27,8 @@ class _NearbyStoreScreenState extends State<NearbyStoreScreen> {
       _position = position;
     });
 
-    Provider.of<NearbyStoresListViewModel>(context, listen: false).allNearbyStores(position.latitude, position.longitude);
+    Provider.of<NearbyStoresListViewModel>(context, listen: false)
+        .allNearbyStores(position.latitude, position.longitude);
   }
 
   // @override
@@ -65,8 +69,32 @@ class _NearbyStoreScreenState extends State<NearbyStoreScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var nearbyStoreslistViewModel = Provider.of<NearbyStoresListViewModel>(context);
+    var nearbyStoreslistViewModel =
+        Provider.of<NearbyStoresListViewModel>(context);
     var size = MediaQuery.of(context).size;
+
+    List<Marker> _buildMarkers() {
+      final _markersList = <Marker>[];
+
+      for (int i = 0;
+          i < nearbyStoreslistViewModel.nearbyStoresList.length;
+          i++) {
+        final mapItem = nearbyStoreslistViewModel.nearbyStoresList[i];
+
+        _markersList.add(
+          Marker(
+            width: 50,
+            height: 50,
+            point: LatLng(mapItem.geometry["coordinates"][1],
+                mapItem.geometry["coordinates"][0]),
+            builder: (_) => Image(image: Svg(mapItem.logoStore, source: SvgSource.network,)),
+          ),
+        );
+      }
+      return _markersList;
+    }
+
+    final _markers = _buildMarkers();
 
     return Scaffold(
       body: Stack(
@@ -77,7 +105,7 @@ class _NearbyStoreScreenState extends State<NearbyStoreScreen> {
                     center: LatLng(_position!.latitude, _position!.longitude),
                     zoom: 14.5,
                   ),
-                  layers: [
+                  nonRotatedLayers: [
                     TileLayerOptions(
                         urlTemplate:
                             "https://api.mapbox.com/styles/v1/julienmt/ckx6t9wl86f0u14nqm714f3th/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoianVsaWVubXQiLCJhIjoiY2s5aGlyNTllMHY3dzNlanczdnRldnFzaCJ9.XzX5C2Y_iiX7Ob33KunkfQ",
@@ -87,10 +115,13 @@ class _NearbyStoreScreenState extends State<NearbyStoreScreen> {
                           'id': 'mapbox.mapbox-streets-v11'
                         }),
                     MarkerLayerOptions(
+                      markers: _markers,
+                    ),
+                    MarkerLayerOptions(
                       markers: [
                         Marker(
-                          width: 50.0,
-                          height: 50.0,
+                          // width: 50.0,
+                          // height: 50.0,
                           point: LatLng(50.841701, 4.32155),
                           builder: (ctx) => const FlutterLogo(),
                         ),
@@ -114,7 +145,9 @@ class _NearbyStoreScreenState extends State<NearbyStoreScreen> {
                   const SizedBox(height: 20),
                   SizedBox(
                     height: size.height / 2.2,
-                    child: NearbyStoresList(nearbyStoresList: nearbyStoreslistViewModel.nearbyStoresList),
+                    child: NearbyStoresList(
+                        nearbyStoresList:
+                            nearbyStoreslistViewModel.nearbyStoresList),
                   ),
                 ],
               ),

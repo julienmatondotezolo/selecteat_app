@@ -39,4 +39,8 @@ class NearbyStoresViewModel {
 
     return formatDistance.replaceAll('.', ',') + " km";
   }
+
+  String get logoStore {
+    return _nearbyStores.properties["logoStore"];
+  }
 }
