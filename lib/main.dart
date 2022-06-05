@@ -5,6 +5,7 @@ import 'package:selecteat_app/view/screens/home_screen.dart';
 import 'package:selecteat_app/view/screens/nearby_stores_screen.dart';
 import 'package:selecteat_app/view/screens/product_screen.dart';
 import 'package:selecteat_app/view/screens/profile_screen.dart';
+import 'package:selecteat_app/view/screens/scanner_screen.dart';
 import 'package:selecteat_app/viewmodels/meals_list_view_model.dart';
 import 'package:selecteat_app/viewmodels/nearby_stores_list_view_model.dart';
 import 'package:selecteat_app/viewmodels/products_list_view_model.dart';
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
             create: (_) => NearbyStoresListViewModel(),
           ),
         ], 
-        child: const ProfileScreen()
+        child: const ScannerScreen()
       ),
     );
   }
