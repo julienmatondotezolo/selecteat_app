@@ -12,6 +12,10 @@ class ProductDetail extends StatelessWidget {
     return null;
   }
 
+  void _addProductToFavs() async {
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -106,6 +110,22 @@ class ProductDetail extends StatelessWidget {
                       ),
                     ),
                   )),
+                ),
+                TextButton(
+                  onPressed: _addProductToFavs,
+                  child: const Icon(
+                    Icons.favorite,
+                    color: Colors.grey,
+                    size: 24,
+                  ),
+                  style: TextButton.styleFrom(
+                    backgroundColor: brandLightGreyColor,
+                    padding: EdgeInsets.zero,
+                    minimumSize: const Size(46, 46),
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                    ),
+                  ),
                 ),
               ],
             )
