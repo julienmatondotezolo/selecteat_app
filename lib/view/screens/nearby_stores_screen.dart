@@ -28,7 +28,7 @@ class _NearbyStoreScreenState extends State<NearbyStoreScreen> {
     });
 
     Provider.of<NearbyStoresListViewModel>(context, listen: false)
-        .allNearbyStores(position.latitude, position.longitude);
+        .allNearbyStores(position.latitude.toString(), position.longitude.toString());
   }
 
   // @override
@@ -70,7 +70,7 @@ class _NearbyStoreScreenState extends State<NearbyStoreScreen> {
   @override
   Widget build(BuildContext context) {
     _getCurrentLocation();
-    
+
     var nearbyStoreslistViewModel =
         Provider.of<NearbyStoresListViewModel>(context);
     var size = MediaQuery.of(context).size;

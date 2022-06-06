@@ -10,7 +10,8 @@ class NearbyService {
 
   // NearbyService({required String this.lat, required String this.long});
 
-  Future<List> fetchNearbyStores(double lat, double long) async {
+  Future<List> fetchNearbyStores(String lat, String long) async {
+    print(lat);
     String url =
         "https://3cli754824.execute-api.eu-west-3.amazonaws.com/dev/nearbystores/$lat/$long";
 
