@@ -31,7 +31,8 @@ class NearbyService {
           .map((nearbyStores) => NearbyStores.fromJson(nearbyStores))
           .toList();
     } else {
-      throw Exception(response);
+      // throw Exception(response);
+      return Future.error(response.statusMessage.toString());
     }
   }
 }

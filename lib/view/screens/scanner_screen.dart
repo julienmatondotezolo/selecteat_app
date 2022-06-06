@@ -19,6 +19,8 @@ class _ScannerScreenState extends State<ScannerScreen> {
   Barcode? result;
   ProductResult? product;
   QRViewController? controller;
+  bool loading = false;
+  String? errorMessage;
 
   @override
   void reassemble() {
@@ -34,6 +36,14 @@ class _ScannerScreenState extends State<ScannerScreen> {
   void dispose() {
     controller?.dispose();
     super.dispose();
+  }
+
+  void _addProductToList() async {
+    return null;
+  }
+
+  void _addProductToFavs() async {
+    return null;
   }
 
   @override
@@ -52,24 +62,25 @@ class _ScannerScreenState extends State<ScannerScreen> {
             borderRadius: 10,
           ),
         ),
-        (result != null)
+        (product != null && errorMessage == null)
             ? Positioned(
                 child: Container(
-                  width: size.width,
-                  // height: size.height / 3,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-                  decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(30.0),
-                        topLeft: Radius.circular(30.0),
-                      ),
-                      boxShadow: [
-                        BoxShadow(color: Colors.black12, blurRadius: 10),
-                      ]),
-                  child: product != null
-                      ? Row(
+                    width: size.width,
+                    // height: size.height / 3,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 40),
+                    decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(30.0),
+                          topLeft: Radius.circular(30.0),
+                        ),
+                        boxShadow: [
+                          BoxShadow(color: Colors.black12, blurRadius: 10),
+                        ]),
+                    child: Column(
+                      children: [
+                        Row(
                           children: [
                             Container(
                               width: size.width / 2.5,
@@ -112,27 +123,96 @@ class _ScannerScreenState extends State<ScannerScreen> {
                                           .copyWith(
                                               fontWeight: FontWeight.bold)),
                                   const SizedBox(height: 10),
-                                  Image(image: Svg(
-                                      "https://static.openfoodfacts.org/images/attributes/nutriscore-"+ product!.product!.nutriscore.toString() + ".svg",
-                                      source: SvgSource.network,
-                                    )
-                                  ),
+                                  Image(
+                                      image: Svg(
+                                    "https://static.openfoodfacts.org/images/attributes/nutriscore-" +
+                                        product!.product!.nutriscore
+                                            .toString() +
+                                        ".svg",
+                                    source: SvgSource.network,
+                                  )),
                                 ],
                               ),
                             ),
                           ],
+                        ),
+                        SizedBox(
+                          height: size.height / 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(
+                              width: size.width / 1.4,
+                              child: Flex(
+                                direction: Axis.horizontal,
+                                children: [
+                                  Expanded(
+                                    child: TextButton(
+                                      style: TextButton.styleFrom(
+                                          primary: Colors.white,
+                                          backgroundColor: brandPrimaryColor,
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 40, vertical: 15)),
+                                      onPressed: _addProductToList,
+                                      child: const Text(
+                                        'Add to list +',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: _addProductToFavs,
+                              child: const Icon(
+                                Icons.favorite,
+                                color: Colors.grey,
+                                size: 24,
+                              ),
+                              style: TextButton.styleFrom(
+                                backgroundColor: brandLightGreyColor,
+                                padding: EdgeInsets.zero,
+                                minimumSize: const Size(46, 46),
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(5)),
+                                ),
+                              ),
+                            ),
+                          ],
                         )
-                      : const Spacer(),
-                ),
+                      ],
+                    )),
                 bottom: 0,
               )
-            : Positioned(
-                child: const Text(
-                  "Scan BARCODE",
-                  style: TextStyle(fontSize: 24, color: Colors.white),
+            : const Spacer(),
+        loading == true
+            ? Positioned(
+                child: SizedBox(
+                  width: size.width,
+                  child: const Center(
+                    child: CircularProgressIndicator(color: brandPrimaryColor),
+                  ),
                 ),
-                bottom: size.height / 8,
-              ),
+                bottom: size.height / 6,
+              )
+            : const Spacer(),
+        errorMessage != null
+            ? AlertDialog(
+                title: Text(errorMessage!),
+                content: const Text('This product was not found in our catalog.'),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.of(context, rootNavigator: true).pop(context),
+                    child: const Text('Try again'),
+                  ),
+                ],
+              )
+            : const Spacer(),
       ],
     );
   }
@@ -143,12 +223,14 @@ class _ScannerScreenState extends State<ScannerScreen> {
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         result = scanData;
+        loading = true;
       });
       getProductNutriscore();
     });
   }
 
   void getProductNutriscore() async {
+    loading = true;
     ProductQueryConfiguration configurations = ProductQueryConfiguration(
         result!.code.toString(),
         language: OpenFoodFactsLanguage.ENGLISH,
@@ -160,14 +242,22 @@ class _ScannerScreenState extends State<ScannerScreen> {
     product = productResult;
 
     if (productResult.status == 1) {
-      // setState(() {
-      //   product = productResult;
-      // });
-      print(productResult.product!.toJson());
+      setState(() {
+        loading = false;
+        // product = productResult;
+      });
+      // print(productResult.toJson());
+      print('LOADING: $loading');
     }
 
     if (productResult.status != 1) {
-      throw Exception('product could not be added');
+      setState(() {
+        errorMessage = productResult.statusVerbose.toString();
+      });
+      // throw Exception('product could not be added');
     }
+
+    print('PRODUCT: $product');
+    print('ERROR: $errorMessage');
   }
 }
