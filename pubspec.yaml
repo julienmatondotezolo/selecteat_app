@@ -39,7 +39,7 @@ dependencies:
   cached_network_image: ^2.2.0+1
   flutter_map: ^0.14.0
   latlong2: ^0.8.1
-  geolocator: ^8.0.1
+  geolocation: ^1.1.2
   geojson: ^1.0.0
   flutter_svg_provider: ^1.0.3
   qr_code_scanner: ^0.7.0
