@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:selecteat_app/utils/constants.dart';
 
 class ScannerScreen extends StatefulWidget {
   const ScannerScreen({Key? key}) : super(key: key);
@@ -33,26 +34,59 @@ class _ScannerScreenState extends State<ScannerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return QRView(
-      key: qrKey,
-      onQRViewCreated: onQRViewCreated,
-      overlay: QrScannerOverlayShape(
-        borderColor: Colors.white,
-        borderLength: 30,
-        borderWidth: 15,
-        borderRadius: 10,
+    var size = MediaQuery.of(context).size;
+
+    return Scaffold(
+      body: Stack(
+        children: [
+          QRView(
+            key: qrKey,
+            onQRViewCreated: onQRViewCreated,
+            overlay: QrScannerOverlayShape(
+              borderColor: result != null ? brandPrimaryColor : Colors.white,
+              borderLength: 30,
+              borderWidth: 15,
+              borderRadius: 10,
+            ),
+          ),
+          (result != null) ? Positioned(
+            child: Container(
+              width: size.width,
+              height: size.height / 3,
+              padding: const EdgeInsets.all(20),
+              decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(30.0),
+                    topLeft: Radius.circular(30.0),
+                  ),
+                  boxShadow: [
+                    BoxShadow(color: Colors.black12, blurRadius: 10),
+                  ]),
+              child: Row(
+                children: [
+                  (result != null) ? Text('CODEBAR: ${result!.code}',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline6!
+                                  .copyWith(fontWeight: FontWeight.bold)) : const Spacer()
+                ],
+              ),
+            ),
+            bottom: 0,
+          ) : const Text("Scan BARCODE"),
+        ],
       ),
     );
   }
 
   void onQRViewCreated(QRViewController controller) {
     setState(() => this.controller = controller);
+
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         result = scanData;
       });
     });
-
-    print(result);
   }
 }

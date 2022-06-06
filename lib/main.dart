@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
             create: (_) => NearbyStoresListViewModel(),
           ),
         ], 
-        child: const HomeScreen()
+        child: const ScannerScreen()
       ),
     );
   }
