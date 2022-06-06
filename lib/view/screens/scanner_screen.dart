@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:selecteat_app/utils/constants.dart';
 
@@ -14,7 +15,29 @@ class ScannerScreen extends StatefulWidget {
 class _ScannerScreenState extends State<ScannerScreen> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   Barcode? result;
+  ProductResult? product;
   QRViewController? controller;
+
+  var scannedBarcode = '3613042717385';
+
+  void getProductNutriscore() async {
+    ProductQueryConfiguration configurations = ProductQueryConfiguration(
+        scannedBarcode,
+        language: OpenFoodFactsLanguage.ENGLISH,
+        fields: [ProductField.ALL]);
+
+    ProductResult productResult =
+        await OpenFoodAPIClient.getProduct(configurations);
+
+    // if (productResult.status == 1) {
+      
+    //   // print(productResult.product!.toJson());
+    // }
+
+    if (productResult.status != 1) {
+      throw Exception('product could not be added');
+    }
+  }
 
   @override
   void reassemble() {
@@ -34,6 +57,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
 
   @override
   Widget build(BuildContext context) {
+    getProductNutriscore();
     var size = MediaQuery.of(context).size;
 
     return Stack(
@@ -71,7 +95,10 @@ class _ScannerScreenState extends State<ScannerScreen> {
                                   .textTheme
                                   .headline6!
                                   .copyWith(fontWeight: FontWeight.bold))
-                          : const Spacer()
+                          : const Spacer(),
+                      product != null
+                          ? Text("Sanned item: " + product!.product!.productName.toString())
+                          : const Spacer(),
                     ],
                   ),
                 ),
@@ -79,12 +106,9 @@ class _ScannerScreenState extends State<ScannerScreen> {
               )
             : Positioned(
                 child: const Text(
-                 "Scan BARCODE", 
-                 style: TextStyle(
-                   fontSize: 24,
-                   color: Colors.white
-                 ),
-                 ),
+                  "Scan BARCODE",
+                  style: TextStyle(fontSize: 24, color: Colors.white),
+                ),
                 bottom: size.height / 8,
               ),
       ],

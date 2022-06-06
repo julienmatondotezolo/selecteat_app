@@ -11,11 +11,17 @@ class NearbyService {
   // NearbyService({required String this.lat, required String this.long});
 
   Future<List> fetchNearbyStores(String lat, String long) async {
-    print(lat);
     String url =
         "https://3cli754824.execute-api.eu-west-3.amazonaws.com/dev/nearbystores/$lat/$long";
 
-    final response = await dio.get(url);
+    final response = await dio.get(
+      url,
+      options: Options(
+        followRedirects: false,
+        // will not throw errors
+        validateStatus: (status) => true,
+      ),
+    );
 
     if (response.statusCode == 200) {
       final result = response.data;
@@ -25,7 +31,7 @@ class NearbyService {
           .map((nearbyStores) => NearbyStores.fromJson(nearbyStores))
           .toList();
     } else {
-      throw Exception("Failled to get nearby stores");
+      throw Exception(response);
     }
   }
 }

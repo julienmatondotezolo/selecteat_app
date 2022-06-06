@@ -43,6 +43,7 @@ dependencies:
   geojson: ^1.0.0
   flutter_svg_provider: ^1.0.3
   qr_code_scanner: ^0.7.0
+  openfoodfacts: ^1.17.0
 
 dev_dependencies:
   flutter_test:
