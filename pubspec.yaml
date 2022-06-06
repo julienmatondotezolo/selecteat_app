@@ -39,11 +39,12 @@ dependencies:
   cached_network_image: ^2.2.0+1
   flutter_map: ^0.14.0
   latlong2: ^0.8.1
-  geolocation: ^1.1.2
   geojson: ^1.0.0
   flutter_svg_provider: ^1.0.3
   qr_code_scanner: ^0.7.0
   openfoodfacts: ^1.17.0
+  location: ^4.4.0
+  http: ^0.13.4
 
 dev_dependencies:
   flutter_test:

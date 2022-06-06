@@ -1,14 +1,14 @@
+import 'dart:async';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
-
+import 'package:location/location.dart';
 import 'package:selecteat_app/utils/constants.dart';
 import 'package:selecteat_app/view/widgets/nearby_stores_list.dart';
-import 'package:selecteat_app/viewmodels/nearbyStores_view_model.dart';
 import 'package:selecteat_app/viewmodels/nearby_stores_list_view_model.dart';
 
 class NearbyStoreScreen extends StatefulWidget {
@@ -19,57 +19,48 @@ class NearbyStoreScreen extends StatefulWidget {
 }
 
 class _NearbyStoreScreenState extends State<NearbyStoreScreen> {
-  Position? _position;
+  Location location = Location();
+  LocationData? _position;
 
   void _getCurrentLocation() async {
-    Position position = await _determinePosition();
+    LocationData position = await _determinePosition();
     setState(() {
       _position = position;
     });
-
-    Provider.of<NearbyStoresListViewModel>(context, listen: false)
-        .allNearbyStores(
-            position.latitude.toString(), position.longitude.toString());
   }
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   Provider.of<NearbyStoresListViewModel>(context, listen: false).allNearbyStores(_position!.latitude, _position!.longitude);
-  // }
+  Future<LocationData> _determinePosition() async {
+    bool _serviceEnabled;
+    PermissionStatus _permissionGranted;
+    LocationData _locationData;
 
-  Future<Position> _determinePosition() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-
-    // Test if location services are enabled.
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      // Location services are not enabled don't continue
-      // accessing the position and request users of the
-      // App to enable the location services.
-      return Future.error('Location services are disabled.');
+    _serviceEnabled = await location.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await location.requestService();
+      // if (!_serviceEnabled) {
+      //   return Future.error("Location permissions are disabled");
+      // }
     }
 
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        return Future.error('Location permissions are denied');
+    _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await location.requestPermission();
+      if (_permissionGranted != PermissionStatus.granted) {
+        return Future.error("Location permissions are denied.");
       }
     }
 
-    if (permission == LocationPermission.deniedForever) {
-      // Permissions are denied forever, handle appropriately.
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
-    }
+    _locationData = await location.getLocation();
 
-    return await Geolocator.getCurrentPosition();
+    Provider.of<NearbyStoresListViewModel>(context, listen: false)
+        .allNearbyStores(_locationData.latitude, _locationData.longitude);
+
+    return _locationData;
   }
 
   @override
   Widget build(BuildContext context) {
+    location.enableBackgroundMode(enable: true);
     _getCurrentLocation();
 
     var nearbyStoreslistViewModel =
@@ -109,7 +100,7 @@ class _NearbyStoreScreenState extends State<NearbyStoreScreen> {
           _position != null
               ? FlutterMap(
                   options: MapOptions(
-                    center: LatLng(_position!.latitude, _position!.longitude),
+                    center: LatLng(_position!.latitude!, _position!.longitude!),
                     zoom: 14.5,
                   ),
                   nonRotatedLayers: [
@@ -129,7 +120,7 @@ class _NearbyStoreScreenState extends State<NearbyStoreScreen> {
                         Marker(
                           // width: 50.0,
                           // height: 50.0,
-                          point: LatLng(50.841701, 4.32155),
+                          point: LatLng(_position!.latitude!, _position!.longitude!),
                           builder: (ctx) => const FlutterLogo(),
                         ),
                       ],

@@ -12,7 +12,7 @@ class NearbyStoresListViewModel with ChangeNotifier {
   LoadingStatus loadingStatus = LoadingStatus.searching;
   List<NearbyStoresViewModel> nearbyStoresList = <NearbyStoresViewModel>[];
 
-  void allNearbyStores(String lat, String long) async {
+  void allNearbyStores(double? lat, double? long) async {
     List allNearbyStores = await NearbyService().fetchNearbyStores(lat, long);
     notifyListeners();
 
