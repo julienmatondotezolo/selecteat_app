@@ -22,7 +22,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 2;
 
   final screens = [
     const NearbyStoreScreen(),

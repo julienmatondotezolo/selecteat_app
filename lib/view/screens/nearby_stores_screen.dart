@@ -87,7 +87,11 @@ class _NearbyStoreScreenState extends State<NearbyStoreScreen> {
             height: 50,
             point: LatLng(mapItem.geometry["coordinates"][1],
                 mapItem.geometry["coordinates"][0]),
-            builder: (_) => Image(image: Svg(mapItem.logoStore, source: SvgSource.network,)),
+            builder: (_) => Image(
+                image: Svg(
+              mapItem.logoStore,
+              source: SvgSource.network,
+            )),
           ),
         );
       }
@@ -129,7 +133,11 @@ class _NearbyStoreScreenState extends State<NearbyStoreScreen> {
                     ),
                   ],
                 )
-              : Container(height: size.height, color: brandPrimaryLightColor),
+              : Column(
+                children: const [
+                  Expanded(child: Center(child: CircularProgressIndicator(color: brandPrimaryColor))),
+                ],
+              ),
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(20),
