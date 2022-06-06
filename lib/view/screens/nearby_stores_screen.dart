@@ -69,6 +69,8 @@ class _NearbyStoreScreenState extends State<NearbyStoreScreen> {
 
   @override
   Widget build(BuildContext context) {
+    _getCurrentLocation();
+    
     var nearbyStoreslistViewModel =
         Provider.of<NearbyStoresListViewModel>(context);
     var size = MediaQuery.of(context).size;
@@ -134,10 +136,13 @@ class _NearbyStoreScreenState extends State<NearbyStoreScreen> {
                   ],
                 )
               : Column(
-                children: const [
-                  Expanded(child: Center(child: CircularProgressIndicator(color: brandPrimaryColor))),
-                ],
-              ),
+                  children: const [
+                    Expanded(
+                        child: Center(
+                            child: CircularProgressIndicator(
+                                color: brandPrimaryColor))),
+                  ],
+                ),
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(20),
