@@ -36,47 +36,58 @@ class _ScannerScreenState extends State<ScannerScreen> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
 
-    return Scaffold(
-      body: Stack(
-        children: [
-          QRView(
-            key: qrKey,
-            onQRViewCreated: onQRViewCreated,
-            overlay: QrScannerOverlayShape(
-              borderColor: result != null ? brandPrimaryColor : Colors.white,
-              borderLength: 30,
-              borderWidth: 15,
-              borderRadius: 10,
-            ),
+    return Stack(
+      children: [
+        QRView(
+          key: qrKey,
+          onQRViewCreated: onQRViewCreated,
+          overlay: QrScannerOverlayShape(
+            borderColor: result != null ? brandPrimaryColor : Colors.white,
+            borderLength: 30,
+            borderWidth: 15,
+            borderRadius: 10,
           ),
-          (result != null) ? Positioned(
-            child: Container(
-              width: size.width,
-              height: size.height / 3,
-              padding: const EdgeInsets.all(20),
-              decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(30.0),
-                    topLeft: Radius.circular(30.0),
-                  ),
-                  boxShadow: [
-                    BoxShadow(color: Colors.black12, blurRadius: 10),
-                  ]),
-              child: Row(
-                children: [
-                  (result != null) ? Text('CODEBAR: ${result!.code}',
+        ),
+        (result != null)
+            ? Positioned(
+                child: Container(
+                  width: size.width,
+                  height: size.height / 3,
+                  padding: const EdgeInsets.all(20),
+                  decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(30.0),
+                        topLeft: Radius.circular(30.0),
+                      ),
+                      boxShadow: [
+                        BoxShadow(color: Colors.black12, blurRadius: 10),
+                      ]),
+                  child: Row(
+                    children: [
+                      (result != null)
+                          ? Text('CODEBAR: ${result!.code}',
                               style: Theme.of(context)
                                   .textTheme
                                   .headline6!
-                                  .copyWith(fontWeight: FontWeight.bold)) : const Spacer()
-                ],
+                                  .copyWith(fontWeight: FontWeight.bold))
+                          : const Spacer()
+                    ],
+                  ),
+                ),
+                bottom: 0,
+              )
+            : Positioned(
+                child: const Text(
+                 "Scan BARCODE", 
+                 style: TextStyle(
+                   fontSize: 24,
+                   color: Colors.white
+                 ),
+                 ),
+                bottom: size.height / 8,
               ),
-            ),
-            bottom: 0,
-          ) : const Text("Scan BARCODE"),
-        ],
-      ),
+      ],
     );
   }
 
