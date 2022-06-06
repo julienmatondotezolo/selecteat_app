@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:selecteat_app/utils/constants.dart';
@@ -17,27 +19,6 @@ class _ScannerScreenState extends State<ScannerScreen> {
   Barcode? result;
   ProductResult? product;
   QRViewController? controller;
-
-  var scannedBarcode = '3613042717385';
-
-  void getProductNutriscore() async {
-    ProductQueryConfiguration configurations = ProductQueryConfiguration(
-        scannedBarcode,
-        language: OpenFoodFactsLanguage.ENGLISH,
-        fields: [ProductField.ALL]);
-
-    ProductResult productResult =
-        await OpenFoodAPIClient.getProduct(configurations);
-
-    // if (productResult.status == 1) {
-      
-    //   // print(productResult.product!.toJson());
-    // }
-
-    if (productResult.status != 1) {
-      throw Exception('product could not be added');
-    }
-  }
 
   @override
   void reassemble() {
@@ -57,7 +38,6 @@ class _ScannerScreenState extends State<ScannerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    getProductNutriscore();
     var size = MediaQuery.of(context).size;
 
     return Stack(
@@ -76,8 +56,9 @@ class _ScannerScreenState extends State<ScannerScreen> {
             ? Positioned(
                 child: Container(
                   width: size.width,
-                  height: size.height / 3,
-                  padding: const EdgeInsets.all(20),
+                  // height: size.height / 3,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
                   decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
@@ -87,20 +68,61 @@ class _ScannerScreenState extends State<ScannerScreen> {
                       boxShadow: [
                         BoxShadow(color: Colors.black12, blurRadius: 10),
                       ]),
-                  child: Row(
-                    children: [
-                      (result != null)
-                          ? Text('CODEBAR: ${result!.code}',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline6!
-                                  .copyWith(fontWeight: FontWeight.bold))
-                          : const Spacer(),
-                      product != null
-                          ? Text("Sanned item: " + product!.product!.productName.toString())
-                          : const Spacer(),
-                    ],
-                  ),
+                  child: product != null
+                      ? Row(
+                          children: [
+                            Container(
+                              width: size.width / 2.5,
+                              height: size.height / 5,
+                              padding: const EdgeInsets.all(20),
+                              decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(5)),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black12, blurRadius: 10)
+                                  ]),
+                              child: Center(
+                                child: CachedNetworkImage(
+                                  width: size.width / 3,
+                                  imageUrl: product!.product!.imageFrontUrl
+                                      .toString(),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: size.width / 20,
+                            ),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    product!.product!.brands.toString(),
+                                    style: const TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Text(product!.product!.productName.toString(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline6!
+                                          .copyWith(
+                                              fontWeight: FontWeight.bold)),
+                                  const SizedBox(height: 10),
+                                  Image(image: Svg(
+                                      "https://static.openfoodfacts.org/images/attributes/nutriscore-"+ product!.product!.nutriscore.toString() + ".svg",
+                                      source: SvgSource.network,
+                                    )
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        )
+                      : const Spacer(),
                 ),
                 bottom: 0,
               )
@@ -122,6 +144,30 @@ class _ScannerScreenState extends State<ScannerScreen> {
       setState(() {
         result = scanData;
       });
+      getProductNutriscore();
     });
+  }
+
+  void getProductNutriscore() async {
+    ProductQueryConfiguration configurations = ProductQueryConfiguration(
+        result!.code.toString(),
+        language: OpenFoodFactsLanguage.ENGLISH,
+        fields: [ProductField.ALL]);
+
+    ProductResult productResult =
+        await OpenFoodAPIClient.getProduct(configurations);
+
+    product = productResult;
+
+    if (productResult.status == 1) {
+      // setState(() {
+      //   product = productResult;
+      // });
+      print(productResult.product!.toJson());
+    }
+
+    if (productResult.status != 1) {
+      throw Exception('product could not be added');
+    }
   }
 }

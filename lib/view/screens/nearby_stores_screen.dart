@@ -28,7 +28,8 @@ class _NearbyStoreScreenState extends State<NearbyStoreScreen> {
     });
 
     Provider.of<NearbyStoresListViewModel>(context, listen: false)
-        .allNearbyStores(position.latitude.toString(), position.longitude.toString());
+        .allNearbyStores(
+            position.latitude.toString(), position.longitude.toString());
   }
 
   // @override
