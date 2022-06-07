@@ -21,7 +21,6 @@ class NearbyStoreScreen extends StatefulWidget {
 class _NearbyStoreScreenState extends State<NearbyStoreScreen> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     Provider.of<NearbyStoresListViewModel>(context, listen: false)
         .allNearbyStores();

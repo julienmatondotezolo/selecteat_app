@@ -33,8 +33,9 @@ Future<LocationData> _determinePosition() async {
     }
   }
 
-  location.enableBackgroundMode(enable: true);
   _locationData = await location.getLocation();
+
+  location.enableBackgroundMode(enable: true);
 
   return _locationData;
 }

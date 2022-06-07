@@ -33,9 +33,12 @@ class ProductsGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (productsList.isEmpty) {
-      return const Center(
-        child: CircularProgressIndicator(
-          color: brandPrimaryColor
+      return Container(
+        margin: const EdgeInsets.all(40),
+        child: const Center(
+          child: CircularProgressIndicator(
+            color: brandPrimaryColor
+          ),
         ),
       );
     }

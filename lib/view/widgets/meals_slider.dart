@@ -15,6 +15,17 @@ class MealsSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
 
+    if (gridList.isEmpty) {
+      return Container(
+        margin: const EdgeInsets.all(40),
+        child: const Center(
+          child: CircularProgressIndicator(
+            color: brandPrimaryColor
+          ),
+        ),
+      );
+    }
+
     return ListView.builder(
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,

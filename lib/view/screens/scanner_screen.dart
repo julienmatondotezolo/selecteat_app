@@ -189,7 +189,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
                     )),
                 bottom: 0,
               )
-            : const Spacer(),
+            : const SizedBox(),
         loading == true
             ? Positioned(
                 child: SizedBox(
@@ -200,7 +200,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
                 ),
                 bottom: size.height / 6,
               )
-            : const Spacer(),
+            : const SizedBox(),
         errorMessage != null
             ? AlertDialog(
                 title: Text(errorMessage!),
@@ -212,7 +212,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
                   ),
                 ],
               )
-            : const Spacer(),
+            : const SizedBox(),
       ],
     );
   }
