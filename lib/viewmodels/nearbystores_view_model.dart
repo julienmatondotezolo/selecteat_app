@@ -18,6 +18,20 @@ class NearbyStoresViewModel {
     return _nearbyStores.properties;
   }
 
+  Map get address {
+    return _nearbyStores.address;
+  }
+
+  String get street {
+    var street = address["street"].replaceAll(',', '').toLowerCase();
+    street = street[0].toUpperCase() + street.substring(1).toLowerCase();
+    var cityName = address["cityName"].toLowerCase();
+    cityName = cityName[0].toUpperCase() + cityName.substring(1).toLowerCase();
+    var zipCode = address["zipCode"];
+
+    return '$street, $zipCode $cityName';
+  }
+
   String get distance {
     var distance = properties["distance"].toString();
     var formatDistance =

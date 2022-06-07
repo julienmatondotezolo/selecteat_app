@@ -48,7 +48,9 @@ class NearbyStoresList extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const Text("Av. Marius Renard 21, 1070 Anderlecht"),
+                  Text(
+                    nearbyStores.street .length > 30 ? nearbyStores.street.substring(0, 30) + '...' : nearbyStores.street
+                  ),
                   RichText(
                     text: TextSpan(children: [
                       const TextSpan(
