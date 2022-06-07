@@ -17,6 +17,7 @@ Future<LocationData> _determinePosition() async {
   LocationData _locationData;
 
   _serviceEnabled = await location.serviceEnabled();
+
   if (!_serviceEnabled) {
     _serviceEnabled = await location.requestService();
     // if (!_serviceEnabled) {
@@ -33,7 +34,6 @@ Future<LocationData> _determinePosition() async {
   }
 
   location.enableBackgroundMode(enable: true);
-
   _locationData = await location.getLocation();
 
   return _locationData;
