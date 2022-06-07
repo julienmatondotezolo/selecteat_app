@@ -27,6 +27,12 @@ class _NearbyStoreScreenState extends State<NearbyStoreScreen> {
         .allNearbyStores();
   }
 
+  static final MapController _mapController = MapController();
+
+  void _gotoLocation(double lat, double long) {
+    _mapController.move(LatLng(lat, long), _mapController.zoom);
+  }
+
   @override
   Widget build(BuildContext context) {
     var nearbyStoreslistViewModel =
@@ -71,6 +77,7 @@ class _NearbyStoreScreenState extends State<NearbyStoreScreen> {
                     center: LatLng(_position.latitude!, _position.longitude!),
                     zoom: 14.5,
                   ),
+                  mapController: _mapController,
                   nonRotatedLayers: [
                     TileLayerOptions(
                         urlTemplate:
@@ -112,7 +119,7 @@ class _NearbyStoreScreenState extends State<NearbyStoreScreen> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   FloatingActionButton(
-                    onPressed: null,
+                    onPressed: () => _gotoLocation(_position!.latitude!, _position.longitude!),
                     child: const Icon(Icons.my_location),
                     backgroundColor: brandPrimaryColor,
                   ),
