@@ -1,4 +1,6 @@
+import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:selecteat_app/models/products.dart';
+import 'package:selecteat_app/models/productsColruyt.dart';
 
 class ProductViewModel {
   final Products _products;
