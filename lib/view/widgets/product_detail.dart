@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:selecteat_app/utils/constants.dart';
 
 class ProductDetail extends StatelessWidget {
@@ -37,7 +38,7 @@ class ProductDetail extends StatelessWidget {
           children: [
             SizedBox(height: size.height / 40,),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
@@ -52,7 +53,7 @@ class ProductDetail extends StatelessWidget {
                   child: Center(
                     child: CachedNetworkImage(
                       width: size.width / 3,
-                      imageUrl: productList.image_url,
+                      imageUrl: productList.imageurl,
                     ),
                   ),
                 ),
@@ -83,6 +84,13 @@ class ProductDetail extends StatelessWidget {
                           color: brandPrimaryColor,
                         ),
                       ),
+                      Image(
+                        width: size.width / 5,
+                        image: Svg("https://static.openfoodfacts.org/images/attributes/nutriscore-" +
+                          productList.nutriscoreletter.toLowerCase() +
+                          ".svg",
+                        source: SvgSource.network,
+                    )),
                     ],
                   ),
                 ),

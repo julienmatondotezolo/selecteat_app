@@ -86,19 +86,40 @@ class MealsSlider extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: size.height / 40),
-                          TextButton(
-                            style: TextButton.styleFrom(
-                              primary: Colors.white,
-                              backgroundColor: brandPrimaryColor,
-                              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15)
-                            ),
-                            onPressed: _mealDetailPage,
-                            child: const Text(
-                              'Start meal',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                            ),
-                            ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              TextButton(
+                                style: TextButton.styleFrom(
+                                  primary: Colors.white,
+                                  backgroundColor: brandPrimaryColor,
+                                  padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15)
+                                ),
+                                onPressed: _mealDetailPage,
+                                child: const Text(
+                                  'Start meal',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                ),
+                                ),
+                              ),
+                              Row(
+                                children: [
+                                  const Icon(
+                                    Icons.timelapse,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
+                                  SizedBox(width: size.width / 80),
+                                  Text(meal.preparationtime,
+                                  style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                  )),
+                                ],
+                              )
+                            ],
                           )
                         ],
                       )
