@@ -77,7 +77,7 @@ class ProductsGrid extends StatelessWidget {
                   children: [
                     CachedNetworkImage(
                       height: 120,
-                      imageUrl: product.image_url,
+                      imageUrl: product.imageurl,
                     ),
                     const SizedBox(height: 5),
                     Column(

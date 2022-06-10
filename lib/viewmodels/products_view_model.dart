@@ -11,8 +11,8 @@ class ProductViewModel {
     return _products.name;
   }
 
-  String get image_url {
-    return _products.image_url;
+  String get imageurl {
+    return _products.imageurl;
   }
 
   String get baseprice {
@@ -23,19 +23,27 @@ class ProductViewModel {
     return _products.bigprice;
   }
 
+  String get category {
+    return _products.category;
+  }
+
+  String get nutriscoreletter {
+    return _products.nutriscoreletter;
+  }
+
   String? get originalprice {
     return _products.originalprice;
   }
 
-  String? get item_promotion {
-    return _products.item_promotion;
+  String? get itempromotion {
+    return _products.itempromotion;
   }
 
   String get store {
     return _products.store;
   }
 
-  String get store_product_id {
-    return _products.store_product_id;
+  String get storeproductid {
+    return _products.storeproductid;
   }
 }
