@@ -44,7 +44,11 @@ class MealsSlider extends StatelessWidget {
               boxShadow: const [
                 BoxShadow(color: Colors.black12, blurRadius: 10),
               ],
-              image: DecorationImage(image: NetworkImage(meal.image), fit: BoxFit.cover),
+              image: DecorationImage(
+                image: NetworkImage(meal.image), 
+                fit: BoxFit.cover
+              ),
+              
             ),
             child: Stack(
               children: [

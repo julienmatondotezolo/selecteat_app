@@ -1,4 +1,5 @@
 import 'package:selecteat_app/models/meals.dart';
+import 'dart:convert';
 
 class MealViewModel {
   final Meals _meals;
@@ -38,12 +39,20 @@ class MealViewModel {
     return _meals.budget;
   }
 
-  String get persons {
-    return _meals.persons;
+  int get persons {
+    var persons = int.parse(_meals.persons);
+    return persons;
   }
 
   String get ingredients {
     return _meals.ingredients;
+  }
+
+  List<dynamic> get ingredientsList {
+    String ingredientString = ingredients;
+    List ingredientList = json.decode(ingredientString);
+
+    return ingredientList;
   }
 
   String get steps {

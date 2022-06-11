@@ -41,8 +41,6 @@ class NearbyStoresViewModel {
       formatDistance = formatDistance + "00";
     }
 
-    // return formatDistance;
-
     if (formatDistance[0] == "0") {
       return formatDistance.replaceAll('0.', ' ') + " m";
     }

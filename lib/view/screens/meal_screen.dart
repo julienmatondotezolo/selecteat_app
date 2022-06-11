@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:selecteat_app/utils/constants.dart';
+import 'package:selecteat_app/view/widgets/counter.dart';
 
 class MealScreen extends StatelessWidget {
   final dynamic meal;
@@ -21,6 +22,7 @@ class MealScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    List<dynamic> ingredientsList = meal.ingredientsList;
 
     return Scaffold(
       body: Stack(
@@ -40,14 +42,14 @@ class MealScreen extends StatelessWidget {
           ),
           Positioned(
             top: size.height * .2,
-            left:0.0,
-            right:0.0,
-            bottom:0.0,
+            left: 0.0,
+            right: 0.0,
+            bottom: 0.0,
             child: SafeArea(
               child: Container(
                 width: size.width,
                 padding:
-                const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
+                    const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -107,6 +109,7 @@ class MealScreen extends StatelessWidget {
                         height: size.height / 20,
                       ),
                       Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text(
                             "Ingrédients",
@@ -116,47 +119,52 @@ class MealScreen extends StatelessWidget {
                               fontSize: 18,
                             ),
                           ),
-                          SizedBox(
-                            height: size.height / 40,
-                          ),
+                          SizedBox(height: size.height / 40,),
+                          Counter(person: meal.persons),
+                          SizedBox(height: size.height / 40,),
                           ListView.builder(
                             scrollDirection: Axis.vertical,
                             shrinkWrap: true,
-                            itemCount: 20,
+                            itemCount: ingredientsList.length,
                             physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (context, index) {
+                              var ingredient = ingredientsList[index];
+                              // print(ingredient);
                               return Container(
                                 decoration: const BoxDecoration(
-                                  border: Border.symmetric(
-                                    horizontal: BorderSide(
-                                     color: brandLightGreyColor,
-                                      width: 1.0,
-                                      style: BorderStyle.solid,
-                                    )
-                                  )
-                                ),
+                                    border: Border.symmetric(
+                                        horizontal: BorderSide(
+                                  color: brandLightGreyColor,
+                                  width: 1.0,
+                                  style: BorderStyle.solid,
+                                ))),
                                 child: Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 8.0),
                                   child: Column(
                                     children: [
                                       Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: const [
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
                                           Expanded(
                                             child: Text(
-                                              "Ingrédients",
-                                              style: TextStyle(
+                                              ingredient['name'],
+                                              // ingredients.name,
+                                              style: const TextStyle(
                                                 color: brandDarkColor,
                                               ),
                                             ),
                                           ),
-                                          Text(
-                                            "Ingrédients",
-                                            style: TextStyle(
-                                              color: brandDarkColor,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
+                                          ingredient['quantity'] != null
+                                              ? Text(
+                                                  ingredient['quantity'],
+                                                  style: const TextStyle(
+                                                    color: brandDarkColor,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                )
+                                              : const Text(""),
                                         ],
                                       )
                                     ],
@@ -164,6 +172,9 @@ class MealScreen extends StatelessWidget {
                                 ),
                               );
                             },
+                          ),
+                          SizedBox(
+                            height: size.height / 8,
                           ),
                         ],
                       )
@@ -203,12 +214,11 @@ class MealScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     TextButton(
-                              style: TextButton.styleFrom(
-                              primary: Colors.white,
-                              backgroundColor: brandRedNotifyColor,
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 40, vertical: 15)
-                              ),
+                      style: TextButton.styleFrom(
+                          primary: Colors.white,
+                          backgroundColor: brandRedNotifyColor,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 40, vertical: 15)),
                       onPressed: _addProductToList,
                       child: const Text(
                         'Add to ingredients list +',
@@ -219,12 +229,11 @@ class MealScreen extends StatelessWidget {
                     ),
                     SizedBox(height: size.height / 60),
                     TextButton(
-                              style: TextButton.styleFrom(
-                              primary: Colors.white,
-                              backgroundColor: brandPrimaryColor,
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 40, vertical: 15)
-                              ),
+                      style: TextButton.styleFrom(
+                          primary: Colors.white,
+                          backgroundColor: brandPrimaryColor,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 40, vertical: 15)),
                       onPressed: _startCookingt,
                       child: const Text(
                         'Start cooking',
