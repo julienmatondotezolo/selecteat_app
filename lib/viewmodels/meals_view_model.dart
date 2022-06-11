@@ -5,6 +5,10 @@ class MealViewModel {
 
   MealViewModel({required Meals meal}) : _meals = meal;
 
+  int get id {
+    return _meals.id;
+  }
+
   String get title {
     return _meals.title;
   }

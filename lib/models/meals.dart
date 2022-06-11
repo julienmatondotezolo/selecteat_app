@@ -1,4 +1,5 @@
 class Meals {
+  final int id;
   final String title;
   final String description;
   final String image;
@@ -10,10 +11,11 @@ class Meals {
   final String ingredients;
   final String steps;
 
-  Meals({required this.title, required this.description, required this.image, required this.cookingtime, required this.preparationtime, required this.difficulty, required this.budget, required this.persons, required this.ingredients, required this.steps});
+  Meals({required this.id, required this.title, required this.description, required this.image, required this.cookingtime, required this.preparationtime, required this.difficulty, required this.budget, required this.persons, required this.ingredients, required this.steps});
 
   factory Meals.fromJson(Map<String, dynamic> json) {
     return Meals(
+      id: json['id'],
       title: json['title'],
       description: json['description'],
       image: json['image'],

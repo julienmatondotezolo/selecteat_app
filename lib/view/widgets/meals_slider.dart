@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:selecteat_app/utils/constants.dart';
+import 'package:selecteat_app/view/screens/meal_screen.dart';
 import 'package:selecteat_app/viewmodels/meals_view_model.dart';
 
 class MealsSlider extends StatelessWidget {
   final List<MealViewModel> gridList;
 
-  void _mealDetailPage() async {
-    return null;
+  void _mealDetailPage(context, productDetail) async {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => MealScreen(meal: productDetail),
+      ) 
+    );
   }
 
   const MealsSlider({Key? key, required this.gridList}) : super(key: key);
@@ -19,9 +25,7 @@ class MealsSlider extends StatelessWidget {
       return Container(
         margin: const EdgeInsets.all(40),
         child: const Center(
-          child: CircularProgressIndicator(
-            color: brandPrimaryColor
-          ),
+          child: CircularProgressIndicator(color: brandPrimaryColor),
         ),
       );
     }
@@ -40,8 +44,7 @@ class MealsSlider extends StatelessWidget {
               boxShadow: const [
                 BoxShadow(color: Colors.black12, blurRadius: 10),
               ],
-              image: DecorationImage(
-                  image: NetworkImage(meal.image), fit: BoxFit.cover),
+              image: DecorationImage(image: NetworkImage(meal.image), fit: BoxFit.cover),
             ),
             child: Stack(
               children: [
@@ -82,8 +85,7 @@ class MealsSlider extends StatelessWidget {
                                     offset: Offset.zero,
                                     blurRadius: 10,
                                   )
-                                ]
-                            ),
+                                ]),
                           ),
                           SizedBox(height: size.height / 40),
                           Row(
@@ -92,16 +94,16 @@ class MealsSlider extends StatelessWidget {
                             children: [
                               TextButton(
                                 style: TextButton.styleFrom(
-                                  primary: Colors.white,
-                                  backgroundColor: brandPrimaryColor,
-                                  padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15)
-                                ),
-                                onPressed: _mealDetailPage,
+                                    primary: Colors.white,
+                                    backgroundColor: brandPrimaryColor,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 40, vertical: 15)),
+                                onPressed: () => _mealDetailPage(context, meal),
                                 child: const Text(
                                   'Start meal',
-                                style: TextStyle(
+                                  style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                ),
+                                  ),
                                 ),
                               ),
                               Row(
@@ -113,10 +115,10 @@ class MealsSlider extends StatelessWidget {
                                   ),
                                   SizedBox(width: size.width / 80),
                                   Text(meal.preparationtime,
-                                  style: const TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                  )),
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w600,
+                                      )),
                                 ],
                               )
                             ],
@@ -129,7 +131,6 @@ class MealsSlider extends StatelessWidget {
               ],
             ),
           );
-        }
-    );
+        });
   }
 }
