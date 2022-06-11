@@ -10,6 +10,10 @@ class MealScreen extends StatelessWidget {
     return null;
   }
 
+  void _startCookingt() async {
+    return null;
+  }
+
   void _addProductToFavs() async {
     return null;
   }
@@ -185,6 +189,51 @@ class MealScreen extends StatelessWidget {
                 minimumSize: const Size(46, 46),
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(5)),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 60,
+            child: SizedBox(
+              width: size.width,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    TextButton(
+                              style: TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: brandRedNotifyColor,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 40, vertical: 15)
+                              ),
+                      onPressed: _addProductToList,
+                      child: const Text(
+                        'Add to ingredients list +',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: size.height / 60),
+                    TextButton(
+                              style: TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: brandPrimaryColor,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 40, vertical: 15)
+                              ),
+                      onPressed: _startCookingt,
+                      child: const Text(
+                        'Start cooking',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
