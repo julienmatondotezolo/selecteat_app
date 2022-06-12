@@ -13,13 +13,10 @@ class IngredientCounter extends StatefulWidget {
 class _IngredientCounterState extends State<IngredientCounter> {
   int _count = 4;
 
-  void _incrementCounter() {
+  void decrementCounter() {
     setState(() {
-      // Your IF statement wgich defines when the counter goes back to zero
-      if (_count == 0) {
-        _count = 1;
-      } else {
-        _count++;
+      if (_count > 1) {
+        _count -= 1;
       }
     });
   }
@@ -60,9 +57,7 @@ class _IngredientCounterState extends State<IngredientCounter> {
                         IconButton(
                           icon: const Icon(Icons.remove),
                           onPressed: () {
-                            setState(() {
-                              _count -= 1;
-                            });
+                            decrementCounter();
                           },
                         ),
                       ])),
