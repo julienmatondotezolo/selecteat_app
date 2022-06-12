@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:selecteat_app/utils/constants.dart';
+import 'package:selecteat_app/view/screens/list_screen.dart';
 
 class SelectEatStores extends StatefulWidget {
   const SelectEatStores({Key? key, required this.ingredients}) : super(key: key);
@@ -13,7 +14,12 @@ class SelectEatStores extends StatefulWidget {
 
 class _SelectEatStoresState extends State<SelectEatStores> {
   void _addProductToList() async {
-    return null;
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const ListScreen(),
+      ) 
+    );
   }
 
   @override

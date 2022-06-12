@@ -11,22 +11,23 @@ class BottomNav extends StatefulWidget {
 }
 
 class _BottomNavState extends State<BottomNav> {
-  int _selectedIndex = 2;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration.zero, () {
-      NavigationController navigation =
+    NavigationController navigation =
           Provider.of<NavigationController>(context, listen: false);
 
+    int _selectedIndex = navigation.screenIndex;
+
+    void _onItemTapped(int index) {
+      setState(() {
+        _selectedIndex = index;
+      });
       navigation.changeScreen(_selectedIndex);
-    });
+    }
+
+    // Future.delayed(Duration.zero, () {
+    //   navigation.changeScreen(_selectedIndex);
+    // });
 
     return BottomNavigationBarTheme(
       data: const BottomNavigationBarThemeData(
