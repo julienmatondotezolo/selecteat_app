@@ -7,6 +7,7 @@ import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:selecteat_app/utils/constants.dart';
 import 'package:selecteat_app/view/components/bottomnav.dart';
+import 'package:selecteat_app/view/screens/home_screen.dart';
 
 class ScannerScreen extends StatefulWidget {
   const ScannerScreen({Key? key}) : super(key: key);
@@ -31,12 +32,6 @@ class _ScannerScreenState extends State<ScannerScreen> {
     } else if (Platform.isIOS) {
       controller!.resumeCamera();
     }
-  }
-
-  @override
-  void dispose() {
-    controller?.dispose();
-    super.dispose();
   }
 
   void _addProductToList() async {
@@ -119,7 +114,9 @@ class _ScannerScreenState extends State<ScannerScreen> {
                                           fontWeight: FontWeight.bold),
                                     ),
                                     const SizedBox(height: 10),
-                                    Text(product!.product!.productName.toString(),
+                                    Text(
+                                        product!.product!.productName
+                                            .toString(),
                                         style: Theme.of(context)
                                             .textTheme
                                             .headline6!
@@ -198,7 +195,8 @@ class _ScannerScreenState extends State<ScannerScreen> {
                   child: SizedBox(
                     width: size.width,
                     child: const Center(
-                      child: CircularProgressIndicator(color: brandPrimaryColor),
+                      child:
+                          CircularProgressIndicator(color: brandPrimaryColor),
                     ),
                   ),
                   bottom: size.height / 6,
@@ -207,10 +205,15 @@ class _ScannerScreenState extends State<ScannerScreen> {
           errorMessage != null
               ? AlertDialog(
                   title: Text(errorMessage!),
-                  content: const Text('This product was not found in our catalog.'),
+                  content:
+                      const Text('This product was not found in our catalog.'),
                   actions: [
                     TextButton(
-                      onPressed: () => Navigator.of(context, rootNavigator: true).pop(context),
+                      onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ScannerScreen(),
+                          )),
                       child: const Text('Try again'),
                     ),
                   ],
@@ -231,6 +234,12 @@ class _ScannerScreenState extends State<ScannerScreen> {
       });
       getProductNutriscore();
     });
+  }
+
+  @override
+  void dispose() {
+    controller!.dispose();
+    super.dispose();
   }
 
   void getProductNutriscore() async {
