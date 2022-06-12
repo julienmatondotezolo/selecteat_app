@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:selecteat_app/utils/constants.dart';
+import 'package:selecteat_app/view/components/bottomnav.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -30,6 +31,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     var size = MediaQuery.of(context).size;
 
     return Scaffold(
+      bottomNavigationBar: const BottomNav(),
         body: SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(20),

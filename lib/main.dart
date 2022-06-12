@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:selecteat_app/controllers/navigation.dart';
 import 'package:selecteat_app/utils/constants.dart';
 import 'package:selecteat_app/view/screens/home_screen.dart';
 import 'package:selecteat_app/view/screens/nearby_stores_screen.dart';
@@ -10,7 +11,25 @@ import 'package:selecteat_app/viewmodels/nearby_stores_list_view_model.dart';
 import 'package:selecteat_app/viewmodels/products_list_view_model.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ListenableProvider<NavigationController>(
+          create: (_) => NavigationController(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ProductsListViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => MealsListViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => NearbyStoresListViewModel(),
+        ),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -21,8 +40,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  int _selectedIndex = 2;
-
   final screens = [
     const NearbyStoreScreen(),
     const ScannerScreen(),
@@ -30,14 +47,11 @@ class _MyAppState extends State<MyApp> {
     const ProfileScreen()
   ];
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    NavigationController navigation =
+        Provider.of<NavigationController>(context, listen: true);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Select Eat App',
@@ -48,49 +62,16 @@ class _MyAppState extends State<MyApp> {
         textTheme:
             Theme.of(context).textTheme.apply(displayColor: brandDarkColor),
       ),
-      home: MultiProvider(
-          providers: [
-            ChangeNotifierProvider(
-              create: (_) => ProductsListViewModel(),
-            ),
-            ChangeNotifierProvider(
-              create: (_) => MealsListViewModel(),
-            ),
-            ChangeNotifierProvider(
-              create: (_) => NearbyStoresListViewModel(),
-            ),
+      home: Navigator(
+          pages: [
+            MaterialPage(child: screens[navigation.screenIndex]),
+            if (navigation.screenIndex == 0) MaterialPage(child: screens[0]),
+            if (navigation.screenIndex == 1) MaterialPage(child: screens[1]),
+            if (navigation.screenIndex == 3) MaterialPage(child: screens[3]),
           ],
-          // child: const HomeScreen()
-          child: Scaffold(
-            body: screens[_selectedIndex],
-            bottomNavigationBar: BottomNavigationBarTheme(
-              data: const BottomNavigationBarThemeData(
-                  selectedItemColor: brandPrimaryColor),
-              child: BottomNavigationBar(
-                currentIndex: _selectedIndex,
-                onTap: _onItemTapped,
-                type: BottomNavigationBarType.fixed,
-                items: const [
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.room_outlined),
-                    label: 'Map',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.qr_code_2),
-                    label: 'Scan',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.home),
-                    label: 'Home',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.person_outline),
-                    label: 'Profile',
-                  ),
-                ],
-              ),
-            ),
-          )),
+          onPopPage: (route, result) {
+            return result;
+          }),
     );
   }
 }

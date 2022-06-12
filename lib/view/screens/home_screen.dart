@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:selecteat_app/utils/constants.dart';
+import 'package:selecteat_app/view/components/bottomnav.dart';
 import 'package:selecteat_app/view/widgets/meals_slider.dart';
 import 'package:selecteat_app/view/widgets/products_grid.dart';
 import 'package:selecteat_app/view/widgets/search_bar.dart';
@@ -29,6 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
     var mealListViewModel = Provider.of<MealsListViewModel>(context);
 
     return Scaffold(
+      bottomNavigationBar: const BottomNav(),
       body: Stack(
         children: [
           Container(height: size.height * .38, color: brandPrimaryLightColor),
