@@ -1,16 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:selecteat_app/utils/constants.dart';
+import 'package:selecteat_app/view/widgets/select_eat_stores.dart';
 
 class SelectEatScreen extends StatelessWidget {
   final dynamic meal;
   const SelectEatScreen({Key? key, required this.meal}) : super(key: key);
 
-  void _balanced() async {
-    return null;
+  void _balanced(context, ingredients) async {
+    showModalBottomSheet(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(20),
+          ),
+        ),
+        context: context,
+        builder: (BuildContext context) {
+          return SelectEatStores(ingredients: ingredients);
+        });
   }
 
-  void _ecologic() async {
-    return null;
+  void _ecologic(context, ingredients) async {
+    showModalBottomSheet(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(20),
+          ),
+        ),
+        context: context,
+        builder: (BuildContext context) {
+          return SelectEatStores(ingredients: ingredients);
+        });
   }
 
   @override
@@ -91,7 +110,7 @@ class SelectEatScreen extends StatelessWidget {
                           ),
                         ),
                         TextButton(
-                          onPressed: () => _balanced(),
+                          onPressed: () => _balanced(context, meal.ingredients),
                           child: const Icon(
                             Icons.arrow_forward_rounded,
                             color: brandPrimaryColor,
@@ -155,7 +174,7 @@ class SelectEatScreen extends StatelessWidget {
                         ),
                       ),
                       TextButton(
-                        onPressed: () => _balanced(),
+                        onPressed: () => _ecologic(context, meal.ingredients),
                         child: const Icon(
                           Icons.arrow_forward_rounded,
                           color: Colors.white,
