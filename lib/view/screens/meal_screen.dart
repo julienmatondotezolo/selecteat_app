@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:selecteat_app/utils/constants.dart';
 import 'package:selecteat_app/view/widgets/counter.dart';
+import 'package:selecteat_app/view/widgets/meals_steps.dart';
 
 class MealScreen extends StatelessWidget {
   final dynamic meal;
@@ -11,7 +12,7 @@ class MealScreen extends StatelessWidget {
     return null;
   }
 
-  void _startCooking(context) async {
+  void _startCooking(context, mealDetail) async {
     showModalBottomSheet(
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
@@ -20,7 +21,7 @@ class MealScreen extends StatelessWidget {
         ),
         context: context,
         builder: (BuildContext context) {
-          return const Text("HI");
+          return MealSteps(mealDetail: mealDetail);
         });
   }
 
@@ -243,7 +244,7 @@ class MealScreen extends StatelessWidget {
                           backgroundColor: brandPrimaryColor,
                           padding: const EdgeInsets.symmetric(
                               horizontal: 40, vertical: 15)),
-                      onPressed: () => _startCooking(context),
+                      onPressed: () => _startCooking(context, meal),
                       child: const Text(
                         'Start cooking',
                         style: TextStyle(

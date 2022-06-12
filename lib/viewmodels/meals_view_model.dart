@@ -54,7 +54,7 @@ class MealViewModel {
     return ingredientList;
   }
 
-  String get steps {
-    return _meals.steps;
+  List get steps {
+    return json.decode(_meals.steps);
   }
 }
