@@ -40,6 +40,8 @@ class ListScreen extends StatelessWidget {
           title: const Text(
             "Shopping list",
           ),
+          toolbarHeight: 80,
+          elevation: 0,
           foregroundColor: brandDarkColor,
           backgroundColor: brandLightGreyColor,
         ),

@@ -41,6 +41,8 @@ class SelectEatScreen extends StatelessWidget {
           title: const Text(
             "Add ingredients",
           ),
+          toolbarHeight: 80,
+          elevation: 0,
           foregroundColor: brandDarkColor,
           backgroundColor: brandLightGreyColor,
         ),

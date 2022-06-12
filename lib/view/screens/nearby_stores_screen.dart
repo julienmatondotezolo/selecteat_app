@@ -27,10 +27,11 @@ class _NearbyStoreScreenState extends State<NearbyStoreScreen> {
         .allNearbyStores();
   }
 
-  final MapController _mapController = MapController();
+  // final MapController _mapController = MapController();
+  MapController? _mapController;
 
   void _gotoLocation(double lat, double long) {
-    _mapController.move(LatLng(lat, long), _mapController.zoom);
+    _mapController!.move(LatLng(lat, long), _mapController!.zoom);
   }
 
   @override
@@ -75,10 +76,13 @@ class _NearbyStoreScreenState extends State<NearbyStoreScreen> {
           _position != null
               ? FlutterMap(
                   options: MapOptions(
+                    onMapCreated: (c) {
+                      _mapController = c;
+                    },
                     center: LatLng(_position.latitude!, _position.longitude!),
                     zoom: 14.5,
                   ),
-                  // mapController: _mapController,
+                  mapController: _mapController,
                   nonRotatedLayers: [
                     TileLayerOptions(
                         urlTemplate:
@@ -140,4 +144,11 @@ class _NearbyStoreScreenState extends State<NearbyStoreScreen> {
       ),
     );
   }
+
+  // @override
+  // void dispose() {
+  //   _mapController.dispose();
+  //   super.dispose();
+  // }
+
 }

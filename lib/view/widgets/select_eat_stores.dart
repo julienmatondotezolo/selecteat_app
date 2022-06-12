@@ -46,8 +46,9 @@ class _SelectEatStoresState extends State<SelectEatStores> {
           child: Column(
             children: const [
               CircularProgressIndicator(color: brandPrimaryColor),
-              SizedBox(height: 20,),
+              SizedBox(height: 40,),
               Text("Selecting all balanced ingredients...",
+                textAlign: TextAlign.center,
                 style:  TextStyle(
                   fontSize: 18,
                   color: Colors.white,
@@ -85,7 +86,7 @@ class _SelectEatStoresState extends State<SelectEatStores> {
                   physics: const AlwaysScrollableScrollPhysics(),
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
-                    itemCount: 2,
+                    itemCount: 3,
                     // itemCount: nearbyStoresList.length,
                     itemBuilder: (context, index) {
                     var nearbyStores = nearbyStoresList[index];

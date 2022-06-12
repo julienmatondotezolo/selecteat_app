@@ -42,7 +42,7 @@ class NearbyStoresViewModel {
     }
 
     if (formatDistance[0] == "0") {
-      return formatDistance.replaceAll('0.', ' ') + " m";
+      return formatDistance.replaceAll('0.', '') + " m";
     }
 
     if (formatDistance.contains(".")) {
