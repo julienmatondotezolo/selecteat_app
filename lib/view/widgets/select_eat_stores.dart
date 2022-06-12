@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:selecteat_app/utils/constants.dart';
 import 'package:selecteat_app/view/screens/list_screen.dart';
 import 'package:selecteat_app/viewmodels/nearby_stores_list_view_model.dart';
-import 'package:selecteat_app/viewmodels/nearbystores_view_model.dart';
 
 class SelectEatStores extends StatefulWidget {
   const SelectEatStores({Key? key, required this.ingredients})
@@ -37,9 +36,29 @@ class _SelectEatStoresState extends State<SelectEatStores> {
     var nearbyStoreslistViewModel =
         Provider.of<NearbyStoresListViewModel>(context);
     List nearbyStoresList = nearbyStoreslistViewModel.nearbyStoresList;
-    var nearbyStores = nearbyStoresList[1];
 
     var size = MediaQuery.of(context).size;
+
+    if (nearbyStoresList.isEmpty) {
+      return Container(
+        margin: const EdgeInsets.all(40),
+        child: Center(
+          child: Column(
+            children: const [
+              CircularProgressIndicator(color: brandPrimaryColor),
+              SizedBox(height: 20,),
+              Text("Selecting all balanced ingredients...",
+                style:  TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              )
+            ],
+          ),
+        ),
+      );
+    }
 
     return Container(
       padding: const EdgeInsets.all(20),
@@ -62,67 +81,92 @@ class _SelectEatStoresState extends State<SelectEatStores> {
             ),
             Column(
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 5, vertical: 20),
-                      padding: const EdgeInsets.all(15),
-                      decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(color: Colors.black12, blurRadius: 10),
-                          ]),
-                      child: CachedNetworkImage(
-                        width: 40,
-                        imageUrl:
-                            "https://loicmaupin.files.wordpress.com/2021/09/logo-carrefour.jpg",
-                      ),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                      Text(
-                        nearbyStores.properties["commercialName"].length > 28
-                            ? nearbyStores.properties["commercialName"]
-                                    .substring(0, 28) +
-                                '...'
-                            : nearbyStores.properties["commercialName"],
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
+                  ListView.builder(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount: 2,
+                    // itemCount: nearbyStoresList.length,
+                    itemBuilder: (context, index) {
+                    var nearbyStores = nearbyStoresList[index];
+
+                      return Container(
+                        padding: const EdgeInsets.all(15),
+                        margin: const EdgeInsets.symmetric(vertical: 5.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.only(right: 20),
+                              decoration: const BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(5)),
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black12, blurRadius: 10),
+                                  ]),
+                              child: CachedNetworkImage(
+                                width: 50,
+                                fit: BoxFit.cover,
+                                imageUrl:
+                                    "https://loicmaupin.files.wordpress.com/2021/09/logo-carrefour.jpg",
+                              ),
+                            ),
+                            Expanded(
+                              child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      nearbyStores.properties["commercialName"],
+                                      softWrap: false,
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 3,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          '${nearbyStores.distance} - ',
+                                          style: const TextStyle(
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                        const Text(
+                                          '(Price and time or estimated)',
+                                          style: TextStyle(
+                                            color: brandRedNotifyColor,
+                                            fontSize: 8,
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 5,
+                                        ),
+                                        const Icon(
+                                          Icons.info_outline,
+                                          color: brandDarkColor,
+                                          size: 12,
+                                        ),
+                                      ],
+                                    )
+                                  ]),
+                            ),
+                            const Text(
+                              // '€ ' + product.baseprice.replaceAll('.', ','),
+                              '€ 76,35',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: brandDarkColor,
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            '${nearbyStores.distance} - ',
-                            style: const TextStyle(
-                              fontSize: 12,
-                            ),
-                          ),
-                          const Text(
-                            '(Price and time or estimated)',
-                            style: TextStyle(
-                              color: brandRedNotifyColor,
-                              fontSize: 8,
-                            ),
-                          ),
-                        ],
-                      )
-                    ]),
-                    const Text(
-                      // '€ ' + product.baseprice.replaceAll('.', ','),
-                      '€ 76,35',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: brandDarkColor,
-                      ),
-                    ),
-                  ],
-                )
+                      );
+                    })
               ],
             ),
             SizedBox(
