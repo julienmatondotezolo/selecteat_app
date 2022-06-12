@@ -1,7 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:selecteat_app/utils/constants.dart';
 import 'package:selecteat_app/view/screens/list_screen.dart';
+import 'package:selecteat_app/viewmodels/nearby_stores_list_view_model.dart';
+import 'package:selecteat_app/viewmodels/nearbystores_view_model.dart';
 
 class SelectEatStores extends StatefulWidget {
   const SelectEatStores({Key? key, required this.ingredients})
@@ -14,6 +17,13 @@ class SelectEatStores extends StatefulWidget {
 }
 
 class _SelectEatStoresState extends State<SelectEatStores> {
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<NearbyStoresListViewModel>(context, listen: false)
+        .allNearbyStores();
+  }
+
   void _addProductToList() async {
     Navigator.push(
         context,
@@ -24,6 +34,11 @@ class _SelectEatStoresState extends State<SelectEatStores> {
 
   @override
   Widget build(BuildContext context) {
+    var nearbyStoreslistViewModel =
+        Provider.of<NearbyStoresListViewModel>(context);
+    List nearbyStoresList = nearbyStoreslistViewModel.nearbyStoresList;
+    var nearbyStores = nearbyStoresList[1];
+
     var size = MediaQuery.of(context).size;
 
     return Container(
@@ -48,9 +63,11 @@ class _SelectEatStoresState extends State<SelectEatStores> {
             Column(
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 20),
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 5, vertical: 20),
                       padding: const EdgeInsets.all(15),
                       decoration: const BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -60,7 +77,48 @@ class _SelectEatStoresState extends State<SelectEatStores> {
                           ]),
                       child: CachedNetworkImage(
                         width: 40,
-                        imageUrl: "https://loicmaupin.files.wordpress.com/2021/09/logo-carrefour.jpg",
+                        imageUrl:
+                            "https://loicmaupin.files.wordpress.com/2021/09/logo-carrefour.jpg",
+                      ),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                      Text(
+                        nearbyStores.properties["commercialName"].length > 28
+                            ? nearbyStores.properties["commercialName"]
+                                    .substring(0, 28) +
+                                '...'
+                            : nearbyStores.properties["commercialName"],
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            '${nearbyStores.distance} - ',
+                            style: const TextStyle(
+                              fontSize: 12,
+                            ),
+                          ),
+                          const Text(
+                            '(Price and time or estimated)',
+                            style: TextStyle(
+                              color: brandRedNotifyColor,
+                              fontSize: 8,
+                            ),
+                          ),
+                        ],
+                      )
+                    ]),
+                    const Text(
+                      // '€ ' + product.baseprice.replaceAll('.', ','),
+                      '€ 76,35',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: brandDarkColor,
                       ),
                     ),
                   ],
