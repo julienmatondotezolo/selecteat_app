@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:selecteat_app/utils/constants.dart';
+import 'package:selecteat_app/view/screens/select_eat_screen.dart';
 import 'package:selecteat_app/view/widgets/ingredient_counter.dart';
 import 'package:selecteat_app/view/widgets/meals_steps.dart';
 
@@ -8,8 +9,13 @@ class MealScreen extends StatelessWidget {
 
   const MealScreen({Key? key, required this.meal}) : super(key: key);
 
-  void _addProductToList() async {
-    return null;
+  void _addProductToList(context, mealDetail) async {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SelectEatScreen(meal: mealDetail),
+      ) 
+    );
   }
 
   void _startCooking(context, mealDetail) async {
@@ -177,7 +183,7 @@ class MealScreen extends StatelessWidget {
                           backgroundColor: brandRedNotifyColor,
                           padding: const EdgeInsets.symmetric(
                               horizontal: 40, vertical: 15)),
-                      onPressed: _addProductToList,
+                      onPressed: () => _addProductToList(context, meal),
                       child: const Text(
                         'Add to ingredients list +',
                         style: TextStyle(
