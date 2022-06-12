@@ -11,8 +11,17 @@ class MealScreen extends StatelessWidget {
     return null;
   }
 
-  void _startCookingt() async {
-    return null;
+  void _startCooking(context) async {
+    showModalBottomSheet(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(20),
+          ),
+        ),
+        context: context,
+        builder: (BuildContext context) {
+          return const Text("HI");
+        });
   }
 
   void _addProductToFavs() async {
@@ -173,8 +182,8 @@ class MealScreen extends StatelessWidget {
                               );
                             },
                           ),
-                          SizedBox(
-                            height: size.height / 8,
+                          const SizedBox(
+                            height: 150,
                           ),
                         ],
                       )
@@ -234,7 +243,7 @@ class MealScreen extends StatelessWidget {
                           backgroundColor: brandPrimaryColor,
                           padding: const EdgeInsets.symmetric(
                               horizontal: 40, vertical: 15)),
-                      onPressed: _startCookingt,
+                      onPressed: () => _startCooking(context),
                       child: const Text(
                         'Start cooking',
                         style: TextStyle(

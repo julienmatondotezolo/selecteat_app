@@ -67,74 +67,73 @@ class _NearbyStoreScreenState extends State<NearbyStoreScreen> {
 
     final _markers = _buildMarkers();
 
-    return Scaffold(
-      body: Stack(
-        children: [
-          _position != null
-              ? FlutterMap(
-                  options: MapOptions(
-                    center: LatLng(_position.latitude!, _position.longitude!),
-                    zoom: 14.5,
-                  ),
-                  mapController: _mapController,
-                  nonRotatedLayers: [
-                    TileLayerOptions(
-                        urlTemplate:
-                            "https://api.mapbox.com/styles/v1/julienmt/ckx6t9wl86f0u14nqm714f3th/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoianVsaWVubXQiLCJhIjoiY2s5aGlyNTllMHY3dzNlanczdnRldnFzaCJ9.XzX5C2Y_iiX7Ob33KunkfQ",
-                        additionalOptions: {
-                          'accessToken':
-                              'pk.eyJ1IjoianVsaWVubXQiLCJhIjoiY2s5aGlyNTllMHY3dzNlanczdnRldnFzaCJ9.XzX5C2Y_iiX7Ob33KunkfQ',
-                          'id': 'mapbox.mapbox-streets-v11'
-                        }),
-                    MarkerLayerOptions(
-                      markers: _markers,
-                    ),
-                    MarkerLayerOptions(
-                      markers: [
-                        Marker(
-                          // width: 50.0,
-                          // height: 50.0,
-                          point: LatLng(
-                              _position.latitude!, _position.longitude!),
-                          builder: (ctx) => const FlutterLogo(),
-                        ),
-                      ],
-                    ),
-                  ],
-                )
-              : Column(
-                  children: const [
-                    Expanded(
-                        child: Center(
-                            child: CircularProgressIndicator(
-                                color: brandPrimaryColor))),
-                  ],
+    return Stack(
+      children: [
+        _position != null
+            ? FlutterMap(
+                options: MapOptions(
+                  center: LatLng(_position.latitude!, _position.longitude!),
+                  zoom: 14.5,
                 ),
-          SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  FloatingActionButton(
-                    onPressed: () => _gotoLocation(_position!.latitude!, _position.longitude!),
-                    child: const Icon(Icons.my_location),
-                    backgroundColor: brandPrimaryColor,
+                mapController: _mapController,
+                nonRotatedLayers: [
+                  TileLayerOptions(
+                      urlTemplate:
+                          "https://api.mapbox.com/styles/v1/julienmt/ckx6t9wl86f0u14nqm714f3th/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoianVsaWVubXQiLCJhIjoiY2s5aGlyNTllMHY3dzNlanczdnRldnFzaCJ9.XzX5C2Y_iiX7Ob33KunkfQ",
+                      additionalOptions: {
+                        'accessToken':
+                            'pk.eyJ1IjoianVsaWVubXQiLCJhIjoiY2s5aGlyNTllMHY3dzNlanczdnRldnFzaCJ9.XzX5C2Y_iiX7Ob33KunkfQ',
+                        'id': 'mapbox.mapbox-streets-v11'
+                      }),
+                  MarkerLayerOptions(
+                    markers: _markers,
                   ),
-                  const SizedBox(height: 20),
-                  SizedBox(
-                    height: size.height / 2.2,
-                    child: NearbyStoresList(
-                        nearbyStoresList:
-                            nearbyStoreslistViewModel.nearbyStoresList),
+                  MarkerLayerOptions(
+                    markers: [
+                      Marker(
+                        // width: 50.0,
+                        // height: 50.0,
+                        point:
+                            LatLng(_position.latitude!, _position.longitude!),
+                        builder: (ctx) => const FlutterLogo(),
+                      ),
+                    ],
                   ),
                 ],
+              )
+            : Column(
+                children: const [
+                  Expanded(
+                      child: Center(
+                          child: CircularProgressIndicator(
+                              color: brandPrimaryColor))),
+                ],
               ),
+        SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                FloatingActionButton(
+                  onPressed: () =>
+                      _gotoLocation(_position!.latitude!, _position.longitude!),
+                  child: const Icon(Icons.my_location),
+                  backgroundColor: brandPrimaryColor,
+                ),
+                const SizedBox(height: 20),
+                SizedBox(
+                  height: size.height / 2.2,
+                  child: NearbyStoresList(
+                      nearbyStoresList:
+                          nearbyStoreslistViewModel.nearbyStoresList),
+                ),
+              ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

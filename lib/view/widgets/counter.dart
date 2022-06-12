@@ -4,7 +4,7 @@ import 'package:selecteat_app/utils/constants.dart';
 class Counter extends StatefulWidget {
   const Counter({Key? key, required this.person}) : super(key: key);
   final int person;
-
+  
   @override
   State<StatefulWidget> createState() {
     return _CounterState();
@@ -26,31 +26,30 @@ class _CounterState extends State<Counter> {
                   borderRadius: BorderRadius.circular(5),
                   border: Border.all(
                     color: brandPrimaryColor,
-                                  width: 1.0,
-                                  style: BorderStyle.solid,
-                  )
-              ),
+                    width: 1.0,
+                    style: BorderStyle.solid,
+                  )),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.add),
-                    onPressed: () {
-                      setState(() {
-                        _count += 1;
-                      });
-                    },
-                  ),
-                  Text(_count.toString() + " people"),
-                  IconButton(
-                    icon: const Icon(Icons.remove),
-                    onPressed: () {
-                      setState(() {
-                        _count -= 1;
-                      });
-                    },
-                  ),
-              ])),
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.add),
+                      onPressed: () {
+                        setState(() {
+                          _count += 1;
+                        });
+                      },
+                    ),
+                    Text(_count.toString() + " people"),
+                    IconButton(
+                      icon: const Icon(Icons.remove),
+                      onPressed: () {
+                        setState(() {
+                          _count -= 1;
+                        });
+                      },
+                    ),
+                  ])),
         ),
       ],
     );

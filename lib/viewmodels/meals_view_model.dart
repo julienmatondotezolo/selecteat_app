@@ -51,7 +51,6 @@ class MealViewModel {
   List<dynamic> get ingredientsList {
     String ingredientString = ingredients;
     List ingredientList = json.decode(ingredientString);
-
     return ingredientList;
   }
 
