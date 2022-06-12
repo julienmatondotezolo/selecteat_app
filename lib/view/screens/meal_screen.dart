@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:selecteat_app/utils/constants.dart';
-import 'package:selecteat_app/view/widgets/counter.dart';
+import 'package:selecteat_app/view/widgets/ingredient_counter.dart';
 import 'package:selecteat_app/view/widgets/meals_steps.dart';
 
 class MealScreen extends StatelessWidget {
@@ -130,59 +130,7 @@ class MealScreen extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: size.height / 40,),
-                          Counter(person: meal.persons),
-                          SizedBox(height: size.height / 40,),
-                          ListView.builder(
-                            scrollDirection: Axis.vertical,
-                            shrinkWrap: true,
-                            itemCount: ingredientsList.length,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemBuilder: (context, index) {
-                              var ingredient = ingredientsList[index];
-                              // print(ingredient);
-                              return Container(
-                                decoration: const BoxDecoration(
-                                    border: Border.symmetric(
-                                        horizontal: BorderSide(
-                                  color: brandLightGreyColor,
-                                  width: 1.0,
-                                  style: BorderStyle.solid,
-                                ))),
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 8.0),
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Expanded(
-                                            child: Text(
-                                              ingredient['name'],
-                                              // ingredients.name,
-                                              style: const TextStyle(
-                                                color: brandDarkColor,
-                                              ),
-                                            ),
-                                          ),
-                                          ingredient['quantity'] != null
-                                              ? Text(
-                                                  ingredient['quantity'],
-                                                  style: const TextStyle(
-                                                    color: brandDarkColor,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                )
-                                              : const Text(""),
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
+                          IngredientCounter(mealDetail: meal),
                           const SizedBox(
                             height: 150,
                           ),
