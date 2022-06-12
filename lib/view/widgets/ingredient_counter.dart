@@ -34,7 +34,7 @@ class _IngredientCounterState extends State<IngredientCounter> {
           children: [
             Expanded(
               child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  padding: const EdgeInsets.symmetric(vertical: 2),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
                       border: Border.all(

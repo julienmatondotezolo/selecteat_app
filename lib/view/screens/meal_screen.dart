@@ -83,7 +83,7 @@ class MealScreen extends StatelessWidget {
                               meal.title,
                               softWrap: false,
                               overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
+                              maxLines: 4,
                               style: const TextStyle(
                                 color: brandDarkColor,
                                 fontWeight: FontWeight.bold,
