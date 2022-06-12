@@ -77,7 +77,7 @@ class MealSteps extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  "Steps",
+                  "Steps:",
                   style: TextStyle(
                     color: brandDarkColor,
                     fontWeight: FontWeight.bold,
