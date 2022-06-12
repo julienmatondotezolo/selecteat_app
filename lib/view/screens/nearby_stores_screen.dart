@@ -27,7 +27,7 @@ class _NearbyStoreScreenState extends State<NearbyStoreScreen> {
         .allNearbyStores();
   }
 
-  static final MapController _mapController = MapController();
+  final MapController _mapController = MapController();
 
   void _gotoLocation(double lat, double long) {
     _mapController.move(LatLng(lat, long), _mapController.zoom);
@@ -78,7 +78,7 @@ class _NearbyStoreScreenState extends State<NearbyStoreScreen> {
                     center: LatLng(_position.latitude!, _position.longitude!),
                     zoom: 14.5,
                   ),
-                  mapController: _mapController,
+                  // mapController: _mapController,
                   nonRotatedLayers: [
                     TileLayerOptions(
                         urlTemplate:
