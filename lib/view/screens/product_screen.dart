@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:selecteat_app/view/components/bottomnav.dart';
 import 'package:selecteat_app/view/widgets/products_grid.dart';
 import 'package:selecteat_app/viewmodels/products_list_view_model.dart';
 
@@ -23,6 +24,7 @@ class _ProductScreenState extends State<ProductScreen> {
     var listViewModel = Provider.of<ProductsListViewModel>(context);
 
     return Scaffold(
+      bottomNavigationBar: const BottomNav(),
       body: ProductsGrid(productsList: listViewModel.productsList),
     );
   }

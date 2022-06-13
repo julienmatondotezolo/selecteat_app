@@ -23,8 +23,12 @@ class ProductService {
   }
 
   Future<List<ProductsColruyt>> fetchProductsCLP() async {
+    String page = "1";
+    String category = "1675";
+    String placeId = "455";
+    String size = "10";
     String urlCLP =
-        "https://ecgproductmw.colruyt.be/ecgproductmw/v2/fr/products/?clientCode=CLP&placeId=727&page=1&isAvailable=true&size=10";
+        "https://ecgproductmw.colruyt.be/ecgproductmw/v2/fr/products/?categoryIds=$category&clientCode=CLP&isAvailable=true&page=$page&placeId=$placeId&size=$size";
 
     final responseCLP = await dio.get(urlCLP);
 
@@ -43,7 +47,6 @@ class ProductService {
 
       // Go through all elements.
       for (var i = items.length - 1; i > 0; i--) {
-
         // Pick a pseudorandom number according to the list length
         var n = random.nextInt(i + 1);
 

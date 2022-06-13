@@ -23,6 +23,14 @@ class _HomeScreenState extends State<HomeScreen> {
     Provider.of<MealsListViewModel>(context, listen: false).allMeals();
   }
 
+  void _allMeals(context) {
+    Navigator.pushNamed(context, '/meals');
+  }
+
+  void _allProducts(context) {
+    Navigator.pushNamed(context, '/products');
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -101,10 +109,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                     .textTheme
                                     .headline6!
                                     .copyWith(fontWeight: FontWeight.bold)),
-                            const Text(
-                              "see all",
-                              style: TextStyle(
-                                  fontSize: 12, color: brandPrimaryColor),
+                            GestureDetector(
+                              onTap:  () => _allMeals(context),
+                              child: const Text(
+                                "see all",
+                                style: TextStyle(
+                                    fontSize: 12, color: brandPrimaryColor),
+                              ),
                             ),
                           ],
                         ),
@@ -124,16 +135,42 @@ class _HomeScreenState extends State<HomeScreen> {
                                     .textTheme
                                     .headline6!
                                     .copyWith(fontWeight: FontWeight.bold)),
-                            const Text(
-                              "see all",
-                              style: TextStyle(
-                                  fontSize: 12, color: brandPrimaryColor),
+                            GestureDetector(
+                              onTap: () => _allProducts(context),
+                              child: const Text(
+                                "see all",
+                                style: TextStyle(
+                                    fontSize: 12, color: brandPrimaryColor),
+                              ),
                             ),
                           ],
                         ),
                         ProductsGrid(
                           productsList: productListViewModel.productsList,
                         ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            TextButton(
+                          style: TextButton.styleFrom(
+                              primary: Colors.white,
+                              side: const BorderSide(width: 2.0, color: brandDarkColor),
+                              // backgroundColor: brandPrimaryColor,
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 15
+                              ),
+                            ),
+                          onPressed: () => _allProducts(context),
+                          child: const Text(
+                            'all products',
+                            style: TextStyle(
+                              color: brandDarkColor,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                          ],
+                        )
                       ],
                     ),
                     SizedBox(height: size.height / 8,)
