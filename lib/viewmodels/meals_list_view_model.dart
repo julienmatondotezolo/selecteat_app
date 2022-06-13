@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:selecteat_app/models/meals.dart';
-import 'package:selecteat_app/services/product_service.dart';
+import 'package:selecteat_app/services/meals_service.dart';
 import 'package:selecteat_app/viewmodels/meals_view_model.dart';
 
 enum LoadingStatus {
@@ -14,7 +14,7 @@ class MealsListViewModel with ChangeNotifier {
   List<MealViewModel> mealsList = <MealViewModel>[];
 
   void allMeals() async {
-    List<Meals> allMeals = await ProductService().fetchMeals();
+    List<Meals> allMeals = await MealService().fetchMeals();
     notifyListeners();
 
     mealsList = allMeals

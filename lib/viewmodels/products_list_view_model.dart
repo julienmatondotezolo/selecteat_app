@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:selecteat_app/models/products.dart';
-import 'package:selecteat_app/models/productsColruyt.dart';
 import 'package:selecteat_app/services/product_service.dart';
 import 'package:selecteat_app/viewmodels/products_view_model.dart';
 
@@ -15,7 +14,8 @@ class ProductsListViewModel with ChangeNotifier {
   List<ProductViewModel> productsList = <ProductViewModel>[];
 
   void allProducts() async {
-    List<Products> allProducts = await ProductService().fetchProducts();
+    // List allProducts = await ProductService().fetchProducts();
+    List allProducts = await ProductService().fetchAllProducts();
     notifyListeners();
 
     productsList = allProducts

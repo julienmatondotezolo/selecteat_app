@@ -84,13 +84,13 @@ class ProductDetail extends StatelessWidget {
                           color: brandPrimaryColor,
                         ),
                       ),
-                      Image(
+                      productList.nutriscoreletter != null ? Image(
                         width: size.width / 5,
                         image: Svg("https://static.openfoodfacts.org/images/attributes/nutriscore-" +
                           productList.nutriscoreletter.toLowerCase() +
                           ".svg",
                         source: SvgSource.network,
-                    )),
+                    )) : SizedBox(),
                     ],
                   ),
                 ),

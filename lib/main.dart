@@ -52,8 +52,6 @@ class _MyAppState extends State<MyApp> {
     NavigationController navigation =
         Provider.of<NavigationController>(context, listen: true);
 
-    print(navigation.screenIndex);
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Select Eat App',

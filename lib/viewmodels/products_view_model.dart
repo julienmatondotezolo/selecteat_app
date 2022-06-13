@@ -1,11 +1,10 @@
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:selecteat_app/models/products.dart';
-import 'package:selecteat_app/models/productsColruyt.dart';
 
 class ProductViewModel {
-  final Products _products;
+  final _products;
 
-  ProductViewModel({required Products product}) : _products = product;
+  ProductViewModel({required product}) : _products = product;
 
   String get name {
     return _products.name;

@@ -10,7 +10,17 @@ class Products {
   final String store;
   final String storeproductid;
 
-  Products({required this.name, required this.imageurl, required this.baseprice, required this.bigprice, required this.category, required this.nutriscoreletter, required this.originalprice, required this.itempromotion, required this.store, required this.storeproductid});
+  Products(
+      {required this.name,
+      required this.imageurl,
+      required this.baseprice,
+      required this.bigprice,
+      required this.category,
+      required this.nutriscoreletter,
+      required this.originalprice,
+      required this.itempromotion,
+      required this.store,
+      required this.storeproductid});
 
   factory Products.fromJson(Map<String, dynamic> json) {
     return Products(
