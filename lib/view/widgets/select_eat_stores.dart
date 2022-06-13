@@ -98,7 +98,7 @@ class _SelectEatStoresState extends State<SelectEatStores> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
-                              margin: const EdgeInsets.only(right: 20),
+                              margin: const EdgeInsets.only(right: 10),
                               decoration: const BoxDecoration(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(5)),
@@ -157,7 +157,7 @@ class _SelectEatStoresState extends State<SelectEatStores> {
                             ),
                             const Text(
                               // '€ ' + product.baseprice.replaceAll('.', ','),
-                              '€ 76,35',
+                              '€ 176,35',
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
