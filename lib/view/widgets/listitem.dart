@@ -20,8 +20,7 @@ class ListItem extends StatelessWidget {
             ),
             color: brandPrimaryOpaqueColor,
           ),
-          padding: const EdgeInsets.symmetric(
-              horizontal: 20, vertical: 25),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -62,73 +61,79 @@ class ListItem extends StatelessWidget {
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Row(
-            children: [
-              Container(
-                margin: const EdgeInsets.only(right: 20),
-                decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(5)),
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(color: Colors.black12, blurRadius: 10),
-                    ]),
-                child: CachedNetworkImage(
-                  height: 120,
-                  fit: BoxFit.contain,
-                  imageUrl:
-                      "https://cdn.carrefour.eu/300_05010759_5400101017634_00.jpeg",
-                ),
-              ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+        ListView.builder(
+            shrinkWrap: true,
+            scrollDirection: Axis.vertical,
+            itemCount: 2,
+            itemBuilder: (context, index) {
+              return Container(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 25),
+                child: Row(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        Text("Carrefour"),
-                        Icon(
-                          Icons.favorite_border_outlined,
-                          color: brandDarkColor,
-                          size: 12,
-                        ),
-                      ],
+                    Container(
+                      margin: const EdgeInsets.only(right: 20),
+                      decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(color: Colors.black12, blurRadius: 10),
+                          ]),
+                      child: CachedNetworkImage(
+                        height: 120,
+                        fit: BoxFit.contain,
+                        imageUrl:
+                            "https://cdn.carrefour.eu/300_05010759_5400101017634_00.jpeg",
+                      ),
                     ),
-                    Text(
-                      "FiletlapjesFiletlapjesFiletlapjes",
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline6!
-                          .copyWith(fontWeight: FontWeight.bold),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        Image(
-                            width: 40,
-                            image: Svg(
-                              "https://static.openfoodfacts.org/images/attributes/nutriscore-a.svg",
-                              source: SvgSource.network,
-                            ),
-                        ),
-                        Text(
-                          '€ 6,00',
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            color: brandPrimaryColor,
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: const [
+                              Text("Carrefour"),
+                              Icon(
+                                Icons.favorite_border_outlined,
+                                color: brandDarkColor,
+                                size: 12,
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
-                    ),
+                          Text(
+                            "FiletlapjesFiletlapjesFiletlapjes",
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline6!
+                                .copyWith(fontWeight: FontWeight.bold),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: const [
+                              Image(
+                                width: 40,
+                                image: Svg(
+                                  "https://static.openfoodfacts.org/images/attributes/nutriscore-a.svg",
+                                  source: SvgSource.network,
+                                ),
+                              ),
+                              Text(
+                                '€ 6,00',
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                  color: brandPrimaryColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    )
                   ],
                 ),
-              )
-            ],
-          ),
-        )
+              );
+            }),
       ],
     );
   }

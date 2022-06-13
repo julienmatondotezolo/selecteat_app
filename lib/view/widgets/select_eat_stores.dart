@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -21,7 +23,15 @@ class _SelectEatStoresState extends State<SelectEatStores> {
     super.initState();
     Provider.of<NearbyStoresListViewModel>(context, listen: false)
         .allNearbyStores();
+
+    Timer(const Duration(seconds: 10), () {
+      setState(() {
+        shouldShow = false;
+      });
+    });
   }
+
+  bool shouldShow = true;
 
   void _addProductToList() async {
     Navigator.push(
@@ -33,6 +43,7 @@ class _SelectEatStoresState extends State<SelectEatStores> {
 
   @override
   Widget build(BuildContext context) {
+    print(shouldShow);
     var nearbyStoreslistViewModel =
         Provider.of<NearbyStoresListViewModel>(context);
     List nearbyStoresList = nearbyStoreslistViewModel.nearbyStoresList;
@@ -46,10 +57,38 @@ class _SelectEatStoresState extends State<SelectEatStores> {
           child: Column(
             children: const [
               CircularProgressIndicator(color: brandPrimaryColor),
-              SizedBox(height: 40,),
-              Text("Selecting all balanced ingredients...",
+              SizedBox(
+                height: 40,
+              ),
+              Text(
+                "Selecting all nearby stores..",
                 textAlign: TextAlign.center,
-                style:  TextStyle(
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              )
+            ],
+          ),
+        ),
+      );
+    }
+
+    if (shouldShow) {
+      return Container(
+        margin: const EdgeInsets.all(40),
+        child: Center(
+          child: Column(
+            children: const [
+              CircularProgressIndicator(color: brandPrimaryColor),
+              SizedBox(
+                height: 40,
+              ),
+              Text(
+                "Selecting all balanced ingredients...",
+                textAlign: TextAlign.center,
+                style: TextStyle(
                   fontSize: 18,
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -82,14 +121,14 @@ class _SelectEatStoresState extends State<SelectEatStores> {
             ),
             Column(
               children: [
-                  ListView.builder(
-                  physics: const AlwaysScrollableScrollPhysics(),
+                ListView.builder(
+                    physics: const AlwaysScrollableScrollPhysics(),
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
                     itemCount: 3,
                     // itemCount: nearbyStoresList.length,
                     itemBuilder: (context, index) {
-                    var nearbyStores = nearbyStoresList[index];
+                      var nearbyStores = nearbyStoresList[index];
 
                       return Container(
                         padding: const EdgeInsets.all(15),
@@ -137,7 +176,7 @@ class _SelectEatStoresState extends State<SelectEatStores> {
                                           ),
                                         ),
                                         const Text(
-                                          '(Price and time or estimated)',
+                                          '(This an estimated price)',
                                           style: TextStyle(
                                             color: brandRedNotifyColor,
                                             fontSize: 8,
@@ -154,6 +193,9 @@ class _SelectEatStoresState extends State<SelectEatStores> {
                                       ],
                                     )
                                   ]),
+                            ),
+                            const SizedBox(
+                              width: 10,
                             ),
                             const Text(
                               // '€ ' + product.baseprice.replaceAll('.', ','),
