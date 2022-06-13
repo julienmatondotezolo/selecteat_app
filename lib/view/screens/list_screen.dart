@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:selecteat_app/controllers/navigation.dart';
 import 'package:selecteat_app/utils/constants.dart';
 import 'package:selecteat_app/view/screens/home_screen.dart';
 import 'package:selecteat_app/view/screens/nearby_stores_screen.dart';
@@ -9,20 +11,12 @@ import 'package:selecteat_app/view/widgets/listitem.dart';
 class ListScreen extends StatelessWidget {
   const ListScreen({Key? key}) : super(key: key);
 
-  void _continueShopping(context) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const HomeScreen(),
-        ));
+  void _continueShopping(context, index) {
+    Navigator.pushNamed(context, '/home');
   }
 
-  void _pickup(context) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const NearbyStoreScreen(),
-        ));
+  void _pickup(context, index) {
+    Navigator.pushNamed(context, '/nearbyStores');
   }
 
   @override
@@ -121,7 +115,7 @@ class ListScreen extends StatelessWidget {
                                   horizontal: 20, vertical: 15
                               ),
                             ),
-                          onPressed: () => _continueShopping,
+                          onPressed: () => _continueShopping(context, 2),
                           child: const Text(
                             'Continue shopping',
                             style: TextStyle(
@@ -136,7 +130,7 @@ class ListScreen extends StatelessWidget {
                               backgroundColor: brandPrimaryColor,
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 20, vertical: 15)),
-                          onPressed: () => _pickup,
+                          onPressed: () => _pickup(context, 0),
                           child: const Text(
                             'Pick up products',
                             style: TextStyle(

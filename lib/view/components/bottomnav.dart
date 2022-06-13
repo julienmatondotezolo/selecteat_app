@@ -18,11 +18,19 @@ class _BottomNavState extends State<BottomNav> {
 
     int _selectedIndex = navigation.screenIndex;
 
+    final routes = [
+        '/nearbyStores',
+        '/scanner',
+        '/home',
+        '/profile',
+    ];
+
     void _onItemTapped(int index) {
       setState(() {
         _selectedIndex = index;
       });
       navigation.changeScreen(_selectedIndex);
+      Navigator.pushNamed(context, routes[index]);
     }
 
     // Future.delayed(Duration.zero, () {

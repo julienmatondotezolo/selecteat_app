@@ -52,6 +52,8 @@ class _MyAppState extends State<MyApp> {
     NavigationController navigation =
         Provider.of<NavigationController>(context, listen: true);
 
+    print(navigation.screenIndex);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Select Eat App',
@@ -62,16 +64,24 @@ class _MyAppState extends State<MyApp> {
         textTheme:
             Theme.of(context).textTheme.apply(displayColor: brandDarkColor),
       ),
-      home: Navigator(
-          pages: [
-            MaterialPage(child: screens[navigation.screenIndex]),
-            if (navigation.screenIndex == 0) MaterialPage(child: screens[0]),
-            if (navigation.screenIndex == 1) MaterialPage(child: screens[1]),
-            if (navigation.screenIndex == 3) MaterialPage(child: screens[3]),
-          ],
-          onPopPage: (route, result) {
-            return result;
-          }),
+      initialRoute: '/home',
+      routes: {
+        '/home': (context) => const HomeScreen(),
+        '/nearbyStores': (context) => const NearbyStoreScreen(),
+        '/scanner': (context) => const ScannerScreen(),
+        '/profile': (context) => const ProfileScreen(),
+      },
+      // home: Navigator(
+      //     pages: const [
+      //       // MaterialPage(child: screens[navigation.screenIndex]),
+      //       if (navigation.screenIndex == 0) MaterialPage(child: screens[0]),
+      //       if (navigation.screenIndex == 1) MaterialPage(child: screens[1]),
+      //       if (navigation.screenIndex == 2) MaterialPage(child: screens[2]),
+      //       if (navigation.screenIndex == 3) MaterialPage(child: screens[3]),
+      //     ],
+      //     onPopPage: (route, result) {
+      //       return route.didPop(result);
+      //     }),
     );
   }
 }
