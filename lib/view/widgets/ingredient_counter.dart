@@ -46,18 +46,18 @@ class _IngredientCounterState extends State<IngredientCounter> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         IconButton(
+                          icon: const Icon(Icons.remove),
+                          onPressed: () {
+                            decrementCounter();
+                          },
+                        ),
+                        Text(_count.toString() + " people"),
+                        IconButton(
                           icon: const Icon(Icons.add),
                           onPressed: () {
                             setState(() {
                               _count += 1;
                             });
-                          },
-                        ),
-                        Text(_count.toString() + " people"),
-                        IconButton(
-                          icon: const Icon(Icons.remove),
-                          onPressed: () {
-                            decrementCounter();
                           },
                         ),
                       ])),

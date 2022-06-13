@@ -3,13 +3,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:selecteat_app/utils/constants.dart';
 
-class ListItem extends StatelessWidget {
+class ListItem extends StatefulWidget {
+  final dynamic productList;
+
   const ListItem({
-    Key? key,
+    Key? key, required this.productList,
   }) : super(key: key);
 
   @override
+  State<ListItem> createState() => _ListItemState();
+}
+
+class _ListItemState extends State<ListItem> {
+  List<int> countList=[];
+  int _count = 1;
+
+  void decrementCounter() {
+    setState(() {
+      if (_count > 1) {
+        _count -= 1;
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    var list = widget.productList;
+
     return Column(
       children: [
         Container(
@@ -25,16 +46,16 @@ class ListItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               RichText(
-                text: const TextSpan(children: [
-                  TextSpan(
+                text: TextSpan(children: [
+                  const TextSpan(
                     text: "Items to pick at ",
                     style: TextStyle(
                       color: brandDarkColor,
                     ),
                   ),
                   TextSpan(
-                    text: "Colruyt",
-                    style: TextStyle(
+                    text: list,
+                    style: const TextStyle(
                       color: brandDarkColor,
                       fontWeight: FontWeight.bold,
                     ),
@@ -64,23 +85,25 @@ class ListItem extends StatelessWidget {
         ListView.builder(
             shrinkWrap: true,
             scrollDirection: Axis.vertical,
+            physics: const NeverScrollableScrollPhysics(),
             itemCount: 2,
             itemBuilder: (context, index) {
               return Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 25),
+                decoration: const BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(width: 1.0, color: brandLightGreyColor),
+                  ),
+                  color: Colors.white,
+                ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 25),
                 child: Row(
                   children: [
                     Container(
                       margin: const EdgeInsets.only(right: 20),
-                      decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(color: Colors.black12, blurRadius: 10),
-                          ]),
                       child: CachedNetworkImage(
-                        height: 120,
-                        fit: BoxFit.contain,
+                        width: 100,
+                        fit: BoxFit.fitWidth,
                         imageUrl:
                             "https://cdn.carrefour.eu/300_05010759_5400101017634_00.jpeg",
                       ),
@@ -100,12 +123,16 @@ class ListItem extends StatelessWidget {
                               ),
                             ],
                           ),
-                          Text(
-                            "FiletlapjesFiletlapjesFiletlapjes",
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline6!
-                                .copyWith(fontWeight: FontWeight.bold),
+                          SizedBox(
+                            width: size.width / 2,
+                            child: const Text(
+                              "FiletlapjesFiletlapjesFiletlapjes",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: brandDarkColor,
+                              ),
+                            ),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -120,10 +147,52 @@ class ListItem extends StatelessWidget {
                               Text(
                                 '€ 6,00',
                                 style: TextStyle(
-                                  fontSize: 24,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                   color: brandPrimaryColor,
                                 ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: Container(
+                                    margin: const EdgeInsets.only(top: 10),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        border: Border.all(
+                                          color: brandPrimaryColor,
+                                          width: 1.0,
+                                          style: BorderStyle.solid,
+                                        )),
+                                    child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          IconButton(
+                                            icon: const Icon(Icons.remove),
+                                            onPressed: () {
+                                              decrementCounter();
+                                            },
+                                          ),
+                                          Text(_count.toString(),
+                                            style: const TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold,
+                                              color: brandDarkColor,
+                                            ),
+                                          ),
+                                          IconButton(
+                                            icon: const Icon(Icons.add),
+                                            onPressed: () {
+                                              setState(() {
+                                                _count += 1;
+                                              });
+                                            },
+                                          ),
+                                        ])),
                               ),
                             ],
                           ),
