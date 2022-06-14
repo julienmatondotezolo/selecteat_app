@@ -78,7 +78,7 @@ flutter_icons:
 # following page: https://dart.dev/tools/pub/pubspec
 flutter_native_splash:
   color: "#26D16C"
-  image: "assets/logo/logo-selecteat-white.png"
+  image: "assets/logo/splash.png"
   fill: true
 
 # The following section is specific to Flutter.

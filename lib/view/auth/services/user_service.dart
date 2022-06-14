@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:selecteat_app/models/users.dart';
 import 'package:selecteat_app/view/auth/services/authentication_service.dart';
 
 class UserService {
@@ -12,20 +13,17 @@ class UserService {
   CollectionReference cartCollection =
       FirebaseFirestore.instance.collection('cart');
 
-  // Future<String?> currentUser() async {
-  //   String uid = _firebaseAuth.currentUser!.uid.toString();
+  Future<UserModel?> getUserData({required String uid}) async {
+    UserModel userModel;
+    var value = await usersCollection.doc(uid).get();
 
-  //   try {
-  //     usersCollection.add({
-  //       'uid': uid,
-  //       'name': name,
-  //       'firstname': firstname,
-  //       'email': email,
-  //     });
-  //   } on FirebaseAuthException catch (e) {
-  //     print(e.message);
-  //     return e.message;
-  //   }
-  // }
-
+    if (value.exists == false) {
+      return userModel = UserModel(
+        email: value.get("email"),
+        firstname: value.get("firstname"),
+        name: value.get("name"),
+        uid: value.get("uid"),
+      );
+    }
+  }
 }

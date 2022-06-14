@@ -8,6 +8,7 @@ class AuthenticationService {
   AuthenticationService(this._firebaseAuth);
 
   /// Changed to idTokenChanges as it updates depending on more cases.
+  // Stream<User?> get authStateChanges => _firebaseAuth.idTokenChanges();
   Stream<User?> get authStateChanges => _firebaseAuth.idTokenChanges();
 
   CollectionReference usersCollection =
@@ -85,23 +86,5 @@ class AuthenticationService {
       print(e.message);
       return e.message;
     }
-  }
-
-  Future<UserModel?> getUserData() async {
-    UserModel userModel;
-    String uid = _firebaseAuth.currentUser!.uid.toString();
-
-    var value = await usersCollection
-        .doc(uid)
-        .get();
-        
-    if (value.exists == false) {
-      return userModel = UserModel(
-        email: value.get("email"),
-        firstname: value.get("firstname"),
-        name: value.get("name"),
-        uid: value.get("uid"),
-      );
-    } 
   }
 }
