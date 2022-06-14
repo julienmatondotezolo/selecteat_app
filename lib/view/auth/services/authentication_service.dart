@@ -9,6 +9,9 @@ class AuthenticationService {
   /// Changed to idTokenChanges as it updates depending on more cases.
   Stream<User?> get authStateChanges => _firebaseAuth.idTokenChanges();
 
+  CollectionReference usersCollection =
+      FirebaseFirestore.instance.collection('users');
+
   /// This won't pop routes so you could do something like
   /// Navigator.of(context).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
   /// after you called this method if you want to pop all routes.
@@ -68,12 +71,10 @@ class AuthenticationService {
       {required String name,
       required String firstname,
       required String email}) async {
-    CollectionReference usersCollection =
-        FirebaseFirestore.instance.collection('users');
     String uid = _firebaseAuth.currentUser!.uid.toString();
 
     try {
-      usersCollection.add({
+      usersCollection.doc(uid).set({
         'uid': uid,
         'name': name,
         'firstname': firstname,
