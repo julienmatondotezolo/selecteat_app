@@ -15,6 +15,17 @@ class AuthenticationService {
     await _firebaseAuth.signOut();
   }
 
+  Future<String?> resetPassword({required String email}) async {
+    try {
+      await _firebaseAuth.sendPasswordResetEmail(email: email);
+      print("Resetting: $email");
+      return "Resetting: $email";
+    } on FirebaseAuthException catch (e) {
+      print(e.message);
+      return e.message;
+    }
+  }
+
   /// There are a lot of different ways on how you can do exception handling.
   /// This is to make it as easy as possible but a better way would be to
   /// use your own custom class that would take the exception and return better

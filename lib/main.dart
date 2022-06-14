@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:selecteat_app/controllers/navigation.dart';
 import 'package:selecteat_app/utils/constants.dart';
-import 'package:selecteat_app/view/auth/screens/register.dart';
+import 'package:selecteat_app/view/auth/screens/login.dart';
 import 'package:selecteat_app/view/auth/services/authentication_service.dart';
 import 'package:selecteat_app/view/screens/home_screen.dart';
 import 'package:selecteat_app/view/screens/nearby_stores_screen.dart';
@@ -103,7 +103,7 @@ class AuthenticationWrapper extends StatelessWidget {
     if (firebaseUser != null) return const MyApp();
     return MaterialApp(
       title: "Registration",
-      home: RegisterScreen()
+      home: LoginScreen()
     );
   }
 }
