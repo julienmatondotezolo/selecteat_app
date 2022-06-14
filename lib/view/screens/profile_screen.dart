@@ -33,6 +33,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     final firebaseUser = context.watch<User>();
+    final user = context.read<AuthenticationService>().getUserData();
+    print(user);
 
     return Scaffold(
         bottomNavigationBar: const BottomNav(),
