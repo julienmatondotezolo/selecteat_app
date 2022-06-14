@@ -1,7 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:selecteat_app/controllers/navigation.dart';
 import 'package:selecteat_app/utils/constants.dart';
+import 'package:selecteat_app/view/auth/screens/register.dart';
+import 'package:selecteat_app/view/auth/services/authentication_service.dart';
 import 'package:selecteat_app/view/screens/home_screen.dart';
 import 'package:selecteat_app/view/screens/nearby_stores_screen.dart';
 import 'package:selecteat_app/view/screens/product_screen.dart';
@@ -11,10 +15,18 @@ import 'package:selecteat_app/viewmodels/meals_list_view_model.dart';
 import 'package:selecteat_app/viewmodels/nearby_stores_list_view_model.dart';
 import 'package:selecteat_app/viewmodels/products_list_view_model.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(
     MultiProvider(
       providers: [
+        Provider<AuthenticationService>(
+          create: (_) => AuthenticationService(FirebaseAuth.instance),
+        ),
+        StreamProvider(
+          create: (context) => context.read<AuthenticationService>().authStateChanges, initialData: null,
+        ),
         ListenableProvider<NavigationController>(
           create: (_) => NavigationController(),
         ),
@@ -28,7 +40,7 @@ void main() {
           create: (_) => NearbyStoresListViewModel(),
         ),
       ],
-      child: const MyApp(),
+      child: AuthenticationWrapper(),
     ),
   );
 }
@@ -79,17 +91,16 @@ class _MyAppState extends State<MyApp> {
         '/meals': (context) => const ProductScreen(),
         '/profile': (context) => const ProfileScreen(),
       },
-      // home: Navigator(
-      //     pages: const [
-      //       // MaterialPage(child: screens[navigation.screenIndex]),
-      //       if (navigation.screenIndex == 0) MaterialPage(child: screens[0]),
-      //       if (navigation.screenIndex == 1) MaterialPage(child: screens[1]),
-      //       if (navigation.screenIndex == 2) MaterialPage(child: screens[2]),
-      //       if (navigation.screenIndex == 3) MaterialPage(child: screens[3]),
-      //     ],
-      //     onPopPage: (route, result) {
-      //       return route.didPop(result);
-      //     }),
     );
+  }
+}
+
+class AuthenticationWrapper extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final firebaseUser = context.watch<User>();
+
+    if (firebaseUser != null) return const MyApp();
+    return RegisterScreen();
   }
 }
