@@ -79,6 +79,7 @@ flutter_icons:
 flutter_native_splash:
   color: "#26D16C"
   image: "assets/logo/logo-selecteat-white.png"
+  fill: true
 
 # The following section is specific to Flutter.
 flutter:
