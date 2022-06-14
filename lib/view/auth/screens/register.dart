@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:selecteat_app/view/auth/screens/login.dart';
 import 'package:selecteat_app/view/auth/services/authentication_service.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -8,34 +9,46 @@ class RegisterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: SafeArea(
-        child: Scaffold(
-          body: Column(
-            children: [
-              TextField(
-                controller: emailController,
-                decoration: InputDecoration(
-                  labelText: "Email",
-                ),
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          children: [
+            Text("Register",
+                style: Theme.of(context)
+                    .textTheme
+                    .headline6!
+                    .copyWith(fontWeight: FontWeight.bold)),
+            TextField(
+              controller: emailController,
+              decoration: InputDecoration(
+                labelText: "Email",
               ),
-              TextField(
-                controller: passwordController,
-                decoration: InputDecoration(
-                  labelText: "Password",
-                ),
+            ),
+            TextField(
+              controller: passwordController,
+              decoration: InputDecoration(
+                labelText: "Password",
               ),
-              TextButton(
-                onPressed: () {
-                  context.read<AuthenticationService>().signIn(
-                        email: emailController.text.trim(),
-                        password: passwordController.text.trim(),
-                      );
-                },
-                child: Text("Sign in"),
-              )
-            ],
-          ),
+            ),
+            TextButton(
+              onPressed: () {
+                context.read<AuthenticationService>().register(
+                      email: emailController.text.trim(),
+                      password: passwordController.text.trim(),
+                    );
+              },
+              child: Text("Create an account"),
+            ),
+            GestureDetector(
+              onTap: () => {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginScreen()),
+                )
+              },
+              child: Text("Already have an account ? login"),
+            )
+          ],
         ),
       ),
     );

@@ -101,6 +101,9 @@ class AuthenticationWrapper extends StatelessWidget {
     final firebaseUser = context.watch<User>();
 
     if (firebaseUser != null) return const MyApp();
-    return RegisterScreen();
+    return MaterialApp(
+      title: "Registration",
+      home: RegisterScreen()
+    );
   }
 }
