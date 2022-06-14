@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:selecteat_app/models/users.dart';
 
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth;
@@ -84,5 +85,23 @@ class AuthenticationService {
       print(e.message);
       return e.message;
     }
+  }
+
+  Future<UserModel?> getUserData() async {
+    UserModel userModel;
+    String uid = _firebaseAuth.currentUser!.uid.toString();
+
+    var value = await usersCollection
+        .doc(uid)
+        .get();
+        
+    if (value.exists == false) {
+      return userModel = UserModel(
+        email: value.get("email"),
+        firstname: value.get("firstname"),
+        name: value.get("name"),
+        uid: value.get("uid"),
+      );
+    } 
   }
 }
