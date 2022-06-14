@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="selecteat_app"
+        android:label="Select Eat"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

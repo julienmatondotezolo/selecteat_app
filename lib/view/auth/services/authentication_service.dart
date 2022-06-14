@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth;
@@ -56,5 +57,9 @@ class AuthenticationService {
       print(e.message);
       return e.message;
     }
+  }
+
+  Future<void> userSetup(String displayName) async {
+
   }
 }
