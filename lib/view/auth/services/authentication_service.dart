@@ -48,10 +48,15 @@ class AuthenticationService {
   /// use your own custom class that would take the exception and return better
   /// error messages. That way you can throw, return or whatever you prefer with that instead.
   Future<String?> register(
-      {required String email, required String password}) async {
+      {required String email,
+      required String password,
+      required String name,
+      required String firstname}) async {
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
+
+      await userSetup(email: email, name: name, firstname: name);
       return "Signed up";
     } on FirebaseAuthException catch (e) {
       print(e.message);
@@ -59,7 +64,24 @@ class AuthenticationService {
     }
   }
 
-  Future<void> userSetup(String displayName) async {
+  Future<String?> userSetup(
+      {required String name,
+      required String firstname,
+      required String email}) async {
+    CollectionReference usersCollection =
+        FirebaseFirestore.instance.collection('users');
+    String uid = _firebaseAuth.currentUser!.uid.toString();
 
+    try {
+      usersCollection.add({
+        'uid': uid,
+        'name': name,
+        'firstname': firstname,
+        'email': email,
+      });
+    } on FirebaseAuthException catch (e) {
+      print(e.message);
+      return e.message;
+    }
   }
 }

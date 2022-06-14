@@ -17,10 +17,10 @@ import 'package:selecteat_app/viewmodels/products_list_view_model.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await Firebase.initializeApp();
-  FlutterNativeSplash.remove();
+  // FlutterNativeSplash.remove();
   runApp(
     MultiProvider(
       providers: [
