@@ -41,6 +41,13 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<ProductsListViewModel>(context, listen: false).allProducts();
+    Provider.of<MealsListViewModel>(context, listen: false).allMeals();
+  }
+
   final screens = [
     const NearbyStoreScreen(),
     const ScannerScreen(),

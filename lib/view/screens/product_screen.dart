@@ -13,12 +13,6 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen> {
-  @override
-  void initState() {
-    super.initState();
-    Provider.of<ProductsListViewModel>(context, listen: false).allProducts();
-  }
-
   final categories = [
     {
       'name': 'Fruits et legumes frais',
@@ -96,6 +90,10 @@ class _ProductScreenState extends State<ProductScreen> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Container(
+                                    foregroundDecoration: const BoxDecoration(
+                                      color: Colors.black,
+                                      backgroundBlendMode: BlendMode.saturation,
+                                    ),
                                     decoration: const BoxDecoration(
                                       color: brandLightGreyColor,
                                       borderRadius: BorderRadius.all(
@@ -103,8 +101,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                     ),
                                     padding: const EdgeInsets.all(15),
                                     child: Image(
-                                      image:
-                                          AssetImage(image!),
+                                      image: AssetImage(image!),
                                       height: 30,
                                     ),
                                   ),
@@ -115,9 +112,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                     maxLines: 2,
                                     textAlign: TextAlign.center,
                                     overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                      fontSize: 12
-                                    ),
+                                    style: const TextStyle(fontSize: 12),
                                   )
                                 ],
                               ),

@@ -16,13 +16,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  @override
-  void initState() {
-    super.initState();
-    Provider.of<ProductsListViewModel>(context, listen: false).allProducts();
-    Provider.of<MealsListViewModel>(context, listen: false).allMeals();
-  }
-
   void _allMeals(context) {
     Navigator.pushNamed(context, '/meals');
   }
