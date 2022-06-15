@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:selecteat_app/utils/constants.dart';
+import 'package:selecteat_app/view/auth/provider/user_provider.dart';
 import 'package:selecteat_app/view/components/bottomnav.dart';
 import 'package:selecteat_app/view/widgets/meals_slider.dart';
 import 'package:selecteat_app/view/widgets/products_grid.dart';
@@ -29,6 +30,20 @@ class _HomeScreenState extends State<HomeScreen> {
     var size = MediaQuery.of(context).size;
     var productListViewModel = Provider.of<ProductsListViewModel>(context);
     var mealListViewModel = Provider.of<MealsListViewModel>(context);
+    var user = Provider.of<UserProvider>(context).currentUser;
+
+    if (user == null) {
+      return Scaffold(
+        body: Container(
+          height: size.height,
+          width: size.width,
+          margin: const EdgeInsets.all(40),
+          child: const Center(
+            child: CircularProgressIndicator(color: brandPrimaryColor),
+          ),
+        ),
+      );
+    }
 
     return Scaffold(
       bottomNavigationBar: const BottomNav(),
@@ -60,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
-                  Text("Welcome Back, Julien !",
+                  Text("Welcome Back, ${user.name} !",
                       style: Theme.of(context)
                           .textTheme
                           .headline6!
@@ -103,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     .headline6!
                                     .copyWith(fontWeight: FontWeight.bold)),
                             GestureDetector(
-                              onTap:  () => _allMeals(context),
+                              onTap: () => _allMeals(context),
                               child: const Text(
                                 "see all",
                                 style: TextStyle(
@@ -116,8 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         SizedBox(
                           height: size.height / 4.5,
                           child: MealsSlider(
-                            gridList: mealListViewModel.mealsList
-                          ),
+                              gridList: mealListViewModel.mealsList),
                         ),
                         const SizedBox(height: 40),
                         Row(
@@ -145,28 +159,30 @@ class _HomeScreenState extends State<HomeScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             TextButton(
-                          style: TextButton.styleFrom(
-                              primary: Colors.white,
-                              side: const BorderSide(width: 2.0, color: brandDarkColor),
-                              // backgroundColor: brandPrimaryColor,
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 15
+                              style: TextButton.styleFrom(
+                                primary: Colors.white,
+                                side: const BorderSide(
+                                    width: 2.0, color: brandDarkColor),
+                                // backgroundColor: brandPrimaryColor,
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 15),
+                              ),
+                              onPressed: () => _allProducts(context),
+                              child: const Text(
+                                'all products',
+                                style: TextStyle(
+                                  color: brandDarkColor,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
-                          onPressed: () => _allProducts(context),
-                          child: const Text(
-                            'all products',
-                            style: TextStyle(
-                              color: brandDarkColor,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
                           ],
                         )
                       ],
                     ),
-                    SizedBox(height: size.height / 8,)
+                    SizedBox(
+                      height: size.height / 8,
+                    )
                   ],
                 ),
               ),

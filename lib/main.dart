@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:selecteat_app/controllers/navigation.dart';
 import 'package:selecteat_app/utils/constants.dart';
+import 'package:selecteat_app/view/auth/provider/user_provider.dart';
 import 'package:selecteat_app/view/auth/screens/login.dart';
 import 'package:selecteat_app/view/auth/services/authentication_service.dart';
 import 'package:selecteat_app/view/screens/home_screen.dart';
@@ -32,6 +33,9 @@ void main() async {
         ),
         ListenableProvider<NavigationController>(
           create: (_) => NavigationController(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => UserProvider(),
         ),
         ChangeNotifierProvider(
           create: (_) => ProductsListViewModel(),
@@ -72,6 +76,9 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    final firebaseUser = context.watch<User>();
+    Provider.of<UserProvider>(context, listen: false).getCurrentUser(firebaseUser.uid);
+
     NavigationController navigation =
         Provider.of<NavigationController>(context, listen: true);
 

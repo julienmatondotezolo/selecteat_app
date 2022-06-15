@@ -17,7 +17,7 @@ class UserService {
     UserModel userModel;
     var value = await usersCollection.doc(uid).get();
 
-    if (value.exists == false) {
+    if (value.exists == true) {
       return userModel = UserModel(
         email: value.get("email"),
         firstname: value.get("firstname"),

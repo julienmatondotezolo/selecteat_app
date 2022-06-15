@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/src/provider.dart';
 import 'package:selecteat_app/utils/constants.dart';
+import 'package:selecteat_app/view/auth/provider/user_provider.dart';
 import 'package:selecteat_app/view/auth/services/authentication_service.dart';
 import 'package:selecteat_app/view/components/bottomnav.dart';
 
@@ -33,6 +34,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     final firebaseUser = context.watch<User>();
+    var user = Provider.of<UserProvider>(context).currentUser;
 
     return Scaffold(
         bottomNavigationBar: const BottomNav(),
@@ -78,18 +80,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text("John Doe",
+                                      Text("${user!.firstname} ${user.name}",
                                           style: Theme.of(context)
                                               .textTheme
                                               .headline6!
                                               .copyWith(
                                                   fontWeight: FontWeight.w500)),
                                       Text(
-                                        firebaseUser.email ?? "",
-                                        style: TextStyle(fontSize: 12),
-                                      ),
-                                      const Text(
-                                        "+32 (0) 49 876 54 32",
+                                        user.email,
                                         style: TextStyle(fontSize: 12),
                                       ),
                                     ],
