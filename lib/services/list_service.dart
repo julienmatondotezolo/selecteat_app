@@ -11,13 +11,15 @@ class ListService {
 
   Future checkIfExistInList(
       {required String uid, required ProductViewModel product}) async {
-    final list = cartCollection
+    final list = await cartCollection
         .where('uid', isEqualTo: uid)
         .where('storeproductid', isEqualTo: product.storeproductid)
         .get();
     try {
-      List<QueryDocumentSnapshot> productList =
-          await list.then((snapshot) => snapshot.docs);
+      // List<QueryDocumentSnapshot> productList =
+      //     await list.then((snapshot) => snapshot.docs);
+
+      List<QueryDocumentSnapshot> productList = list.docs;
 
       return productList.isNotEmpty;
     } on FirebaseAuthException catch (e) {
@@ -57,15 +59,15 @@ class ListService {
 
   Future removeFromList(
       {required String uid, required ProductViewModel product}) async {
-    final list = cartCollection
+    final list = await cartCollection
         .where('uid', isEqualTo: uid)
         .where('storeproductid', isEqualTo: product.storeproductid)
         .get();
 
     try {
-      list.then((value) => value.docs.forEach((doc) {
-            doc.reference.delete();
-          }));
+      list.docs.forEach((doc) {
+        doc.reference.delete();
+      });
 
       print("${product.name} is removed from list.");
     } on FirebaseAuthException catch (e) {

@@ -19,13 +19,13 @@ class ProductDetail extends StatefulWidget {
 class _ProductDetailState extends State<ProductDetail> {
   // void initState() {
   //   super.initState();
-  //   Provider.of<ListController>(context, listen: false).checkProductList(uid, product)
-  // };
+  //   Provider.of<ListController>(context, listen: false);
+  // }
 
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var user = Provider.of<UserProvider>(context).currentUser;
-    ListController list = Provider.of<ListController>(context, listen: true);
+    ListController list = Provider.of<ListController>(context);
     List productsList = Provider.of<ListController>(context).productsList;
     bool _exists;
 
@@ -44,10 +44,11 @@ class _ProductDetailState extends State<ProductDetail> {
 
     void _checkProductList(productList, context) async {
       list.checkProductList(user!.uid, productList);
-
+      print("Product exist is ${list.exists}");
       setState(() {
         _exists = list.exists;
       });
+      print("State: ${list.exists}");
     }
 
     void _addProductToFavs(productList, context) async {
@@ -58,10 +59,9 @@ class _ProductDetailState extends State<ProductDetail> {
       return null;
     }
 
-    _checkProductList(widget.productList, context);
-    _getProductList(context);
-
     _exists = false;
+
+    _checkProductList(widget.productList, context);
 
     return Container(
       padding: const EdgeInsets.all(20),

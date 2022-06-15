@@ -85,7 +85,7 @@ class _MyAppState extends State<MyApp> {
     Provider.of<UserProvider>(context, listen: false).getCurrentUser(firebaseUser.uid);
 
     NavigationController navigation =
-        Provider.of<NavigationController>(context, listen: true);
+        Provider.of<NavigationController>(context, listen: false);
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
