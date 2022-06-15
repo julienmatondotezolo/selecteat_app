@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:selecteat_app/utils/constants.dart';
+import 'package:selecteat_app/view/components/myappbar.dart';
 import 'package:selecteat_app/view/widgets/select_eat_stores.dart';
 
 class SelectEatScreen extends StatelessWidget {
@@ -37,15 +38,7 @@ class SelectEatScreen extends StatelessWidget {
     var size = MediaQuery.of(context).size;
 
     return Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            "Add ingredients",
-          ),
-          toolbarHeight: 80,
-          elevation: 0,
-          foregroundColor: brandDarkColor,
-          backgroundColor: brandLightGreyColor,
-        ),
+        appBar: MyAppBar(),
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(20),

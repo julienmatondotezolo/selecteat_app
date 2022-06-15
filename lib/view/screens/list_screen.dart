@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:selecteat_app/auth/provider/user_provider.dart';
 import 'package:selecteat_app/controllers/list.dart';
 import 'package:selecteat_app/utils/constants.dart';
+import 'package:selecteat_app/view/components/myappbar.dart';
 import 'package:selecteat_app/view/widgets/list_store_price_total.dart';
 import 'package:selecteat_app/view/widgets/list_item.dart';
 import 'package:selecteat_app/viewmodels/products_view_model.dart';
@@ -30,15 +31,7 @@ class ListScreen extends StatelessWidget {
         Provider.of<ListController>(context).productsList;
 
     return Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            "Shopping list",
-          ),
-          toolbarHeight: 80,
-          elevation: 0,
-          foregroundColor: brandDarkColor,
-          backgroundColor: brandLightGreyColor,
-        ),
+        appBar: MyAppBar(),
         body: Stack(children: [
           SafeArea(
             child: SingleChildScrollView(

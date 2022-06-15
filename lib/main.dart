@@ -94,6 +94,7 @@ class _MyAppState extends State<MyApp> {
         Provider.of<NavigationController>(context, listen: false);
 
     return MaterialApp(
+      color: brandPrimaryColor,
       debugShowCheckedModeBanner: false,
       title: 'Select Eat App',
       theme: ThemeData(

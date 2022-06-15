@@ -9,10 +9,12 @@ import 'package:selecteat_app/viewmodels/products_view_model.dart';
 
 class FavouritesItem extends StatefulWidget {
   final dynamic productList;
+  final dynamic user;
 
   const FavouritesItem({
     Key? key,
     required this.productList,
+    required this.user,
   }) : super(key: key);
 
   @override
@@ -21,13 +23,21 @@ class FavouritesItem extends StatefulWidget {
 
 class _FavouritesItemState extends State<FavouritesItem> {
   @override
+  void initState() {
+    super.initState();
+    // setState(() {
+    //   _exists = Provider.of<ListController>(context).exists;
+    // });
+  }
+
+  bool? _exists;
+
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    var user = Provider.of<UserProvider>(context).currentUser;
-    ListController list = Provider.of<ListController>(context);
+    var user = widget.user;
 
+    ListController list = Provider.of<ListController>(context);
     List<ProductViewModel> productList = widget.productList;
-    bool? _exists;
 
     void _addProductToList(productList, context) async {
       list.addProductList(user!.uid, productList);
@@ -37,17 +47,6 @@ class _FavouritesItemState extends State<FavouritesItem> {
       list.removeProductFromList(user!.uid, productList);
     }
 
-    void _checkProductList(productList, context) async {
-      list.checkProductList(user!.uid, productList);
-      print("Product exist is ${list.exists}");
-      setState(() {
-        _exists = list.exists;
-      });
-      print("State: ${list.exists}");
-    }
-
-     _checkProductList(widget.productList, context);
-    
     return ListView.builder(
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
@@ -137,38 +136,44 @@ class _FavouritesItemState extends State<FavouritesItem> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(
-                        child: _exists == false
-                            ? TextButton(
-                                style: TextButton.styleFrom(
-                                    primary: Colors.white,
-                                    backgroundColor: brandPrimaryColor,
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 40, vertical: 15)),
-                                onPressed: () => _addProductToList(
-                                    widget.productList, context),
-                                child: const Text(
-                                  'Add to list +',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
+                                    child: _exists == false
+                                        ? TextButton(
+                                            style: TextButton.styleFrom(
+                                                primary: Colors.white,
+                                                backgroundColor:
+                                                    brandPrimaryColor,
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 40,
+                                                        vertical: 15)),
+                                            onPressed: () => _addProductToList(
+                                                widget.productList, context),
+                                            child: const Text(
+                                              'Add to list +',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          )
+                                        : TextButton(
+                                            style: TextButton.styleFrom(
+                                                primary: Colors.white,
+                                                backgroundColor:
+                                                    brandRedNotifyColor,
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 40,
+                                                        vertical: 15)),
+                                            onPressed: () => _removeFromList(
+                                                widget.productList, context),
+                                            child: const Text(
+                                              'Remove from list +',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
                                   ),
-                                ),
-                              )
-                            : TextButton(
-                                style: TextButton.styleFrom(
-                                    primary: Colors.white,
-                                    backgroundColor: brandRedNotifyColor,
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 40, vertical: 15)),
-                                onPressed: () => _removeFromList(
-                                    widget.productList, context),
-                                child: const Text(
-                                  'Remove from list +',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                      ),
                                 ],
                               ),
                             ),

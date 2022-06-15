@@ -5,6 +5,7 @@ import 'package:selecteat_app/auth/provider/user_provider.dart';
 import 'package:selecteat_app/auth/services/authentication_service.dart';
 import 'package:selecteat_app/utils/constants.dart';
 import 'package:selecteat_app/view/components/bottomnav.dart';
+import 'package:selecteat_app/view/components/myappbar.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -37,6 +38,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     var user = Provider.of<UserProvider>(context).currentUser;
 
     return Scaffold(
+      appBar: MyAppBar(),
         bottomNavigationBar: const BottomNav(),
         body: SafeArea(
           child: Padding(
@@ -45,7 +47,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 Expanded(
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      SizedBox(height: size.height / 40),
                       Text("Profile",
                           style: Theme.of(context)
                               .textTheme
@@ -54,7 +58,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(height: size.height / 20),
+                          SizedBox(height: size.height / 40),
                           Container(
                             padding: const EdgeInsets.all(20),
                             decoration: BoxDecoration(
