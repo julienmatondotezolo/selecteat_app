@@ -45,7 +45,7 @@ class FavouritesService {
 
   Future getFavourites({required String uid}) async {
     final list = await favouritesCollection.where('uid', isEqualTo: uid).get();
-
+    
     try {
       Iterable result = list.docs.map((doc) => doc.data()).toList();
       return result.map((product) => Products.fromJson(product)).toList();

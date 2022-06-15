@@ -81,6 +81,7 @@ class _MyAppState extends State<MyApp> {
     const NearbyStoreScreen(),
     const ScannerScreen(),
     const HomeScreen(),
+    const FavouritesScreen(),
     const ProfileScreen()
   ];
 

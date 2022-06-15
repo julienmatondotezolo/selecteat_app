@@ -10,7 +10,7 @@ enum LoadingStatus {
 
 class FavouritesController with ChangeNotifier {
   LoadingStatus loadingStatus = LoadingStatus.searching;
-  List<ProductViewModel> productsList = <ProductViewModel>[];
+  List<ProductViewModel> favouritesList = <ProductViewModel>[];
   bool exists = false;
 
   void checkFavouritesList(uid, product) async {
@@ -37,11 +37,11 @@ class FavouritesController with ChangeNotifier {
 
   void getFavouritesList(uid) async {
     List allProductList = await FavouritesService().getFavourites(uid: uid);
-    productsList = allProductList
+    favouritesList = allProductList
         .map((product) => ProductViewModel(product: product))
         .toList();
 
-    if (productsList.isEmpty) {
+    if (favouritesList.isEmpty) {
       loadingStatus = LoadingStatus.empty;
     } else {
       loadingStatus = LoadingStatus.completed;

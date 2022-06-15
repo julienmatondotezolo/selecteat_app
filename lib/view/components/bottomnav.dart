@@ -22,6 +22,7 @@ class _BottomNavState extends State<BottomNav> {
         '/nearbyStores',
         '/scanner',
         '/home',
+        '/favourites',
         '/profile',
     ];
 
@@ -39,6 +40,7 @@ class _BottomNavState extends State<BottomNav> {
 
     return BottomNavigationBarTheme(
       data: const BottomNavigationBarThemeData(
+          unselectedItemColor: brandDarkColor,
           selectedItemColor: brandPrimaryColor),
       child: BottomNavigationBar(
         currentIndex: _selectedIndex,
@@ -56,6 +58,10 @@ class _BottomNavState extends State<BottomNav> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite_border),
+            label: 'Favourites',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_outline),

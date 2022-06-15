@@ -4,7 +4,7 @@ import 'package:selecteat_app/auth/provider/user_provider.dart';
 import 'package:selecteat_app/controllers/list.dart';
 import 'package:selecteat_app/utils/constants.dart';
 import 'package:selecteat_app/view/widgets/list_store_price_total.dart';
-import 'package:selecteat_app/view/widgets/listitem.dart';
+import 'package:selecteat_app/view/widgets/list_item.dart';
 import 'package:selecteat_app/viewmodels/products_view_model.dart';
 
 class ListScreen extends StatelessWidget {
