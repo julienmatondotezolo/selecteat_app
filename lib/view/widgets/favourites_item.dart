@@ -118,68 +118,6 @@ class _FavouritesItemState extends State<FavouritesItem> {
                           ),
                         ],
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.only(top: 10),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  border: Border.all(
-                                    color: brandPrimaryColor,
-                                    width: 1.0,
-                                    style: BorderStyle.solid,
-                                  )),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: _exists == false
-                                        ? TextButton(
-                                            style: TextButton.styleFrom(
-                                                primary: Colors.white,
-                                                backgroundColor:
-                                                    brandPrimaryColor,
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 40,
-                                                        vertical: 15)),
-                                            onPressed: () => _addProductToList(
-                                                widget.productList, context),
-                                            child: const Text(
-                                              'Add to list +',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          )
-                                        : TextButton(
-                                            style: TextButton.styleFrom(
-                                                primary: Colors.white,
-                                                backgroundColor:
-                                                    brandRedNotifyColor,
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 40,
-                                                        vertical: 15)),
-                                            onPressed: () => _removeFromList(
-                                                widget.productList, context),
-                                            child: const Text(
-                                              'Remove from list +',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
                     ],
                   ),
                 )
