@@ -1,10 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:selecteat_app/models/meals.dart';
+import 'package:selecteat_app/auth/services/user_service.dart';
 import 'package:selecteat_app/models/users.dart';
-import 'package:selecteat_app/services/meals_service.dart';
-import 'package:selecteat_app/view/auth/services/user_service.dart';
-import 'package:selecteat_app/viewmodels/meals_view_model.dart';
 import 'package:selecteat_app/viewmodels/user_view_model.dart';
 
 enum LoadingStatus {
@@ -23,8 +19,6 @@ class UserProvider with ChangeNotifier {
 
     if (user != null) {
       currentUser = UserViewModel(user: user);
-    } else {
-      currentUser = "" as UserViewModel?;
     }
 
     if (currentUser != null) {

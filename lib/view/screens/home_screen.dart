@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:selecteat_app/auth/provider/user_provider.dart';
 import 'package:selecteat_app/utils/constants.dart';
-import 'package:selecteat_app/view/auth/provider/user_provider.dart';
 import 'package:selecteat_app/view/components/bottomnav.dart';
 import 'package:selecteat_app/view/widgets/meals_slider.dart';
 import 'package:selecteat_app/view/widgets/products_grid.dart';
@@ -75,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
-                  Text("Welcome Back, ${user.name} !",
+                  Text("Welcome Back, ${user.firstname} !",
                       style: Theme.of(context)
                           .textTheme
                           .headline6!

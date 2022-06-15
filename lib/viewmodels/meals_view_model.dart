@@ -57,4 +57,18 @@ class MealViewModel {
   List get steps {
     return json.decode(_meals.steps);
   }
+
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'title': title,
+    'description': description,
+    'image': image,
+    'cookingtime': cookingtime,
+    'preparationtime': preparationtime,
+    'difficulty': difficulty,
+    'budget': budget,
+    'persons': persons,
+    'ingredients': ingredients,
+    'steps': steps,
+  };
 }

@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
+import 'package:selecteat_app/auth/provider/user_provider.dart';
+import 'package:selecteat_app/auth/services/authentication_service.dart';
 import 'package:selecteat_app/utils/constants.dart';
-import 'package:selecteat_app/view/auth/provider/user_provider.dart';
-import 'package:selecteat_app/view/auth/services/authentication_service.dart';
 import 'package:selecteat_app/view/components/bottomnav.dart';
 
 class ProfileScreen extends StatefulWidget {

@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:selecteat_app/models/users.dart';
 
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth;
@@ -61,7 +60,7 @@ class AuthenticationService {
       await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
 
-      await userSetup(email: email, name: name, firstname: name);
+      await userSetup(email: email, name: name, firstname: firstname);
       return "Signed up";
     } on FirebaseAuthException catch (e) {
       print(e.message);

@@ -1,28 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:selecteat_app/utils/constants.dart';
-import 'package:selecteat_app/view/auth/screens/register.dart';
-import 'package:selecteat_app/view/auth/services/authentication_service.dart';
+import 'package:selecteat_app/auth/screens/register.dart';
+import 'package:selecteat_app/auth/screens/reset.dart';
+import 'package:selecteat_app/auth/services/authentication_service.dart';
 
-class ResetPasswordScreen extends StatelessWidget {
+class LoginScreen extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            "Reset password",
-          ),
-          toolbarHeight: 80,
-          elevation: 0,
-          foregroundColor: brandDarkColor,
-          backgroundColor: brandLightGreyColor,
-        ),
         body: Column(
           children: [
-            Text("Reset Password",
+            Text("Login",
                 style: Theme.of(context)
                     .textTheme
                     .headline6!
@@ -33,11 +25,18 @@ class ResetPasswordScreen extends StatelessWidget {
                 labelText: "Email",
               ),
             ),
+            TextField(
+              controller: passwordController,
+              decoration: InputDecoration(
+                labelText: "Password",
+              ),
+            ),
             TextButton(
               onPressed: () {
-                context.read<AuthenticationService>().resetPassword(
-                  email: emailController.text.trim(),
-                );
+                context.read<AuthenticationService>().login(
+                      email: emailController.text.trim(),
+                      password: passwordController.text.trim(),
+                    );
               },
               child: Text("Confirm"),
             ),
@@ -45,11 +44,12 @@ class ResetPasswordScreen extends StatelessWidget {
               onTap: () => {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => RegisterScreen()),
+                  MaterialPageRoute(builder: (context) => ResetPasswordScreen()),
                 )
               },
               child: Text("Forgot password"),
             ),
+            SizedBox(height: 10,),
             GestureDetector(
               onTap: () => {
                 Navigator.push(

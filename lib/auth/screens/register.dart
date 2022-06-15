@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:selecteat_app/view/auth/screens/login.dart';
-import 'package:selecteat_app/view/auth/services/authentication_service.dart';
+import 'package:selecteat_app/auth/services/authentication_service.dart';
+
+import 'login.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override

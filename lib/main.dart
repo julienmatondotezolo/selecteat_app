@@ -2,11 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:selecteat_app/controllers/list.dart';
 import 'package:selecteat_app/controllers/navigation.dart';
 import 'package:selecteat_app/utils/constants.dart';
-import 'package:selecteat_app/view/auth/provider/user_provider.dart';
-import 'package:selecteat_app/view/auth/screens/login.dart';
-import 'package:selecteat_app/view/auth/services/authentication_service.dart';
 import 'package:selecteat_app/view/screens/home_screen.dart';
 import 'package:selecteat_app/view/screens/nearby_stores_screen.dart';
 import 'package:selecteat_app/view/screens/product_screen.dart';
@@ -16,6 +14,10 @@ import 'package:selecteat_app/viewmodels/meals_list_view_model.dart';
 import 'package:selecteat_app/viewmodels/nearby_stores_list_view_model.dart';
 import 'package:selecteat_app/viewmodels/products_list_view_model.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+
+import 'auth/provider/user_provider.dart';
+import 'auth/screens/login.dart';
+import 'auth/services/authentication_service.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -33,6 +35,9 @@ void main() async {
         ),
         ListenableProvider<NavigationController>(
           create: (_) => NavigationController(),
+        ),
+        ListenableProvider<ListController>(
+          create: (_) => ListController(),
         ),
         ChangeNotifierProvider(
           create: (_) => UserProvider(),

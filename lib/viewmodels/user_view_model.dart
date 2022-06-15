@@ -14,7 +14,6 @@ class UserViewModel {
   }
 
   String get name {
-    print(_user.name);
     return _user.name;
   }
 

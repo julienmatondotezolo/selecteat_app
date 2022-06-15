@@ -45,4 +45,17 @@ class ProductViewModel {
   String get storeproductid {
     return _products.storeproductid;
   }
+
+  Map<String, dynamic> toJson() => {
+      'name': name,
+      'imageurl': imageurl,
+      'baseprice': baseprice,
+      'bigprice': bigprice,
+      'category': category,
+      'nutriscoreletter': nutriscoreletter,
+      'originalprice': originalprice,
+      'itempromotion': itempromotion,
+      'store': store,
+      'storeproductid': storeproductid,
+    };
 }

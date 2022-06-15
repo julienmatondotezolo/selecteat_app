@@ -1,24 +1,62 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
+import 'package:selecteat_app/auth/provider/user_provider.dart';
+import 'package:selecteat_app/controllers/list.dart';
 import 'package:selecteat_app/utils/constants.dart';
 
-class ProductDetail extends StatelessWidget {
+class ProductDetail extends StatefulWidget {
   final dynamic productList;
 
   const ProductDetail({Key? key, required this.productList}) : super(key: key);
 
-  void _addProductToList() async {
-    return null;
-  }
-
-  void _addProductToFavs() async {
-    return null;
-  }
-
   @override
+  State<ProductDetail> createState() => _ProductDetailState();
+}
+
+class _ProductDetailState extends State<ProductDetail> {
+  @override
+  // void initState() {
+  //   super.initState();
+  //   Provider.of<ListController>(context, listen: false).checkProductList(uid, product)
+  // };
+
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    var user = Provider.of<UserProvider>(context).currentUser;
+    ListController list = Provider.of<ListController>(context);
+    bool _exists;
+
+    void _addProductToList(productList, context) async {
+      list.addProductList(user!.uid, productList);
+    }
+
+    void _addProductToFavs(productList, context) async {
+      return null;
+    }
+
+    void _removeFromList(productList, context) async {
+      list.removeProductFromList(user!.uid, productList);
+    }
+
+    void _checkProductList(productList, context) async {
+      list.checkProductList(user!.uid, productList);
+      print(list.exists);
+
+      setState(() {
+        _exists = list.exists;
+      });
+    }
+
+    _exists = false;
+
+    void _checkProductFavs(productList, context) async {
+      return null;
+    }
+
+    _checkProductList(widget.productList, context);
 
     return Container(
       padding: const EdgeInsets.all(20),
@@ -36,7 +74,9 @@ class ProductDetail extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           mainAxisSize: MainAxisSize.min,
           children: [
-            SizedBox(height: size.height / 40,),
+            SizedBox(
+              height: size.height / 40,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,7 +93,7 @@ class ProductDetail extends StatelessWidget {
                   child: Center(
                     child: CachedNetworkImage(
                       width: size.width / 3,
-                      imageUrl: productList.imageurl,
+                      imageUrl: widget.productList.imageurl,
                     ),
                   ),
                 ),
@@ -65,38 +105,45 @@ class ProductDetail extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        productList.store,
+                        widget.productList.store,
                         style: const TextStyle(
                             fontSize: 12, fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 10),
-                      Text(productList.name,
+                      Text(widget.productList.name,
                           style: Theme.of(context)
                               .textTheme
                               .headline6!
                               .copyWith(fontWeight: FontWeight.bold)),
                       const SizedBox(height: 10),
                       Text(
-                        '€ ' + productList.baseprice.replaceAll('.', ','),
+                        '€ ' +
+                            widget.productList.baseprice.replaceAll('.', ','),
                         style: const TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
                           color: brandPrimaryColor,
                         ),
                       ),
-                      productList.nutriscoreletter != null ? Image(
-                        width: size.width / 5,
-                        image: Svg("https://static.openfoodfacts.org/images/attributes/nutriscore-" +
-                          productList.nutriscoreletter.toLowerCase() +
-                          ".svg",
-                        source: SvgSource.network,
-                    )) : SizedBox(),
+                      widget.productList.nutriscoreletter != null
+                          ? Image(
+                              width: size.width / 5,
+                              image: Svg(
+                                "https://static.openfoodfacts.org/images/attributes/nutriscore-" +
+                                    widget.productList.nutriscoreletter
+                                        .toLowerCase() +
+                                    ".svg",
+                                source: SvgSource.network,
+                              ))
+                          : SizedBox(),
                     ],
                   ),
                 ),
               ],
             ),
-            SizedBox(height: size.height / 20,),
+            SizedBox(
+              height: size.height / 20,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -106,27 +153,44 @@ class ProductDetail extends StatelessWidget {
                     direction: Axis.horizontal,
                     children: [
                       Expanded(
-                        child: TextButton(
-                                  style: TextButton.styleFrom(
-                                  primary: Colors.white,
-                                  backgroundColor: brandPrimaryColor,
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 40, vertical: 15)
+                        child: _exists == false
+                            ? TextButton(
+                                style: TextButton.styleFrom(
+                                    primary: Colors.white,
+                                    backgroundColor: brandPrimaryColor,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 40, vertical: 15)),
+                                onPressed: () => _addProductToList(
+                                    widget.productList, context),
+                                child: const Text(
+                                  'Add to list +',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
                                   ),
-                          onPressed: _addProductToList,
-                          child: const Text(
-                            'Add to list +',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
+                                ),
+                              )
+                            : TextButton(
+                                style: TextButton.styleFrom(
+                                    primary: Colors.white,
+                                    backgroundColor: brandRedNotifyColor,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 40, vertical: 15)),
+                                onPressed: () => _removeFromList(
+                                    widget.productList, context),
+                                child: const Text(
+                                  'Remove from list +',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
                       ),
                     ],
                   ),
                 ),
                 TextButton(
-                  onPressed: _addProductToFavs,
+                  onPressed: () =>
+                      _addProductToFavs(widget.productList, context),
                   child: const Icon(
                     Icons.favorite,
                     color: Colors.grey,

@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:selecteat_app/models/users.dart';
-import 'package:selecteat_app/view/auth/services/authentication_service.dart';
 
 class UserService {
   CollectionReference usersCollection =
