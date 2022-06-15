@@ -15,7 +15,9 @@ class ProductViewModel {
   }
 
   String get baseprice {
-    return _products.baseprice;
+    var price = _products.baseprice;
+    if (price.contains('€ ')) return price;
+    return '€ ' + _products.baseprice.replaceAll('.', ',');
   }
 
   String get bigprice {
@@ -47,15 +49,15 @@ class ProductViewModel {
   }
 
   Map<String, dynamic> toJson() => {
-      'name': name,
-      'imageurl': imageurl,
-      'baseprice': baseprice,
-      'bigprice': bigprice,
-      'category': category,
-      'nutriscoreletter': nutriscoreletter,
-      'originalprice': originalprice,
-      'itempromotion': itempromotion,
-      'store': store,
-      'storeproductid': storeproductid,
-    };
+        'name': name,
+        'imageurl': imageurl,
+        'baseprice': baseprice,
+        'bigprice': bigprice,
+        'category': category,
+        'nutriscoreletter': nutriscoreletter,
+        'originalprice': originalprice,
+        'itempromotion': itempromotion,
+        'store': store,
+        'storeproductid': storeproductid,
+      };
 }

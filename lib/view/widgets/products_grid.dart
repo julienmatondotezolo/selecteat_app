@@ -97,8 +97,7 @@ class ProductsGrid extends StatelessWidget {
                             style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(height: 2),
-                          Text(
-                            '€ ' + product.baseprice.replaceAll('.', ','),
+                          Text(product.baseprice,
                             style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,

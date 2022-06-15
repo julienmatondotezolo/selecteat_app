@@ -27,12 +27,7 @@ class _ProductDetailState extends State<ProductDetail> {
     var user = Provider.of<UserProvider>(context).currentUser;
     ListController list = Provider.of<ListController>(context);
     List productsList = Provider.of<ListController>(context).productsList;
-    bool _exists;
-
-    void _getProductList(context) async {
-      list.getProductList(user!.uid);
-      print(productsList);
-    }
+    bool? _exists;
 
     void _addProductToList(productList, context) async {
       list.addProductList(user!.uid, productList);
@@ -59,9 +54,8 @@ class _ProductDetailState extends State<ProductDetail> {
       return null;
     }
 
-    _exists = false;
-
     _checkProductList(widget.productList, context);
+    _checkProductFavs(widget.productList, context);
 
     return Container(
       padding: const EdgeInsets.all(20),
@@ -125,9 +119,7 @@ class _ProductDetailState extends State<ProductDetail> {
                               .headline6!
                               .copyWith(fontWeight: FontWeight.bold)),
                       const SizedBox(height: 10),
-                      Text(
-                        '€ ' +
-                            widget.productList.baseprice.replaceAll('.', ','),
+                      Text(widget.productList.baseprice,
                         style: const TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,

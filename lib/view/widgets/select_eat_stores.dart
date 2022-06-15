@@ -24,7 +24,7 @@ class _SelectEatStoresState extends State<SelectEatStores> {
     Provider.of<NearbyStoresListViewModel>(context, listen: false)
         .allNearbyStores();
 
-    Timer(const Duration(seconds: 10), () {
+    Timer(const Duration(seconds: 1), () {
       setState(() {
         shouldShow = false;
       });

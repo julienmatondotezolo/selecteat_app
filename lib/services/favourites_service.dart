@@ -3,13 +3,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:selecteat_app/models/products.dart';
 import 'package:selecteat_app/viewmodels/products_view_model.dart';
 
-class ListService {
-  CollectionReference cartCollection =
-      FirebaseFirestore.instance.collection('cart');
+class FavouritesService {
+  CollectionReference favouritesCollection =
+      FirebaseFirestore.instance.collection('favourites');
 
-  Future checkIfExistInList(
+  Future checkIfExistInFavourites(
       {required String uid, required ProductViewModel product}) async {
-    final list = await cartCollection
+    final list = await favouritesCollection
         .where('uid', isEqualTo: uid)
         .where('storeproductid', isEqualTo: product.storeproductid)
         .get();
@@ -26,9 +26,9 @@ class ListService {
     }
   }
 
-  Future addToList(
+  Future addToFavourites(
       {required String uid, required ProductViewModel product}) async {
-    final list = cartCollection.doc();
+    final list = favouritesCollection.doc();
 
     final body = product.toJson();
     body.addAll({'uid': uid});
@@ -43,8 +43,8 @@ class ListService {
     }
   }
 
-  Future getList({required String uid}) async {
-    final list = await cartCollection.where('uid', isEqualTo: uid).get();
+  Future getFavourites({required String uid}) async {
+    final list = await favouritesCollection.where('uid', isEqualTo: uid).get();
 
     try {
       Iterable result = list.docs.map((doc) => doc.data()).toList();
@@ -55,9 +55,9 @@ class ListService {
     }
   }
 
-  Future removeFromList(
+  Future removeFromFavourites(
       {required String uid, required ProductViewModel product}) async {
-    final list = await cartCollection
+    final list = await favouritesCollection
         .where('uid', isEqualTo: uid)
         .where('storeproductid', isEqualTo: product.storeproductid)
         .get();
@@ -74,8 +74,8 @@ class ListService {
     }
   }
 
-  Future clearList({required String uid}) async {
-    final list = cartCollection.where('uid', isEqualTo: uid).get();
+  Future clearFavourites({required String uid}) async {
+    final list = favouritesCollection.where('uid', isEqualTo: uid).get();
 
     try {
       list.then((value) => value.docs.forEach((doc) {

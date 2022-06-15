@@ -2,12 +2,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:selecteat_app/utils/constants.dart';
+import 'package:selecteat_app/viewmodels/products_view_model.dart';
 
 class ListItem extends StatefulWidget {
   final dynamic productList;
 
   const ListItem({
-    Key? key, required this.productList,
+    Key? key,
+    required this.productList,
   }) : super(key: key);
 
   @override
@@ -15,7 +17,7 @@ class ListItem extends StatefulWidget {
 }
 
 class _ListItemState extends State<ListItem> {
-  List<int> countList=[];
+  List<int> countList = [];
   int _count = 1;
 
   void decrementCounter() {
@@ -29,65 +31,15 @@ class _ListItemState extends State<ListItem> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    var list = widget.productList;
+    List<ProductViewModel> productList = widget.productList;
 
-    return Column(
-      children: [
-        Container(
-          decoration: const BoxDecoration(
-            border: Border(
-              top: BorderSide(width: 2.0, color: brandLightGreyColor),
-              bottom: BorderSide(width: 2.0, color: brandLightGreyColor),
-            ),
-            color: brandPrimaryOpaqueColor,
-          ),
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              RichText(
-                text: TextSpan(children: [
-                  const TextSpan(
-                    text: "Items to pick at ",
-                    style: TextStyle(
-                      color: brandDarkColor,
-                    ),
-                  ),
-                  TextSpan(
-                    text: list,
-                    style: const TextStyle(
-                      color: brandDarkColor,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ]),
-              ),
-              RichText(
-                text: const TextSpan(children: [
-                  TextSpan(
-                    text: "Total: ",
-                    style: TextStyle(
-                      color: brandDarkColor,
-                    ),
-                  ),
-                  TextSpan(
-                    text: "€ 4,45",
-                    style: TextStyle(
-                      color: brandDarkColor,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ]),
-              ),
-            ],
-          ),
-        ),
-        ListView.builder(
+    return ListView.builder(
             shrinkWrap: true,
             scrollDirection: Axis.vertical,
             physics: const NeverScrollableScrollPhysics(),
-            itemCount: 2,
+            itemCount: productList.length,
             itemBuilder: (context, index) {
+              var product = productList[index];
               return Container(
                 decoration: const BoxDecoration(
                   border: Border(
@@ -104,8 +56,7 @@ class _ListItemState extends State<ListItem> {
                       child: CachedNetworkImage(
                         width: 100,
                         fit: BoxFit.fitWidth,
-                        imageUrl:
-                            "https://cdn.carrefour.eu/300_05010759_5400101017634_00.jpeg",
+                        imageUrl: product.imageurl,
                       ),
                     ),
                     Expanded(
@@ -114,8 +65,8 @@ class _ListItemState extends State<ListItem> {
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
-                              Text("Carrefour"),
+                            children: [
+                              Text(product.store),
                               Icon(
                                 Icons.favorite_border_outlined,
                                 color: brandDarkColor,
@@ -125,8 +76,7 @@ class _ListItemState extends State<ListItem> {
                           ),
                           SizedBox(
                             width: size.width / 2,
-                            child: const Text(
-                              "FiletlapjesFiletlapjesFiletlapjes",
+                            child: Text(product.name,
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
@@ -136,7 +86,7 @@ class _ListItemState extends State<ListItem> {
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
+                            children: [
                               Image(
                                 width: 40,
                                 image: Svg(
@@ -145,7 +95,7 @@ class _ListItemState extends State<ListItem> {
                                 ),
                               ),
                               Text(
-                                '€ 6,00',
+                                product.baseprice,
                                 style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
@@ -177,7 +127,8 @@ class _ListItemState extends State<ListItem> {
                                               decrementCounter();
                                             },
                                           ),
-                                          Text(_count.toString(),
+                                          Text(
+                                            _count.toString(),
                                             style: const TextStyle(
                                               fontSize: 18,
                                               fontWeight: FontWeight.bold,
@@ -202,8 +153,7 @@ class _ListItemState extends State<ListItem> {
                   ],
                 ),
               );
-            }),
-      ],
-    );
+            });
+
   }
 }

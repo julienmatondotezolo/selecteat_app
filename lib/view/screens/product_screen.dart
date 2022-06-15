@@ -51,7 +51,6 @@ class _ProductScreenState extends State<ProductScreen> {
   @override
   Widget build(BuildContext context) {
     var listViewModel = Provider.of<ProductsListViewModel>(context);
-    print(categories[0]["name"]);
 
     return Scaffold(
       bottomNavigationBar: const BottomNav(),
