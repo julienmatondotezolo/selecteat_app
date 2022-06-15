@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:selecteat_app/controllers/favourites.dart';
 import 'package:selecteat_app/controllers/list.dart';
 import 'package:selecteat_app/controllers/navigation.dart';
 import 'package:selecteat_app/utils/constants.dart';
@@ -38,6 +39,9 @@ void main() async {
         ),
         ListenableProvider<ListController>(
           create: (_) => ListController(),
+        ),
+        ListenableProvider<FavouritesController>(
+          create: (_) => FavouritesController(),
         ),
         ChangeNotifierProvider(
           create: (_) => UserProvider(),

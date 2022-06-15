@@ -4,6 +4,7 @@ import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:selecteat_app/auth/provider/user_provider.dart';
+import 'package:selecteat_app/controllers/favourites.dart';
 import 'package:selecteat_app/controllers/list.dart';
 import 'package:selecteat_app/utils/constants.dart';
 
@@ -17,17 +18,15 @@ class ProductDetail extends StatefulWidget {
 }
 
 class _ProductDetailState extends State<ProductDetail> {
-  // void initState() {
-  //   super.initState();
-  //   Provider.of<ListController>(context, listen: false);
-  // }
-
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var user = Provider.of<UserProvider>(context).currentUser;
     ListController list = Provider.of<ListController>(context);
-    List productsList = Provider.of<ListController>(context).productsList;
+    FavouritesController favourites =
+        Provider.of<FavouritesController>(context);
+    // List productsList = Provider.of<ListController>(context).productsList;
     bool? _exists;
+    bool? _existsFavs;
 
     void _addProductToList(productList, context) async {
       list.addProductList(user!.uid, productList);
@@ -47,11 +46,20 @@ class _ProductDetailState extends State<ProductDetail> {
     }
 
     void _addProductToFavs(productList, context) async {
-      return null;
+      favourites.addFavouritesList(user!.uid, productList);
+    }
+
+    void _removeFromFavs(productList, context) async {
+      favourites.removeFavouritesFromList(user!.uid, productList);
     }
 
     void _checkProductFavs(productList, context) async {
-      return null;
+      favourites.checkFavouritesList(user!.uid, productList);
+      print("Product exist is ${favourites.exists}");
+      setState(() {
+        _existsFavs = favourites.exists;
+      });
+      print("State: ${favourites.exists}");
     }
 
     _checkProductList(widget.productList, context);
@@ -119,7 +127,8 @@ class _ProductDetailState extends State<ProductDetail> {
                               .headline6!
                               .copyWith(fontWeight: FontWeight.bold)),
                       const SizedBox(height: 10),
-                      Text(widget.productList.baseprice,
+                      Text(
+                        widget.productList.baseprice,
                         style: const TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -189,6 +198,7 @@ class _ProductDetailState extends State<ProductDetail> {
                     ],
                   ),
                 ),
+                _existsFavs == false ?
                 TextButton(
                   onPressed: () =>
                       _addProductToFavs(widget.productList, context),
@@ -205,7 +215,23 @@ class _ProductDetailState extends State<ProductDetail> {
                       borderRadius: BorderRadius.all(Radius.circular(5)),
                     ),
                   ),
-                ),
+                ) : TextButton(
+                  onPressed: () =>
+                      _removeFromFavs(widget.productList, context),
+                  child: const Icon(
+                    Icons.favorite,
+                    color: brandRedNotifyColor,
+                    size: 24,
+                  ),
+                  style: TextButton.styleFrom(
+                    backgroundColor: brandLightGreyColor,
+                    padding: EdgeInsets.zero,
+                    minimumSize: const Size(46, 46),
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                    ),
+                  ),
+                )
               ],
             )
           ],
