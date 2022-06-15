@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:selecteat_app/auth/provider/user_provider.dart';
 import 'package:selecteat_app/controllers/list.dart';
 import 'package:selecteat_app/utils/constants.dart';
+import 'package:selecteat_app/view/widgets/product_detail.dart';
 import 'package:selecteat_app/viewmodels/products_view_model.dart';
 
 class FavouritesItem extends StatefulWidget {
@@ -47,6 +48,19 @@ class _FavouritesItemState extends State<FavouritesItem> {
       list.removeProductFromList(user!.uid, productList);
     }
 
+    void _showProductDetails(context, productDetail) async {
+      showModalBottomSheet(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(20),
+          ),
+        ),
+        context: context,
+        builder: (BuildContext context) {
+          return ProductDetail(productList: productDetail);
+        });
+    }
+
     return ListView.builder(
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
@@ -54,74 +68,79 @@ class _FavouritesItemState extends State<FavouritesItem> {
         itemCount: productList.length,
         itemBuilder: (context, index) {
           var product = productList[index];
-          return Container(
-            decoration: const BoxDecoration(
-              border: Border(
-                bottom: BorderSide(width: 1.0, color: brandLightGreyColor),
-              ),
-              color: Colors.white,
-            ),
-            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 25),
-            child: Row(
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(right: 20),
-                  child: CachedNetworkImage(
-                    width: 100,
-                    fit: BoxFit.fitWidth,
-                    imageUrl: product.imageurl,
-                  ),
+          return GestureDetector(
+            onTap: () {
+              _showProductDetails(context, product);
+            },
+            child: Container(
+              decoration: const BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(width: 1.0, color: brandLightGreyColor),
                 ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(product.store),
-                          Icon(
-                            Icons.favorite_border_outlined,
-                            color: brandDarkColor,
-                            size: 12,
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        width: size.width / 2,
-                        child: Text(
-                          product.name,
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: brandDarkColor,
-                          ),
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Image(
-                            width: 40,
-                            image: Svg(
-                              "https://static.openfoodfacts.org/images/attributes/nutriscore-a.svg",
-                              source: SvgSource.network,
+                color: Colors.white,
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 25),
+              child: Row(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(right: 20),
+                    child: CachedNetworkImage(
+                      width: 100,
+                      fit: BoxFit.fitWidth,
+                      imageUrl: product.imageurl,
+                    ),
+                  ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(product.store),
+                            Icon(
+                              Icons.favorite_border_outlined,
+                              color: brandDarkColor,
+                              size: 12,
                             ),
-                          ),
-                          Text(
-                            product.baseprice,
+                          ],
+                        ),
+                        SizedBox(
+                          width: size.width / 2,
+                          child: Text(
+                            product.name,
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
-                              color: brandPrimaryColor,
+                              color: brandDarkColor,
                             ),
                           ),
-                        ],
-                      ),
-                    ],
-                  ),
-                )
-              ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Image(
+                              width: 40,
+                              image: Svg(
+                                "https://static.openfoodfacts.org/images/attributes/nutriscore-a.svg",
+                                source: SvgSource.network,
+                              ),
+                            ),
+                            Text(
+                              product.baseprice,
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: brandPrimaryColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
           );
         });

@@ -8,6 +8,7 @@ import 'package:selecteat_app/controllers/navigation.dart';
 import 'package:selecteat_app/utils/constants.dart';
 import 'package:selecteat_app/view/screens/favourites_screen.dart';
 import 'package:selecteat_app/view/screens/home_screen.dart';
+import 'package:selecteat_app/view/screens/list_screen.dart';
 import 'package:selecteat_app/view/screens/nearby_stores_screen.dart';
 import 'package:selecteat_app/view/screens/product_screen.dart';
 import 'package:selecteat_app/view/screens/profile_screen.dart';
@@ -112,6 +113,7 @@ class _MyAppState extends State<MyApp> {
         '/products': (context) => const ProductScreen(),
         '/meals': (context) => const ProductScreen(),
         '/favourites': (context) => const FavouritesScreen(),
+        '/list': (context) => const ListScreen(),
         '/profile': (context) => const ProfileScreen(),
       },
     );

@@ -15,10 +15,15 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Image(
-          image: Svg("assets/logo/logo-selecteat.svg"),
-          // height: 200
-          ),
+      title: GestureDetector(
+      onTap: () {
+          Navigator.pushNamed(context, '/list');
+        },
+        child: Image(
+            image: Svg("assets/logo/logo-selecteat.svg"),
+            // height: 200
+            ),
+      ),
       centerTitle: true,
       actions: [
         Container(
