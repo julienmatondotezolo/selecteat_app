@@ -74,9 +74,22 @@ class ListService {
     }
   }
 
-  // Future<List<Products>> getList({required String uid}) async {
-  //   DocumentSnapshot<Object?> list = await cartCollection.doc(uid).get();
+  Future clearList(
+      {required String uid}) async {
+    final list = cartCollection
+        .where('uid', isEqualTo: uid)
+        .get();
 
-  // }
+    try {
+      list.then((value) => value.docs.forEach((doc) {
+            doc.reference.delete();
+          }));
+
+      print("Product list is cleared.");
+    } on FirebaseAuthException catch (e) {
+      print(e.message);
+      return e.message;
+    }
+  }
 
 }
