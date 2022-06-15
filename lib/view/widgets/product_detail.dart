@@ -17,7 +17,6 @@ class ProductDetail extends StatefulWidget {
 }
 
 class _ProductDetailState extends State<ProductDetail> {
-  @override
   // void initState() {
   //   super.initState();
   //   Provider.of<ListController>(context, listen: false).checkProductList(uid, product)
@@ -26,15 +25,17 @@ class _ProductDetailState extends State<ProductDetail> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var user = Provider.of<UserProvider>(context).currentUser;
-    ListController list = Provider.of<ListController>(context);
+    ListController list = Provider.of<ListController>(context, listen: true);
+    List productsList = Provider.of<ListController>(context).productsList;
     bool _exists;
+
+    void _getProductList(context) async {
+      list.getProductList(user!.uid);
+      print(productsList);
+    }
 
     void _addProductToList(productList, context) async {
       list.addProductList(user!.uid, productList);
-    }
-
-    void _addProductToFavs(productList, context) async {
-      return null;
     }
 
     void _removeFromList(productList, context) async {
@@ -43,20 +44,24 @@ class _ProductDetailState extends State<ProductDetail> {
 
     void _checkProductList(productList, context) async {
       list.checkProductList(user!.uid, productList);
-      print(list.exists);
 
       setState(() {
         _exists = list.exists;
       });
     }
 
-    _exists = false;
+    void _addProductToFavs(productList, context) async {
+      return null;
+    }
 
     void _checkProductFavs(productList, context) async {
       return null;
     }
 
     _checkProductList(widget.productList, context);
+    _getProductList(context);
+
+    _exists = false;
 
     return Container(
       padding: const EdgeInsets.all(20),
@@ -92,6 +97,10 @@ class _ProductDetailState extends State<ProductDetail> {
                       ]),
                   child: Center(
                     child: CachedNetworkImage(
+                      placeholder: (context, url) => CircularProgressIndicator(
+                        color: brandPrimaryColor,
+                      ),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
                       width: size.width / 3,
                       imageUrl: widget.productList.imageurl,
                     ),

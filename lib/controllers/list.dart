@@ -30,20 +30,16 @@ class ListController with ChangeNotifier {
     notifyListeners();
   }
 
-    void clearList(uid) async {
+  void clearList(uid) async {
     await ListService().clearList(uid: uid);
     notifyListeners();
   }
 
   void getProductList(uid) async {
-    List list = await ListService().getList(uid: uid);
-    notifyListeners();
-
-    print(list);
-
-    // productsList = list
-    //     .map((product) => ProductViewModel(product: product))
-    //     .toList();
+    List allProductList = await ListService().getList(uid: uid);
+    productsList = allProductList
+        .map((product) => ProductViewModel(product: product))
+        .toList();
 
     if (productsList.isEmpty) {
       loadingStatus = LoadingStatus.empty;

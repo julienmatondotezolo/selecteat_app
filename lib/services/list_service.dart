@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:selecteat_app/models/products.dart';
 import 'package:selecteat_app/viewmodels/products_view_model.dart';
 
 class ListService {
@@ -43,12 +44,11 @@ class ListService {
   }
 
   Future getList({required String uid}) async {
-    final list = cartCollection..where('uid', isEqualTo: uid);
+    final list = await cartCollection.where('uid', isEqualTo: uid).get();
 
     try {
-      await list.get();
-      print("User list");
-      return "User list";
+      Iterable result = list.docs.map((doc) => doc.data()).toList();
+      return result.map((product) => Products.fromJson(product)).toList();
     } on FirebaseAuthException catch (e) {
       print(e.message);
       return e.message;
@@ -74,11 +74,8 @@ class ListService {
     }
   }
 
-  Future clearList(
-      {required String uid}) async {
-    final list = cartCollection
-        .where('uid', isEqualTo: uid)
-        .get();
+  Future clearList({required String uid}) async {
+    final list = cartCollection.where('uid', isEqualTo: uid).get();
 
     try {
       list.then((value) => value.docs.forEach((doc) {
@@ -91,5 +88,4 @@ class ListService {
       return e.message;
     }
   }
-
 }
