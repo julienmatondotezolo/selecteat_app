@@ -11,6 +11,10 @@ class ProductViewModel {
   }
 
   String get imageurl {
+    var image = _products.imageurl;
+    if(image.contains("?buildNumber=")){
+      return image.split('?buildNumber')[0];
+    }
     return _products.imageurl;
   }
 
