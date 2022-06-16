@@ -29,7 +29,7 @@ class ProductService {
     String size = "10";
     String urlCLP =
         "https://ecgproductmw.colruyt.be/ecgproductmw/v2/fr/products/?categoryIds=$category&clientCode=CLP&isAvailable=true&page=$page&placeId=$placeId&size=$size";
-
+    print(urlCLP);
     final responseCLP = await dio.get(urlCLP);
 
     if (responseCLP.statusCode == 200) {
@@ -58,7 +58,8 @@ class ProductService {
       return items;
     }
 
-    var mergedList = [...await fetchProducts(), ...await fetchProductsCLP()];
+    var mergedList = [...await fetchProducts()];
+    // var mergedList = [...await fetchProducts(), ...await fetchProductsCLP()];
 
     return shuffle(mergedList);
   }

@@ -5,15 +5,17 @@ import 'package:selecteat_app/view/components/bottomnav.dart';
 import 'package:selecteat_app/view/components/myappbar.dart';
 import 'package:selecteat_app/view/widgets/products_grid.dart';
 import 'package:selecteat_app/viewmodels/products_list_view_model.dart';
+import 'package:selecteat_app/viewmodels/products_view_model.dart';
+import 'package:selecteat_app/viewmodels/search_list_view_model.dart';
 
-class ProductScreen extends StatefulWidget {
-  const ProductScreen({Key? key}) : super(key: key);
+class SearchScreen extends StatefulWidget {
+  const SearchScreen({Key? key}) : super(key: key);
 
   @override
-  State<ProductScreen> createState() => _ProductScreenState();
+  State<SearchScreen> createState() => _SearchScreenState();
 }
 
-class _ProductScreenState extends State<ProductScreen> {
+class _SearchScreenState extends State<SearchScreen> {
   final categories = [
     {
       'name': 'Fruits et legumes frais',
@@ -49,8 +51,26 @@ class _ProductScreenState extends State<ProductScreen> {
     },
   ];
 
+  var query;
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero, () {
+      setState(() {
+        query = ModalRoute.of(context)!.settings.arguments;
+      });
+    });
+    
+    Provider.of<SearchListViewModel>(context, listen: false).searchResult(query);
+    print(query);
+  }
+
   @override
   Widget build(BuildContext context) {
+    List<ProductViewModel> searchListResult =
+        Provider.of<SearchListViewModel>(context).searchListResult;
+        
     var listViewModel = Provider.of<ProductsListViewModel>(context);
 
     return Scaffold(
@@ -129,7 +149,7 @@ class _ProductScreenState extends State<ProductScreen> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        ProductsGrid(productsList: listViewModel.productsList),
+                        ProductsGrid(productsList: searchListResult),
                       ],
                     ),
                   ),

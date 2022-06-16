@@ -37,19 +37,7 @@ class SearchBar extends StatelessWidget {
               )
             ],
           )
-
-          // const TextField(
-          //   readOnly: true,
-          //   decoration: InputDecoration(
-          //     hintText: "Que recherchez-vous ?",
-          //     icon: Icon(
-          //       Icons.search,
-          //       color: brandPrimaryColor,
-          //     ),
-          //     border: InputBorder.none,
-          //   ),
-          // ),
-          ),
+      ),
     );
   }
 }

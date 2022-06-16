@@ -17,7 +17,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: GestureDetector(
       onTap: () {
-          Navigator.pushNamed(context, '/list');
+          Navigator.popAndPushNamed(context, '/home');
         },
         child: Image(
             image: Svg("assets/logo/logo-selecteat.svg"),
@@ -32,9 +32,14 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
             child: Stack(
               alignment: AlignmentDirectional.center,
               children: [
-                Container(
-                  margin: EdgeInsets.only(right: 7),
-                  child: Icon(Icons.shopping_cart_outlined)),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.popAndPushNamed(context, '/list');
+                  },
+                  child: Container(
+                    margin: EdgeInsets.only(right: 7),
+                    child: Icon(Icons.shopping_cart_outlined)),
+                ),
                 Positioned(
                   right: 0,
                     top: 15,

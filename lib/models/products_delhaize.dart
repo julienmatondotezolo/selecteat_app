@@ -15,15 +15,15 @@ class ProductsDelhaize {
   factory ProductsDelhaize.fromJson(Map<String, dynamic> json) {
     return ProductsDelhaize(
       name: json['name'],
-      imageurl: json['fullImage'],
-      baseprice: json['price']['basicPrice'].toString(),
-      bigprice: json['bigprice'],
-      category: json['topCategoryName'],
-      nutriscoreletter: json['nutriscoreLabel'],
-      originalprice: json['measurementUnitQuantityPrice'],
+      imageurl: "https://www.delhaize.be/" + json['images'][3]["url"],
+      baseprice: json["price"]["value"].toString(),
+      bigprice: json["price"]["unitPrice"].toString(),
+      category: json["url"],
+      nutriscoreletter: json['nutriScoreLetter'],
+      originalprice: json["price"]["supplementaryPriceLabel1"],
       itempromotion: "",
-      store: "colruyt",
-      storeproductid: json['productId'],
+      store: "delhaize",
+      storeproductid: json['code'],
     );
   }
 }

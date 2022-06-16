@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:selecteat_app/services/search_service.dart';
+import 'package:selecteat_app/viewmodels/products_view_model.dart';
 
 enum LoadingStatus {
   completed,
@@ -10,6 +11,7 @@ enum LoadingStatus {
 class SearchListViewModel with ChangeNotifier {
   LoadingStatus loadingStatus = LoadingStatus.searching;
   List<dynamic> searchListSuggestion = [];
+  List<ProductViewModel> searchListResult = [];
 
   late String searchTerm;
 
@@ -21,6 +23,23 @@ class SearchListViewModel with ChangeNotifier {
     searchListSuggestion = allSearchSuggestion;
 
     if (searchListSuggestion.isEmpty) {
+      loadingStatus = LoadingStatus.empty;
+    } else {
+      loadingStatus = LoadingStatus.completed;
+    }
+    notifyListeners();
+  }
+
+  void searchResult(searchTerm) async {
+    // List allProducts = await ProductService().fetchProducts();
+    List allResult = await SearchService().fetchAllSearch(searchTerm);
+    notifyListeners();
+
+    searchListResult = allResult
+        .map((product) => ProductViewModel(product: product))
+        .toList();
+
+    if (searchListResult.isEmpty) {
       loadingStatus = LoadingStatus.empty;
     } else {
       loadingStatus = LoadingStatus.completed;

@@ -32,13 +32,11 @@ class MySearchDelegate extends SearchDelegate {
       }
     }
 
-    if (searchTerms.isEmpty) {
+    if (searchTerms.isEmpty && query.isNotEmpty) {
       return Container(
-        margin: const EdgeInsets.all(40),
+        padding: const EdgeInsets.only(bottom: 200),
         child: const Center(
-          child: CircularProgressIndicator(
-            color: brandPrimaryColor
-          ),
+          child: CircularProgressIndicator(color: brandPrimaryColor),
         ),
       );
     }
@@ -47,16 +45,30 @@ class MySearchDelegate extends SearchDelegate {
         itemCount: matchQuery.length,
         itemBuilder: (context, index) {
           var result = matchQuery[index];
-          return ListTile(
-            title: Text(result),
+          return Container(
+            margin: EdgeInsets.symmetric(vertical: 5),
+            child: ListTile(
+                onTap: () {
+                  Navigator.of(context).popAndPushNamed(
+                    '/search',
+                    arguments: result,
+                  );
+                },
+                title: Text(result),
+                selectedTileColor: brandPrimaryLightColor,
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 20, vertical: 1),
+                tileColor: brandLightGreyColor),
           );
-        });
+        }
+    );
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
     Provider.of<SearchListViewModel>(context).searchSuggestion(query);
-    searchTerms = Provider.of<SearchListViewModel>(context).searchListSuggestion;
+    searchTerms =
+        Provider.of<SearchListViewModel>(context).searchListSuggestion;
 
     List<String> matchQuery = [];
     for (var fruit in searchTerms) {
@@ -69,9 +81,7 @@ class MySearchDelegate extends SearchDelegate {
       return Container(
         padding: const EdgeInsets.only(bottom: 200),
         child: const Center(
-          child: CircularProgressIndicator(
-            color: brandPrimaryColor
-          ),
+          child: CircularProgressIndicator(color: brandPrimaryColor),
         ),
       );
     }
@@ -80,9 +90,22 @@ class MySearchDelegate extends SearchDelegate {
         itemCount: matchQuery.length,
         itemBuilder: (context, index) {
           var result = matchQuery[index];
-          return ListTile(
-            title: Text(result),
+          return Container(
+            margin: EdgeInsets.symmetric(vertical: 5),
+            child: ListTile(
+                onTap: () {
+                  Navigator.of(context).popAndPushNamed(
+                    '/search',
+                    arguments: result,
+                  );
+                },
+                title: Text(result),
+                selectedTileColor: brandPrimaryLightColor,
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 20, vertical: 1),
+                tileColor: brandLightGreyColor),
           );
-        });
+        }
+    );
   }
 }

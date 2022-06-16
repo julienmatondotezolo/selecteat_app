@@ -13,6 +13,7 @@ import 'package:selecteat_app/view/screens/nearby_stores_screen.dart';
 import 'package:selecteat_app/view/screens/product_screen.dart';
 import 'package:selecteat_app/view/screens/profile_screen.dart';
 import 'package:selecteat_app/view/screens/scanner_screen.dart';
+import 'package:selecteat_app/view/screens/search_screen.dart';
 import 'package:selecteat_app/viewmodels/meals_list_view_model.dart';
 import 'package:selecteat_app/viewmodels/nearby_stores_list_view_model.dart';
 import 'package:selecteat_app/viewmodels/products_list_view_model.dart';
@@ -35,7 +36,9 @@ void main() async {
           create: (_) => AuthenticationService(FirebaseAuth.instance),
         ),
         StreamProvider(
-          create: (context) => context.read<AuthenticationService>().authStateChanges, initialData: null,
+          create: (context) =>
+              context.read<AuthenticationService>().authStateChanges,
+          initialData: null,
         ),
         ListenableProvider<NavigationController>(
           create: (_) => NavigationController(),
@@ -93,10 +96,9 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     final firebaseUser = context.watch<User>();
-    Provider.of<UserProvider>(context, listen: false).getCurrentUser(firebaseUser.uid);
-
-    NavigationController navigation =
-        Provider.of<NavigationController>(context, listen: false);
+    Provider.of<UserProvider>(context, listen: false)
+        .getCurrentUser(firebaseUser.uid);
+    Provider.of<NavigationController>(context, listen: false);
 
     return MaterialApp(
       color: brandPrimaryColor,
@@ -116,6 +118,7 @@ class _MyAppState extends State<MyApp> {
         '/scanner': (context) => const ScannerScreen(),
         '/products': (context) => const ProductScreen(),
         '/meals': (context) => const ProductScreen(),
+        '/search': (context) => const SearchScreen(),
         '/favourites': (context) => const FavouritesScreen(),
         '/list': (context) => const ListScreen(),
         '/profile': (context) => const ProfileScreen(),
@@ -130,9 +133,6 @@ class AuthenticationWrapper extends StatelessWidget {
     final firebaseUser = context.watch<User>();
 
     if (firebaseUser != null) return const MyApp();
-    return MaterialApp(
-      title: "Registration",
-      home: LoginScreen()
-    );
+    return MaterialApp(title: "Registration", home: LoginScreen());
   }
 }
