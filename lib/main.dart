@@ -17,6 +17,7 @@ import 'package:selecteat_app/viewmodels/meals_list_view_model.dart';
 import 'package:selecteat_app/viewmodels/nearby_stores_list_view_model.dart';
 import 'package:selecteat_app/viewmodels/products_list_view_model.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:selecteat_app/viewmodels/search_list_view_model.dart';
 
 import 'auth/provider/user_provider.dart';
 import 'auth/screens/login.dart';
@@ -47,6 +48,9 @@ void main() async {
         ),
         ChangeNotifierProvider(
           create: (_) => UserProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => SearchListViewModel(),
         ),
         ChangeNotifierProvider(
           create: (_) => ProductsListViewModel(),

@@ -14,21 +14,26 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 20, bottom: 20),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(30),
         ),
-        child: const TextField(
-          decoration: InputDecoration(
-            hintText: "Search products & meals...",
-            icon: Icon(
+        child: Row(
+          children: [
+            Icon(
               Icons.search,
               color: brandPrimaryColor,
             ),
-            border: InputBorder.none,
-          ),
-        ),
+            SizedBox(width: 10,),
+            Text(
+            "Que recherchez-vous ?",
+            style: TextStyle(
+              color: Colors.grey
+            ),
+            )
+          ],
+        )
       ),
     );
   }
