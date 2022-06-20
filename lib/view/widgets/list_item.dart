@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:selecteat_app/utils/constants.dart';
+import 'package:selecteat_app/view/widgets/product_detail.dart';
 import 'package:selecteat_app/viewmodels/products_view_model.dart';
 
 class ListItem extends StatefulWidget {
@@ -28,6 +29,19 @@ class _ListItemState extends State<ListItem> {
     });
   }
 
+  void _showProductDetails(context, productDetail) async {
+    showModalBottomSheet(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(20),
+          ),
+        ),
+        context: context,
+        builder: (BuildContext context) {
+          return ProductDetail(productList: productDetail);
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -51,12 +65,15 @@ class _ListItemState extends State<ListItem> {
                     const EdgeInsets.symmetric(horizontal: 20.0, vertical: 25),
                 child: Row(
                   children: [
-                    Container(
-                      margin: const EdgeInsets.only(right: 20),
-                      child: CachedNetworkImage(
-                        width: 100,
-                        fit: BoxFit.fitWidth,
-                        imageUrl: product.imageurl,
+                    GestureDetector(
+                      onTap: () => _showProductDetails(context, product),
+                      child: Container(
+                        margin: const EdgeInsets.only(right: 20),
+                        child: CachedNetworkImage(
+                          width: 100,
+                          fit: BoxFit.fitWidth,
+                          imageUrl: product.imageurl,
+                        ),
                       ),
                     ),
                     Expanded(
