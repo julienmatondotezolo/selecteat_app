@@ -23,14 +23,16 @@ class SearchService {
   }
 
   Future<List<ProductsColruyt>> fetchSearchCLP(searchTerm) async {
-    String page = "1";
+    var dio = Dio();
+    dio.options.headers['X-CG-APIKey'] = 'a8ylmv13-b285-4788-9e14-0f79b7ed2411';
+
+    int page = 1;
     String placeId = "455";
     String size = "10";
     String urlCLP =
-        "https://ecgproductmw.colruyt.be/ecgproductmw/v2/fr/products?clientCode=CLP&isAvailable=true&page=$page&placeId=$placeId&searchTerm=$searchTerm&size=$size";
+        "https://apip.colruyt.be/gateway/ictmgmt.emarkecom.cgproductsearchsvc.v2/v1/fr/products?clientCode=CLP&isAvailable=true&page=${page.toString()}&placeId=$placeId&searchTerm=$searchTerm&size=$size&ts=1654641965327";
     print(urlCLP);
     final responseCLP = await dio.get(urlCLP);
-
     if (responseCLP.statusCode == 200) {
       final result = responseCLP.data["products"];
       Iterable list = result;
@@ -41,11 +43,11 @@ class SearchService {
   }
 
   Future<List<ProductsDelhaize>> fetchSearchDelhaize(searchTerm) async {
-    String page = "1";
+    int page = 0;
     String placeId = "455";
     String size = "10";
     String urlCLP =
-        'https://api.delhaize.be/?operationName=GetProductSearch&variables={"lang":"fr","searchQuery":"$searchTerm","pageNumber":0,"pageSize":20,"filterFlag":true,"useSpellingSuggestion":true}&extensions={"persistedQuery":{"version":1,"sha256Hash":"d35a68b909fdfc67c6911c7fa14700ddecb1b170e805715a2bf7419ab73b157e"}}';
+        'https://api.delhaize.be/?operationName=GetProductSearch&variables={"lang":"fr","searchQuery":"$searchTerm","pageNumber":${page.toString()},"pageSize":$size,"filterFlag":true,"useSpellingSuggestion":true}&extensions={"persistedQuery":{"version":1,"sha256Hash":"d35a68b909fdfc67c6911c7fa14700ddecb1b170e805715a2bf7419ab73b157e"}}';
     print(urlCLP);
     final responseCLP = await dio.get(urlCLP);
 
@@ -76,7 +78,10 @@ class SearchService {
     }
 
     var mergedList = [...await fetchSearchDelhaize(searchTerm)];
-    // var mergedList = [...await fetchSearchDelhaize(), ...await fetchSearchCLP()];
+    // var mergedList = [
+    //   ...await fetchSearchDelhaize(searchTerm),
+    //   ...await fetchSearchCLP(searchTerm)
+    // ];
 
     return shuffle(mergedList);
   }

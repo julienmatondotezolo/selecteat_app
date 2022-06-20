@@ -18,26 +18,44 @@ class ProductDetail extends StatefulWidget {
 }
 
 class _ProductDetailState extends State<ProductDetail> {
+  bool _exists = false;
+  bool _existsFavs = false;
+  var user;
+
+  @override
+  void initState() {
+    super.initState();
+    // Future.delayed(Duration.zero, () {
+      // user = Provider.of<UserProvider>(context).currentUser;
+      // list = Provider.of<ListController>(context);
+
+    //   list!.checkProductList(user!.uid, widget.productList);
+    //   print("Product exist is ${list!.exists}");
+    //   setState(() {
+    //     _exists = list!.exists;
+    //   });
+    //   print("State: ${list!.exists}");
+    // });
+  }
+
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    var user = Provider.of<UserProvider>(context).currentUser;
+    user = Provider.of<UserProvider>(context).currentUser;
     ListController list = Provider.of<ListController>(context);
     FavouritesController favourites =
         Provider.of<FavouritesController>(context);
-    // List productsList = Provider.of<ListController>(context).productsList;
-    bool? _exists;
-    bool? _existsFavs;
+    List productsList = Provider.of<ListController>(context).productsList;
 
     void _addProductToList(productList, context) async {
-      list.addProductList(user!.uid, productList);
+      list.addProductList(user.uid, productList);
     }
 
     void _removeFromList(productList, context) async {
-      list.removeProductFromList(user!.uid, productList);
+      list.removeProductFromList(user.uid, productList);
     }
 
     void _checkProductList(productList, context) async {
-      list.checkProductList(user!.uid, productList);
+      list.checkProductList(user.uid, productList);
       print("Product exist is ${list.exists}");
       setState(() {
         _exists = list.exists;
@@ -198,40 +216,41 @@ class _ProductDetailState extends State<ProductDetail> {
                     ],
                   ),
                 ),
-                _existsFavs == false ?
-                TextButton(
-                  onPressed: () =>
-                      _addProductToFavs(widget.productList, context),
-                  child: const Icon(
-                    Icons.favorite,
-                    color: Colors.grey,
-                    size: 24,
-                  ),
-                  style: TextButton.styleFrom(
-                    backgroundColor: brandLightGreyColor,
-                    padding: EdgeInsets.zero,
-                    minimumSize: const Size(46, 46),
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
-                    ),
-                  ),
-                ) : TextButton(
-                  onPressed: () =>
-                      _removeFromFavs(widget.productList, context),
-                  child: const Icon(
-                    Icons.favorite,
-                    color: brandRedNotifyColor,
-                    size: 24,
-                  ),
-                  style: TextButton.styleFrom(
-                    backgroundColor: brandLightGreyColor,
-                    padding: EdgeInsets.zero,
-                    minimumSize: const Size(46, 46),
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
-                    ),
-                  ),
-                )
+                _existsFavs == false
+                    ? TextButton(
+                        onPressed: () =>
+                            _addProductToFavs(widget.productList, context),
+                        child: const Icon(
+                          Icons.favorite,
+                          color: Colors.grey,
+                          size: 24,
+                        ),
+                        style: TextButton.styleFrom(
+                          backgroundColor: brandLightGreyColor,
+                          padding: EdgeInsets.zero,
+                          minimumSize: const Size(46, 46),
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                          ),
+                        ),
+                      )
+                    : TextButton(
+                        onPressed: () =>
+                            _removeFromFavs(widget.productList, context),
+                        child: const Icon(
+                          Icons.favorite,
+                          color: brandRedNotifyColor,
+                          size: 24,
+                        ),
+                        style: TextButton.styleFrom(
+                          backgroundColor: brandLightGreyColor,
+                          padding: EdgeInsets.zero,
+                          minimumSize: const Size(46, 46),
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                          ),
+                        ),
+                      )
               ],
             )
           ],

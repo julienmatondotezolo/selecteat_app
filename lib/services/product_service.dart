@@ -58,8 +58,8 @@ class ProductService {
       return items;
     }
 
-    var mergedList = [...await fetchProducts()];
-    // var mergedList = [...await fetchProducts(), ...await fetchProductsCLP()];
+    // var mergedList = [...await fetchProducts()];
+    var mergedList = [...await fetchProducts(), ...await fetchProductsCLP()];
 
     return shuffle(mergedList);
   }

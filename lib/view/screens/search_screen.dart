@@ -60,17 +60,16 @@ class _SearchScreenState extends State<SearchScreen> {
       setState(() {
         query = ModalRoute.of(context)!.settings.arguments;
       });
+      Provider.of<SearchListViewModel>(context, listen: false)
+        .searchResult(query);
     });
-    
-    Provider.of<SearchListViewModel>(context, listen: false).searchResult(query);
-    print(query);
   }
 
   @override
   Widget build(BuildContext context) {
     List<ProductViewModel> searchListResult =
         Provider.of<SearchListViewModel>(context).searchListResult;
-        
+
     var listViewModel = Provider.of<ProductsListViewModel>(context);
 
     return Scaffold(
@@ -145,10 +144,15 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.all(20),
                   child: SingleChildScrollView(
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 20.0),
+                          child: Text('Search result: "$query" (${searchListResult.length})'),
+                        ),
                         ProductsGrid(productsList: searchListResult),
                       ],
                     ),

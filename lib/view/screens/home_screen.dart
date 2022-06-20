@@ -64,8 +64,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       width: 40,
                       decoration: const BoxDecoration(
                           color: Colors.white, shape: BoxShape.circle),
-                      child: const Text(
-                        "JM",
+                      child: Text(
+                        user.initials,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           // fontSize: 18,
