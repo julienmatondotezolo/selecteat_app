@@ -1,13 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:selecteat_app/controllers/favourites.dart';
 import 'package:selecteat_app/controllers/list.dart';
+import 'package:selecteat_app/controllers/local.dart';
 import 'package:selecteat_app/controllers/navigation.dart';
 import 'package:selecteat_app/controllers/selecteat.dart';
 import 'package:selecteat_app/utils/constants.dart';
-import 'package:selecteat_app/utils/themes.dart';
 import 'package:selecteat_app/view/screens/favourites_screen.dart';
 import 'package:selecteat_app/view/screens/home_screen.dart';
 import 'package:selecteat_app/view/screens/list_screen.dart';
@@ -21,6 +22,7 @@ import 'package:selecteat_app/viewmodels/nearby_stores_list_view_model.dart';
 import 'package:selecteat_app/viewmodels/products_list_view_model.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:selecteat_app/viewmodels/search_list_view_model.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'auth/provider/user_provider.dart';
 import 'auth/screens/login.dart';
@@ -41,6 +43,9 @@ void main() async {
           create: (context) =>
               context.read<AuthenticationService>().authStateChanges,
           initialData: null,
+        ),
+        ListenableProvider<LocalController>(
+          create: (_) => LocalController(),
         ),
         ListenableProvider<NavigationController>(
           create: (_) => NavigationController(),
@@ -105,6 +110,7 @@ class _MyAppState extends State<MyApp> {
         .getCurrentUser(firebaseUser.uid);
     Provider.of<NavigationController>(context, listen: false);
     Provider.of<ListController>(context).getProductList(firebaseUser.uid);
+    final localController = Provider.of<LocalController>(context);
 
     return MaterialApp(
       color: brandPrimaryColor,
@@ -121,6 +127,17 @@ class _MyAppState extends State<MyApp> {
             Theme.of(context).textTheme.apply(displayColor: brandDarkColor),
       ),
       initialRoute: '/home',
+      locale: localController.locale,
+      localizationsDelegates: [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale('fr'),
+        Locale('nl'),
+      ],
       routes: {
         '/home': (context) => const HomeScreen(),
         '/nearbyStores': (context) => const NearbyStoreScreen(),

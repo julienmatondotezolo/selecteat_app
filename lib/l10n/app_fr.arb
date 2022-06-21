@@ -1,0 +1,14 @@
+{
+    "helloWorld": "Coucou",
+    "@helloWorld": {
+      "description": "The conventional newborn programmer greeting"
+    },
+    "profilePage": "Profil",
+    "@profilePage": {
+      "description": "Profile page"
+    },
+    "editPassword": "Modifier le mot de passe",
+    "@editPassword": {
+      "description": "editPassword"
+    }
+}

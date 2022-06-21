@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:selecteat_app/auth/provider/user_provider.dart';
 import 'package:selecteat_app/auth/services/authentication_service.dart';
+import 'package:selecteat_app/controllers/local.dart';
 import 'package:selecteat_app/utils/constants.dart';
 import 'package:selecteat_app/view/components/bottomnav.dart';
 import 'package:selecteat_app/view/components/myappbar.dart';
@@ -14,20 +15,33 @@ class ProfileScreen extends StatefulWidget {
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
-List<DropdownMenuItem<String>> get dropdownItems {
-  List<DropdownMenuItem<String>> menuItems = [
-    const DropdownMenuItem(child: Text("Français"), value: "Français"),
-    const DropdownMenuItem(child: Text("Nederlands"), value: "Nederlands"),
-  ];
-  return menuItems;
-}
-
 class _ProfileScreenState extends State<ProfileScreen> {
-  String selectedValue = "English";
+  String selectedValue = "fr";
   bool _lights = false;
+  var localController;
+
+  @override
+  void initState() {
+    localController = Provider.of<LocalController>(context, listen: false);
+    super.initState();
+  }
 
   void _signOut() async {
     context.read<AuthenticationService>().signOut();
+  }
+
+  List<DropdownMenuItem<String>> get dropdownItems {
+    List<DropdownMenuItem<String>> menuItems = [
+        DropdownMenuItem(
+          onTap: () => localController.setLocale(Locale("fr")),
+          child: Text("Français"),
+          value: "fr"),
+        DropdownMenuItem(
+          onTap: () => localController.setLocale(Locale("nl")),
+          child: Text("Nederlands"),
+          value: "nl"),
+    ];
+    return menuItems;
   }
 
   @override
@@ -37,7 +51,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     var user = Provider.of<UserProvider>(context).currentUser;
 
     return Scaffold(
-      appBar: MyAppBar(),
+        appBar: MyAppBar(),
         bottomNavigationBar: const BottomNav(),
         body: SafeArea(
           child: Padding(

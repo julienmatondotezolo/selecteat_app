@@ -10,6 +10,7 @@ import 'package:selecteat_app/view/widgets/products_grid.dart';
 import 'package:selecteat_app/view/widgets/search_bar.dart';
 import 'package:selecteat_app/viewmodels/meals_list_view_model.dart';
 import 'package:selecteat_app/viewmodels/products_list_view_model.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -81,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       CartHome()
                     ],
                   ),
-                  Text("Welcome Back, ${user.firstname} !",
+                  Text("${AppLocalizations.of(context)!.helloWorld}, ${user.firstname} !",
                       style: Theme.of(context)
                           .textTheme
                           .headline6!

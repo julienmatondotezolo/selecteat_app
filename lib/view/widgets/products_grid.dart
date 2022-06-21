@@ -75,6 +75,10 @@ class ProductsGrid extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     CachedNetworkImage(
+                      placeholder: (context, url) => CircularProgressIndicator(
+                        color: brandPrimaryColor,
+                      ),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
                       height: 120,
                       imageUrl: product.imageurl,
                     ),
