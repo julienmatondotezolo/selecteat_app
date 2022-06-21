@@ -99,6 +99,7 @@ class _MyAppState extends State<MyApp> {
     Provider.of<UserProvider>(context, listen: false)
         .getCurrentUser(firebaseUser.uid);
     Provider.of<NavigationController>(context, listen: false);
+    Provider.of<ListController>(context).getProductList(firebaseUser.uid);
 
     return MaterialApp(
       color: brandPrimaryColor,

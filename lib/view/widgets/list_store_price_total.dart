@@ -5,9 +5,11 @@ class ListStorePriceTotal extends StatelessWidget {
   const ListStorePriceTotal({
     Key? key,
     required this.store,
+    required this.totalPrice,
   }) : super(key: key);
 
   final store;
+  final totalPrice;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +43,7 @@ class ListStorePriceTotal extends StatelessWidget {
             ]),
           ),
           RichText(
-            text: const TextSpan(children: [
+            text: TextSpan(children: [
               TextSpan(
                 text: "Total: ",
                 style: TextStyle(
@@ -49,7 +51,7 @@ class ListStorePriceTotal extends StatelessWidget {
                 ),
               ),
               TextSpan(
-                text: "€ 4,45",
+                text: "€ $totalPrice",
                 style: TextStyle(
                   color: brandDarkColor,
                   fontWeight: FontWeight.bold,

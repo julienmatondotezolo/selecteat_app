@@ -30,6 +30,39 @@ class ListScreen extends StatelessWidget {
     List<ProductViewModel> productsList =
         Provider.of<ListController>(context).productsList;
 
+    var containCarrefour =
+        productsList.where((element) => element.store == "carrefour");
+    var containColruyt =
+        productsList.where((element) => element.store == "colruyt");
+    var containDelhaize =
+        productsList.where((element) => element.store == "delhaize");
+
+    var totalPrice, totalPriceColruyt, totalPriceCarrefour, totalPriceDelhaize;
+
+    if (containColruyt.isNotEmpty)
+      totalPriceColruyt = containColruyt
+          .map((item) => double.parse(
+              item.baseprice.replaceAll("€", '').replaceAll(",", '.')))
+          .reduce((value, current) => value + current);
+
+    if (containCarrefour.isNotEmpty)
+      totalPriceCarrefour = containCarrefour
+          .map((item) => double.parse(
+              item.baseprice.replaceAll("€", '').replaceAll(",", '.')))
+          .reduce((value, current) => value + current);
+          
+    if (containDelhaize.isNotEmpty)
+      totalPriceDelhaize = containDelhaize
+          .map((item) => double.parse(
+              item.baseprice.replaceAll("€", '').replaceAll(",", '.')))
+          .reduce((value, current) => value + current);
+
+    if (productsList.isNotEmpty)
+    totalPrice = productsList
+        .map((item) => double.parse(
+            item.baseprice.replaceAll("€", '').replaceAll(",", '.')))
+        .reduce((value, current) => value + current);
+
     return Scaffold(
         appBar: MyAppBar(),
         body: Stack(children: [
@@ -37,7 +70,9 @@ class ListScreen extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  ListStorePriceTotal(store: "carrefour"),
+                  if (containCarrefour.isNotEmpty)
+                    ListStorePriceTotal(
+                        store: "Carrefour", totalPrice: totalPriceCarrefour),
                   ListView.builder(
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
@@ -51,8 +86,7 @@ class ListScreen extends StatelessWidget {
                         carrefourList.add(productsList[index]);
                         return Column(
                           children: [
-                            ListItem(
-                                productList: carrefourList),
+                            ListItem(productList: carrefourList),
                           ],
                         );
                       }
@@ -60,7 +94,9 @@ class ListScreen extends StatelessWidget {
                       return SizedBox.shrink();
                     },
                   ),
-                  ListStorePriceTotal(store: "Colruyt"),
+                  if (containColruyt.isNotEmpty)
+                    ListStorePriceTotal(
+                        store: "Colruyt", totalPrice: totalPriceColruyt),
                   ListView.builder(
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
@@ -74,8 +110,7 @@ class ListScreen extends StatelessWidget {
                         colruytList.add(productsList[index]);
                         return Column(
                           children: [
-                            ListItem(
-                                productList: colruytList),
+                            ListItem(productList: colruytList),
                           ],
                         );
                       }
@@ -83,7 +118,9 @@ class ListScreen extends StatelessWidget {
                       return SizedBox.shrink();
                     },
                   ),
-                  ListStorePriceTotal(store: "Delhaize"),
+                  if (containDelhaize.isNotEmpty)
+                    ListStorePriceTotal(
+                        store: "Delhaize", totalPrice: totalPriceDelhaize),
                   ListView.builder(
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
@@ -144,7 +181,7 @@ class ListScreen extends StatelessWidget {
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
+                      children: [
                         Text(
                           "Total:",
                           style: TextStyle(
@@ -153,7 +190,7 @@ class ListScreen extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "€ 76,35",
+                          "€ ${totalPrice.toString().replaceAll('.', ',')}",
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
