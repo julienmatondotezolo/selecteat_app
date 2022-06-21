@@ -34,7 +34,7 @@ class Products {
       nutriscoreletter: json['nutriscoreletter'],
       originalprice: json['originalprice'],
       itempromotion: json['itempromotion'],
-      quantity: json['quantity'],
+      quantity: null,
       store: json['store'],
       storeproductid: json['storeproductid'],
     );

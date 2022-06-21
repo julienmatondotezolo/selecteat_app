@@ -7,10 +7,11 @@ class ProductsColruyt {
   final String category;
   final String nutriscoreletter;
   final String? itempromotion;
+  final String? quantity;
   final String store;
   final String storeproductid;
 
-  ProductsColruyt({required this.name, required this.imageurl, required this.baseprice, required this.bigprice, required this.category, required this.nutriscoreletter, required this.originalprice, required this.itempromotion, required this.store, required this.storeproductid});
+  ProductsColruyt({required this.name, required this.imageurl, required this.baseprice, required this.bigprice, required this.category, required this.nutriscoreletter, required this.originalprice, required this.itempromotion, required this.store, required this.storeproductid, required this.quantity,});
 
   factory ProductsColruyt.fromJson(Map<String, dynamic> json) {
     return ProductsColruyt(
@@ -22,6 +23,7 @@ class ProductsColruyt {
       nutriscoreletter: json['nutriscoreLabel'],
       originalprice: json['measurementUnitQuantityPrice'],
       itempromotion: "",
+      quantity: null,
       store: "colruyt",
       storeproductid: json['productId'],
     );

@@ -20,7 +20,7 @@ class ProductViewModel {
 
   String get baseprice {
     var price = _products.baseprice;
-    var quantity = _products.quantity;
+    var quantity;
 
     if (_products.quantity == null) quantity = 1;
 
@@ -30,7 +30,8 @@ class ProductViewModel {
       var priceTotal = priceToDouble * quantity;
       return '€ ' + priceTotal.toStringAsFixed(2).replaceAll('.', ',');
     }
-    return '€ ' + (price * quantity).toStringAsFixed(2).replaceAll('.', ',');
+
+    return '€ ' + price.replaceAll('.', ',');
   }
 
   String get bigprice {
