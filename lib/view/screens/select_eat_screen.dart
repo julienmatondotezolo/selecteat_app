@@ -36,8 +36,6 @@ class SelectEatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    var ingredients = meal.ingredients;
-
     return Scaffold(
         appBar: MyAppBar(),
         body: SafeArea(
@@ -46,42 +44,63 @@ class SelectEatScreen extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
-                Text(
-                  'Select between the 2 options to add the ingredients for ${meal.title} with feta to your cart.',
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: brandDarkColor,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                  ),
+                RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Select between the 2 options to add the ingredients for ',
+                          style: const TextStyle(
+                            color: brandDarkColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                        ),
+                        TextSpan(
+                          text: meal.title,
+                          style: const TextStyle(
+                            color: brandPrimaryColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                        ),
+                        TextSpan(
+                          text: ' to your cart.',
+                          style: const TextStyle(
+                            color: brandDarkColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ],
+                    ),
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 40,
                 ),
                 DefaultTextStyle(
                   style: const TextStyle(color: Colors.white),
                   child: Container(
-                    padding: const EdgeInsets.all(20),
-                    margin: const EdgeInsets.symmetric(vertical: 10.0),
-                    decoration: const BoxDecoration(
-                        color: brandPrimaryColor,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(5.0),
-                        ),
-                        boxShadow: [
-                          BoxShadow(color: Colors.black12, blurRadius: 10),
-                        ]),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(
-                          width: size.width / 1.5,
-                          child: Expanded(
+                      padding: const EdgeInsets.all(20),
+                      margin: const EdgeInsets.symmetric(vertical: 10.0),
+                      decoration: const BoxDecoration(
+                          color: brandPrimaryColor,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(5.0),
+                          ),
+                          boxShadow: [
+                            BoxShadow(color: Colors.black12, blurRadius: 10),
+                          ]),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                            width: size.width / 1.5,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
+                              children: [
                                 Text(
                                   'Balanced',
                                   style: TextStyle(
@@ -92,39 +111,90 @@ class SelectEatScreen extends StatelessWidget {
                                 SizedBox(
                                   height: 20,
                                 ),
-                                Text(
-                                  'The healthiest ingredients based on the nutri-score to compose a balanced cart.',
+                                RichText(
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: 'The ',
+                                      ),
+                                      TextSpan(
+                                        text: 'healthiest ingredients',
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: ' based on the nutri-score to ',
+                                      ),
+                                      TextSpan(
+                                        text: 'compose a balanced cart.',
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ]
+                                  )
                                 ),
                                 SizedBox(
                                   height: 10,
                                 ),
-                                Text(
-                                  'The ingredients will be from one or different stores near you.',
+                                RichText(
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: 'The ingredients',
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: ' will be from ',
+                                      ),
+                                      TextSpan(
+                                        text: 'one',
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: ' or ',
+                                      ),
+                                      TextSpan(
+                                        text: 'different stores',
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: 'near you.',
+                                      ),
+                                    ]
+                                  )
                                 ),
                               ],
                             ),
                           ),
-                        ),
-                        TextButton(
-                          onPressed: () => _balanced(context, meal.ingredients),
-                          child: const Icon(
-                            Icons.arrow_forward_rounded,
-                            color: brandPrimaryColor,
-                            size: 20,
-                          ),
-                          style: TextButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            padding: EdgeInsets.zero,
-                            minimumSize: const Size(38, 38),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30),
+                          TextButton(
+                            onPressed: () => _balanced(context, meal.ingredients),
+                            child: const Icon(
+                              Icons.arrow_forward_rounded,
+                              color: brandPrimaryColor,
+                              size: 20,
+                            ),
+                            style: TextButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              padding: EdgeInsets.zero,
+                              minimumSize: const Size(38, 38),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
                 ),
+
                 Container(
                   padding: const EdgeInsets.all(20),
                   margin: const EdgeInsets.symmetric(vertical: 10.0),
@@ -141,32 +211,107 @@ class SelectEatScreen extends StatelessWidget {
                     children: [
                       SizedBox(
                         width: size.width / 1.5,
-                        child: Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text(
-                                'Economic',
-                                style: TextStyle(
-                                  color: brandDarkColor,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Economic',
+                              style: TextStyle(
+                                color: brandDarkColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            RichText(
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: 'The ',
+                                        style: const TextStyle(
+                                          color: brandDarkColor,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: 'cheapest ingredients',
+                                        style: const TextStyle(
+                                          color: brandDarkColor,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: ' from ',
+                                        style: const TextStyle(
+                                          color: brandDarkColor,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: 'different stores.',
+                                        style: const TextStyle(
+                                          color: brandDarkColor,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ]
+                                  )
                                 ),
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text(
-                                'The cheapest ingredients from different stores.',
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                'The ingredients will be from one or different stores near you.',
-                              ),
-                            ],
-                          ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            RichText(
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: 'The ',
+                                        style: const TextStyle(
+                                          color: brandDarkColor,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: 'ingredients',
+                                        style: const TextStyle(
+                                          color: brandDarkColor,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: ' will be from ',
+                                        style: const TextStyle(
+                                          color: brandDarkColor,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: 'one',
+                                        style: const TextStyle(
+                                          color: brandDarkColor,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: ' or ',
+                                        style: const TextStyle(
+                                          color: brandDarkColor,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: 'different stores',
+                                        style: const TextStyle(
+                                          color: brandDarkColor,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: 'near you.',
+                                        style: const TextStyle(
+                                          color: brandDarkColor,
+                                        ),
+                                      ),
+                                    ]
+                                  )
+                                ),
+                          ],
                         ),
                       ),
                       TextButton(

@@ -38,7 +38,6 @@ class MealScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    List<dynamic> ingredientsList = meal.ingredientsList;
 
     return Scaffold(
       body: Stack(

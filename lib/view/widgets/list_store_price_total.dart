@@ -26,7 +26,8 @@ class ListStorePriceTotal extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           RichText(
-            text: TextSpan(children: [
+            text: TextSpan(
+              children: [
               const TextSpan(
                 text: "Items to pick at ",
                 style: TextStyle(
