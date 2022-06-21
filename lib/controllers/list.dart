@@ -30,6 +30,11 @@ class ListController with ChangeNotifier {
     notifyListeners();
   }
 
+  void updateProductList(uid, product, count) async {
+    await ListService().updateList(uid: uid, product: product, count: count);
+    notifyListeners();
+  }
+
   void clearList(uid) async {
     await ListService().clearList(uid: uid);
     notifyListeners();

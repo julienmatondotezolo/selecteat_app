@@ -12,7 +12,7 @@ class ProductViewModel {
 
   String get imageurl {
     var image = _products.imageurl;
-    if(image.contains("?buildNumber=")){
+    if (image.contains("?buildNumber=")) {
       return image.split('?buildNumber')[0];
     }
     return _products.imageurl;
@@ -50,6 +50,11 @@ class ProductViewModel {
 
   String get storeproductid {
     return _products.storeproductid;
+  }
+
+  int? get quantity {
+    if (_products.quantity == null) return 1;
+    return _products.quantity;
   }
 
   Map<String, dynamic> toJson() => {

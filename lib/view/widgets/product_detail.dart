@@ -26,8 +26,8 @@ class _ProductDetailState extends State<ProductDetail> {
   void initState() {
     super.initState();
     // Future.delayed(Duration.zero, () {
-      // user = Provider.of<UserProvider>(context).currentUser;
-      // list = Provider.of<ListController>(context);
+    // user = Provider.of<UserProvider>(context).currentUser;
+    // list = Provider.of<ListController>(context);
 
     //   list!.checkProductList(user!.uid, widget.productList);
     //   print("Product exist is ${list!.exists}");
@@ -44,7 +44,7 @@ class _ProductDetailState extends State<ProductDetail> {
     ListController list = Provider.of<ListController>(context);
     FavouritesController favourites =
         Provider.of<FavouritesController>(context);
-    List productsList = Provider.of<ListController>(context).productsList;
+    // List productsList = Provider.of<ListController>(context).productsList;
 
     void _addProductToList(productList, context) async {
       list.addProductList(user.uid, productList);

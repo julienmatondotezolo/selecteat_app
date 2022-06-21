@@ -31,7 +31,8 @@ class ListService {
     final list = cartCollection.doc();
 
     final body = product.toJson();
-    body.addAll({'uid': uid});
+    body.addAll({'uid': uid, 'quantity': 1});
+    print(body);
 
     try {
       await list.set(body);
@@ -49,6 +50,28 @@ class ListService {
     try {
       Iterable result = list.docs.map((doc) => doc.data()).toList();
       return result.map((product) => Products.fromJson(product)).toList();
+    } on FirebaseAuthException catch (e) {
+      print(e.message);
+      return e.message;
+    }
+  }
+
+  Future updateList(
+      {required String uid,
+      required ProductViewModel product,
+      required int count}) async {
+    final list = await cartCollection
+        .where('uid', isEqualTo: uid)
+        .where('storeproductid', isEqualTo: product.storeproductid)
+        .get();
+
+    try {
+      list.docs.forEach((doc) {
+        var quantity = doc.get('quantity');
+        doc.reference.update({'quantity': count});
+      });
+
+      print("${product.name} is updated.");
     } on FirebaseAuthException catch (e) {
       print(e.message);
       return e.message;

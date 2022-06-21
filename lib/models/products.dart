@@ -7,6 +7,7 @@ class Products {
   final String nutriscoreletter;
   final String? originalprice;
   final String? itempromotion;
+  final int? quantity;
   final String store;
   final String storeproductid;
 
@@ -19,6 +20,7 @@ class Products {
       required this.nutriscoreletter,
       required this.originalprice,
       required this.itempromotion,
+      required this.quantity,
       required this.store,
       required this.storeproductid});
 
@@ -32,6 +34,7 @@ class Products {
       nutriscoreletter: json['nutriscoreletter'],
       originalprice: json['originalprice'],
       itempromotion: json['itempromotion'],
+      quantity: json['quantity'],
       store: json['store'],
       storeproductid: json['storeproductid'],
     );

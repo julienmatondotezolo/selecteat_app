@@ -25,6 +25,7 @@ class Cart extends StatelessWidget {
               margin: EdgeInsets.only(right: 7),
               child: Icon(Icons.shopping_cart_outlined)),
         ),
+        productsList.length > 0 ?
         Positioned(
           right: 0,
           top: 15,
@@ -41,7 +42,7 @@ class Cart extends StatelessWidget {
               ),
             ),
           ),
-        ),
+        ) : SizedBox(),
       ],
     );
   }
