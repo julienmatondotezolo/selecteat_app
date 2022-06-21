@@ -192,7 +192,8 @@ class ListScreen extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "€ ${totalPrice.toString().replaceAll('.', ',')}",
+                          // "€ ${totalPrice.toString().replaceAll('.', ',')}",
+                          "€ ${totalPrice.toStringAsFixed(2).replaceAll('.', ',')}",
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,

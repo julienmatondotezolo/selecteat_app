@@ -20,8 +20,17 @@ class ProductViewModel {
 
   String get baseprice {
     var price = _products.baseprice;
-    if (price.contains('€ ')) return price;
-    return '€ ' + _products.baseprice.replaceAll('.', ',');
+    var quantity = _products.quantity;
+
+    if (_products.quantity == null) quantity = 1;
+
+    if (price.contains('€ ')) {
+      var priceToDouble =
+          double.parse(price.replaceAll('€', '').replaceAll(',', '.'));
+      var priceTotal = priceToDouble * quantity;
+      return '€ ' + priceTotal.toStringAsFixed(2).replaceAll('.', ',');
+    }
+    return '€ ' + (price * quantity).toStringAsFixed(2).replaceAll('.', ',');
   }
 
   String get bigprice {
