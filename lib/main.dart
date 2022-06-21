@@ -7,6 +7,7 @@ import 'package:selecteat_app/controllers/list.dart';
 import 'package:selecteat_app/controllers/navigation.dart';
 import 'package:selecteat_app/controllers/selecteat.dart';
 import 'package:selecteat_app/utils/constants.dart';
+import 'package:selecteat_app/utils/themes.dart';
 import 'package:selecteat_app/view/screens/favourites_screen.dart';
 import 'package:selecteat_app/view/screens/home_screen.dart';
 import 'package:selecteat_app/view/screens/list_screen.dart';
@@ -109,6 +110,8 @@ class _MyAppState extends State<MyApp> {
       color: brandPrimaryColor,
       debugShowCheckedModeBanner: false,
       title: 'Select Eat App',
+      themeMode: ThemeMode.system,
+      // theme: MyThemes.lighTheme,
       theme: ThemeData(
         bottomSheetTheme:
             const BottomSheetThemeData(backgroundColor: Colors.transparent),

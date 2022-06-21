@@ -62,23 +62,23 @@ class _HomeScreenState extends State<HomeScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                        // Container(
-                        //   alignment: Alignment.center,
-                        //   height: 40,
-                        //   width: 40,
-                        //   decoration: const BoxDecoration(
-                        //       color: Colors.white, shape: BoxShape.circle),
-                        //   child: Text(
-                        //     user.initials,
-                        //     textAlign: TextAlign.center,
-                        //     style: TextStyle(
-                        //       // fontSize: 18,
-                        //       fontWeight: FontWeight.bold,
-                        //       color: brandPrimaryColor,
-                        //     ),
-                        //   ),
-                        // ),
-                        CartHome()
+                      // Container(
+                      //   alignment: Alignment.center,
+                      //   height: 40,
+                      //   width: 40,
+                      //   decoration: const BoxDecoration(
+                      //       color: Colors.white, shape: BoxShape.circle),
+                      //   child: Text(
+                      //     user.initials,
+                      //     textAlign: TextAlign.center,
+                      //     style: TextStyle(
+                      //       // fontSize: 18,
+                      //       fontWeight: FontWeight.bold,
+                      //       color: brandPrimaryColor,
+                      //     ),
+                      //   ),
+                      // ),
+                      CartHome()
                     ],
                   ),
                   Text("Welcome Back, ${user.firstname} !",
