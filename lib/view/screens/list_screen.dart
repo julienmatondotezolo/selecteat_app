@@ -147,6 +147,8 @@ class ListScreen extends StatelessWidget {
               ),
             ),
           ),
+
+          totalPrice != null ?
           Positioned(
             child: Container(
                 width: size.width,
@@ -243,6 +245,8 @@ class ListScreen extends StatelessWidget {
                 )),
             bottom: 0,
           )
-        ]));
+          : SizedBox(),
+        ]),
+      );
   }
 }

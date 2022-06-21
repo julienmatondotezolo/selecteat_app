@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:selecteat_app/auth/provider/user_provider.dart';
 import 'package:selecteat_app/utils/constants.dart';
 import 'package:selecteat_app/view/components/bottomnav.dart';
+import 'package:selecteat_app/view/widgets/cart.dart';
+import 'package:selecteat_app/view/widgets/cart_home.dart';
 import 'package:selecteat_app/view/widgets/meals_slider.dart';
 import 'package:selecteat_app/view/widgets/products_grid.dart';
 import 'package:selecteat_app/view/widgets/search_bar.dart';
@@ -48,6 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       bottomNavigationBar: const BottomNav(),
       body: Stack(
+        clipBehavior: Clip.hardEdge,
         children: [
           Container(height: size.height * .38, color: brandPrimaryLightColor),
           SafeArea(
@@ -56,24 +59,27 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 40,
-                      width: 40,
-                      decoration: const BoxDecoration(
-                          color: Colors.white, shape: BoxShape.circle),
-                      child: Text(
-                        user.initials,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          // fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: brandPrimaryColor,
-                        ),
-                      ),
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                        // Container(
+                        //   alignment: Alignment.center,
+                        //   height: 40,
+                        //   width: 40,
+                        //   decoration: const BoxDecoration(
+                        //       color: Colors.white, shape: BoxShape.circle),
+                        //   child: Text(
+                        //     user.initials,
+                        //     textAlign: TextAlign.center,
+                        //     style: TextStyle(
+                        //       // fontSize: 18,
+                        //       fontWeight: FontWeight.bold,
+                        //       color: brandPrimaryColor,
+                        //     ),
+                        //   ),
+                        // ),
+                        CartHome()
+                    ],
                   ),
                   Text("Welcome Back, ${user.firstname} !",
                       style: Theme.of(context)
@@ -127,7 +133,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 10),
                         SizedBox(
                           height: size.height / 4.5,
                           child: MealsSlider(
