@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:selecteat_app/models/meals.dart';
+import 'package:selecteat_app/models/products_delhaize.dart';
 
 class MealService {
   var dio = Dio();

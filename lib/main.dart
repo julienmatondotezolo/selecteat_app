@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:selecteat_app/controllers/favourites.dart';
 import 'package:selecteat_app/controllers/list.dart';
 import 'package:selecteat_app/controllers/navigation.dart';
+import 'package:selecteat_app/controllers/selecteat.dart';
 import 'package:selecteat_app/utils/constants.dart';
 import 'package:selecteat_app/view/screens/favourites_screen.dart';
 import 'package:selecteat_app/view/screens/home_screen.dart';
@@ -45,6 +46,9 @@ void main() async {
         ),
         ListenableProvider<ListController>(
           create: (_) => ListController(),
+        ),
+        ListenableProvider<SelectEatController>(
+          create: (_) => SelectEatController(),
         ),
         ListenableProvider<FavouritesController>(
           create: (_) => FavouritesController(),
@@ -109,6 +113,7 @@ class _MyAppState extends State<MyApp> {
         bottomSheetTheme:
             const BottomSheetThemeData(backgroundColor: Colors.transparent),
         primaryColor: brandPrimaryColor,
+        fontFamily: 'Montreal',
         textTheme:
             Theme.of(context).textTheme.apply(displayColor: brandDarkColor),
       ),

@@ -1,6 +1,8 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:dio/dio.dart';
+import 'package:selecteat_app/models/products.dart';
 import 'package:selecteat_app/models/products_colruyt.dart';
 import 'package:selecteat_app/models/products_delhaize.dart';
 
@@ -60,6 +62,43 @@ class SearchService {
     }
   }
 
+  Future<List<Products>> fetchSearch(searchTerm) async {
+    String url =
+        "https://3cli754824.execute-api.eu-west-3.amazonaws.com/dev/search?query=$searchTerm";
+
+    final response = await dio.get(url);
+
+    if (response.statusCode == 200) {
+      final result = response.data;
+      Iterable list = result;
+      return list.map((product) => Products.fromJson(product)).toList();
+    } else {
+      throw Exception("Failled to get product data");
+    }
+  }
+
+  // FutureOr<List<dynamic>> fetchBalanced(ingredientsParsed) async {
+  Future<List?> fetchBalanced(ingredientsParsed) async {
+    for (var ingredient in ingredientsParsed) {
+      var searchTerm = ingredient['name'];
+      String url =
+          "https://3cli754824.execute-api.eu-west-3.amazonaws.com/dev/search?query=$searchTerm";
+
+      Response<dynamic> response = await dio.get(url);
+      print(response.statusCode);
+
+      if (response.statusCode == 200) {
+        final result = response.data;
+        Iterable list = result;
+        list.map((product) => Products.fromJson(product)).toList();
+      } else {
+        throw Exception("Failled to get product data");
+      }
+    }
+
+    return null;
+  }
+
   Future<List> fetchAllSearch(searchTerm) async {
     List shuffle(List items) {
       var random = Random();
@@ -77,7 +116,7 @@ class SearchService {
       return items;
     }
 
-    var mergedList = [...await fetchSearchDelhaize(searchTerm)];
+    var mergedList = [...await fetchSearch(searchTerm)];
     // var mergedList = [
     //   ...await fetchSearchDelhaize(searchTerm),
     //   ...await fetchSearchCLP(searchTerm)

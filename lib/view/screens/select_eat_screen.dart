@@ -16,11 +16,11 @@ class SelectEatScreen extends StatelessWidget {
         ),
         context: context,
         builder: (BuildContext context) {
-          return SelectEatStores(ingredients: ingredients);
+          return SelectEatStores(ingredients: ingredients, option: "balanced");
         });
   }
 
-  void _ecologic(context, ingredients) async {
+  void _economic(context, ingredients) async {
     showModalBottomSheet(
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
@@ -29,7 +29,7 @@ class SelectEatScreen extends StatelessWidget {
         ),
         context: context,
         builder: (BuildContext context) {
-          return SelectEatStores(ingredients: ingredients);
+          return SelectEatStores(ingredients: ingredients, option: "economic");
         });
   }
 
@@ -315,7 +315,7 @@ class SelectEatScreen extends StatelessWidget {
                         ),
                       ),
                       TextButton(
-                        onPressed: () => _ecologic(context, meal.ingredients),
+                        onPressed: () => _economic(context, meal.ingredients),
                         child: const Icon(
                           Icons.arrow_forward_rounded,
                           color: Colors.white,

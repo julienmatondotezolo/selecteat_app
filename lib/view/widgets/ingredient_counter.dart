@@ -26,6 +26,7 @@ class _IngredientCounterState extends State<IngredientCounter> {
     var size = MediaQuery.of(context).size;
     var meal = widget.mealDetail;
     List<dynamic> ingredientsList = meal.ingredientsList;
+
     // var persons = meal.persons;
     return Column(
       children: [
@@ -70,7 +71,7 @@ class _IngredientCounterState extends State<IngredientCounter> {
         ListView.builder(
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
-          itemCount: ingredientsList.length,
+          itemCount: ingredientsList.length ~/ 2,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             var ingredient = ingredientsList[index];

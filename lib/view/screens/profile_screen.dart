@@ -16,7 +16,6 @@ class ProfileScreen extends StatefulWidget {
 
 List<DropdownMenuItem<String>> get dropdownItems {
   List<DropdownMenuItem<String>> menuItems = [
-    const DropdownMenuItem(child: Text("English"), value: "English"),
     const DropdownMenuItem(child: Text("Français"), value: "Français"),
     const DropdownMenuItem(child: Text("Nederlands"), value: "Nederlands"),
   ];

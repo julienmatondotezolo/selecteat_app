@@ -3,26 +3,50 @@ import 'dart:async';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:selecteat_app/controllers/selecteat.dart';
 import 'package:selecteat_app/utils/constants.dart';
 import 'package:selecteat_app/view/screens/list_screen.dart';
 import 'package:selecteat_app/viewmodels/nearby_stores_list_view_model.dart';
 
 class SelectEatStores extends StatefulWidget {
-  const SelectEatStores({Key? key, required this.ingredients})
+  const SelectEatStores(
+      {Key? key, required this.ingredients, required this.option})
       : super(key: key);
 
   final dynamic ingredients;
+  final dynamic option;
 
   @override
   State<SelectEatStores> createState() => _SelectEatStoresState();
 }
 
 class _SelectEatStoresState extends State<SelectEatStores> {
+  SelectEatController? list;
+  void balanced(ingredients, list) async {
+    list.balanced(ingredients);
+  }
+
+  void economic(ingredients, list) async {
+    list.balanced(ingredients);
+  }
+
   @override
   void initState() {
-    super.initState();
     Provider.of<NearbyStoresListViewModel>(context, listen: false)
         .allNearbyStores();
+
+    list = Provider.of<SelectEatController>(context, listen: false);
+    print(list!.loadingStatus);
+
+    if (widget.option == "balanced") {
+      balanced(widget.ingredients, list);
+    }
+
+    if (widget.option == "economic") {
+      economic(widget.ingredients, list);
+    }
+
+    super.initState();
 
     Timer(const Duration(seconds: 1), () {
       setState(() {
@@ -39,11 +63,12 @@ class _SelectEatStoresState extends State<SelectEatStores> {
         MaterialPageRoute(
           builder: (context) => const ListScreen(),
         ));
-  }
+  }  
 
   @override
   Widget build(BuildContext context) {
-    print(shouldShow);
+    SelectEatController list = Provider.of<SelectEatController>(context);
+
     var nearbyStoreslistViewModel =
         Provider.of<NearbyStoresListViewModel>(context);
     List nearbyStoresList = nearbyStoreslistViewModel.nearbyStoresList;
@@ -75,7 +100,7 @@ class _SelectEatStoresState extends State<SelectEatStores> {
       );
     }
 
-    if (shouldShow) {
+    if (list.loadingStatus.toString() != "delhaize") {
       return Container(
         margin: const EdgeInsets.all(40),
         child: Center(
@@ -169,27 +194,27 @@ class _SelectEatStoresState extends State<SelectEatStores> {
                                     ),
                                     Row(
                                       children: [
-                                        Text(
-                                          '${nearbyStores.distance} - ',
-                                          style: const TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
+                                        // Text(
+                                        //   '${nearbyStores.distance} - ',
+                                        //   style: const TextStyle(
+                                        //     fontSize: 12,
+                                        //   ),
+                                        // ),
                                         const Text(
-                                          '(This an estimated price)',
+                                          'This an estimated price',
                                           style: TextStyle(
                                             color: brandRedNotifyColor,
-                                            fontSize: 8,
+                                            fontSize: 10,
                                           ),
                                         ),
-                                        const SizedBox(
-                                          width: 5,
-                                        ),
-                                        const Icon(
-                                          Icons.info_outline,
-                                          color: brandDarkColor,
-                                          size: 12,
-                                        ),
+                                        // const SizedBox(
+                                        //   width: 5,
+                                        // ),
+                                        // const Icon(
+                                        //   Icons.info_outline,
+                                        //   color: brandDarkColor,
+                                        //   size: 12,
+                                        // ),
                                       ],
                                     )
                                   ]),
