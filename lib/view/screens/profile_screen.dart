@@ -17,7 +17,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  String selectedValue = "fr";
+  String? selectedValue;
   bool _lights = false;
   var localController;
 
@@ -25,6 +25,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     localController = Provider.of<LocalController>(context, listen: false);
     super.initState();
+    selectedValue = localController.locale.toString();
   }
 
   void _signOut() async {
@@ -33,11 +34,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   List<DropdownMenuItem<String>> get dropdownItems {
     List<DropdownMenuItem<String>> menuItems = [
-        DropdownMenuItem(
+      DropdownMenuItem(
           onTap: () => localController.setLocale(Locale("fr")),
           child: Text("Français"),
           value: "fr"),
-        DropdownMenuItem(
+      DropdownMenuItem(
           onTap: () => localController.setLocale(Locale("nl")),
           child: Text("Nederlands"),
           value: "nl"),
@@ -50,7 +51,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     var size = MediaQuery.of(context).size;
     final firebaseUser = context.watch<User>();
     var user = Provider.of<UserProvider>(context).currentUser;
-
     return Scaffold(
         appBar: MyAppBar(),
         bottomNavigationBar: const BottomNav(),
@@ -145,7 +145,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(AppLocalizations.of(context)!.editPassword,
+                                      Text(
+                                          AppLocalizations.of(context)!
+                                              .editPassword,
                                           style: Theme.of(context)
                                               .textTheme
                                               .headline6!
