@@ -5,6 +5,8 @@ import 'package:dio/dio.dart';
 import 'package:selecteat_app/models/products.dart';
 import 'package:selecteat_app/models/products_colruyt.dart';
 import 'package:selecteat_app/models/products_delhaize.dart';
+import 'package:http/http.dart' as http;
+import 'package:ua_client_hints/ua_client_hints.dart';
 
 class SearchService {
   var dio = Dio();
@@ -25,15 +27,30 @@ class SearchService {
   }
 
   Future<List<ProductsColruyt>> fetchSearchCLP(searchTerm) async {
-    var dio = Dio();
-    dio.options.headers['X-CG-APIKey'] = 'a8ylmv13-b285-4788-9e14-0f79b7ed2411';
+    final String ua = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36 RuxitSynthetic/1.0 v8449358166 t6988750937567728211 athfa3c3975 altpub cvcv=2 smf=0";
 
+    var dio = Dio();
+    dio.options.headers["X-CG-APIKey"] = "a8ylmv13-b285-4788-9e14-0f79b7ed2411";
+    dio.options.headers["User-Agent"] = ua;
+    print(ua);
     int page = 1;
     String placeId = "455";
     String size = "10";
     String urlCLP =
         "https://apip.colruyt.be/gateway/ictmgmt.emarkecom.cgproductsearchsvc.v2/v1/fr/products?clientCode=CLP&isAvailable=true&page=${page.toString()}&placeId=$placeId&searchTerm=$searchTerm&size=$size&ts=1654641965327";
+
     print(urlCLP);
+    // var url = Uri.parse(urlCLP);
+    // var response = await http.get(url, headers: {
+    //   "X-CG-APIKey": "a8ylmv13-b285-4788-9e14-0f79b7ed2411",
+    //   "User-Agent": ua
+    // });
+    // print('Response status: ${response.body}');
+
+    // final result = response.body;
+    // Iterable list = result as Iterable;
+    // return list.map((product) => ProductsColruyt.fromJson(product)).toList();
+
     final responseCLP = await dio.get(urlCLP);
     if (responseCLP.statusCode == 200) {
       final result = responseCLP.data["products"];
@@ -116,11 +133,11 @@ class SearchService {
       return items;
     }
 
-    // var mergedList = [...await fetchSearch(searchTerm)];
-    var mergedList = [
-      ...await fetchSearchDelhaize(searchTerm),
-      ...await fetchSearch(searchTerm)
-    ];
+    var mergedList = [...await fetchSearchCLP(searchTerm)];
+    // var mergedList = [
+    //   ...await fetchSearchDelhaize(searchTerm),
+    //   ...await fetchSearch(searchTerm)
+    // ];
 
     return shuffle(mergedList);
   }
