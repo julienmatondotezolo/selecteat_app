@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:selecteat_app/utils/constants.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class IngredientCounter extends StatefulWidget {
   const IngredientCounter({Key? key, required this.mealDetail})
@@ -25,6 +26,12 @@ class _IngredientCounterState extends State<IngredientCounter> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var meal = widget.mealDetail;
+    var personen = AppLocalizations.of(context)!.people;
+
+    if (_count == 1 && personen == " personen") {
+      personen = " persoon";
+    }
+
     List<dynamic> ingredientsList = meal.ingredientsList;
 
     // var persons = meal.persons;
@@ -52,7 +59,7 @@ class _IngredientCounterState extends State<IngredientCounter> {
                             decrementCounter();
                           },
                         ),
-                        Text(_count.toString() + " people"),
+                        Text(_count.toString() + personen),
                         IconButton(
                           icon: const Icon(Icons.add),
                           onPressed: () {

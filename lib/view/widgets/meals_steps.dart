@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:selecteat_app/utils/constants.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MealSteps extends StatelessWidget {
   final dynamic mealDetail;
@@ -76,8 +77,8 @@ class MealSteps extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "Steps:",
+                Text(
+                  AppLocalizations.of(context)!.steps,
                   style: TextStyle(
                     color: brandDarkColor,
                     fontWeight: FontWeight.bold,

@@ -51,11 +51,11 @@
     "@logout": {
       "description": "logout"
     },
-    "startMeal": "Voir le repas",
+    "startMeal": "Voir la recette",
     "@startMeal": {
       "description": "startMeal"
     },
-    "steps": "Étapes",
+    "steps": "Étapes: ",
     "@steps": {
       "description": "steps"
     },
@@ -63,7 +63,7 @@
     "@ingredients": {
       "description": "ingredients"
     },
-    "people": "Personne(s)",
+    "people": " personne(s)",
     "@people": {
       "description": "people"
     },
