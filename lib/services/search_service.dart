@@ -32,7 +32,6 @@ class SearchService {
     var dio = Dio();
     dio.options.headers["X-CG-APIKey"] = "a8ylmv13-b285-4788-9e14-0f79b7ed2411";
     dio.options.headers["User-Agent"] = ua;
-    print(ua);
     int page = 1;
     String placeId = "455";
     String size = "10";
@@ -133,11 +132,12 @@ class SearchService {
       return items;
     }
 
-    var mergedList = [...await fetchSearchCLP(searchTerm)];
-    // var mergedList = [
-    //   ...await fetchSearchDelhaize(searchTerm),
-    //   ...await fetchSearch(searchTerm)
-    // ];
+    // var mergedList = [...await fetchSearchCLP(searchTerm)];
+    var mergedList = [
+      ...await fetchSearchDelhaize(searchTerm),
+      ...await fetchSearch(searchTerm),
+      ...await fetchSearchCLP(searchTerm)
+    ];
 
     return shuffle(mergedList);
   }
