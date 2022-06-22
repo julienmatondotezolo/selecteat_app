@@ -116,11 +116,11 @@ class SearchService {
       return items;
     }
 
-    var mergedList = [...await fetchSearch(searchTerm)];
-    // var mergedList = [
-    //   ...await fetchSearchDelhaize(searchTerm),
-    //   ...await fetchSearchCLP(searchTerm)
-    // ];
+    // var mergedList = [...await fetchSearch(searchTerm)];
+    var mergedList = [
+      ...await fetchSearchDelhaize(searchTerm),
+      ...await fetchSearch(searchTerm)
+    ];
 
     return shuffle(mergedList);
   }
