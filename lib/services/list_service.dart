@@ -67,11 +67,10 @@ class ListService {
 
     try {
       list.docs.forEach((doc) {
-        var quantity = doc.get('quantity');
         doc.reference.update({'quantity': count});
       });
-
       print("${product.name} is updated.");
+      // print("${product.name} is updated.");
     } on FirebaseAuthException catch (e) {
       print(e.message);
       return e.message;

@@ -4,10 +4,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
+import 'package:provider/provider.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:selecteat_app/utils/constants.dart';
 import 'package:selecteat_app/view/components/bottomnav.dart';
-import 'package:selecteat_app/view/screens/home_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:selecteat_app/viewmodels/products_view_model.dart';
+import 'package:selecteat_app/viewmodels/search_list_view_model.dart';
 
 class ScannerScreen extends StatefulWidget {
   const ScannerScreen({Key? key}) : super(key: key);
@@ -34,8 +37,23 @@ class _ScannerScreenState extends State<ScannerScreen> {
     }
   }
 
-  void _addProductToList() async {
-    return null;
+  void _addProductToList(String? productName) async {
+    Provider.of<SearchListViewModel>(context, listen: false)
+        .searchResult(productName);
+
+    List<ProductViewModel> searchListResult =
+        Provider.of<SearchListViewModel>(context).searchListResult;
+
+    showModalBottomSheet(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(20),
+          ),
+        ),
+        context: context,
+        builder: (BuildContext context) {
+          return Text(searchListResult.length.toString());
+        });
   }
 
   void _addProductToFavs() async {
@@ -44,6 +62,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     var size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -154,7 +173,8 @@ class _ScannerScreenState extends State<ScannerScreen> {
                                             backgroundColor: brandPrimaryColor,
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 40, vertical: 15)),
-                                        onPressed: _addProductToList,
+                                        onPressed: () => _addProductToList(
+                                            product!.product!.productName),
                                         child: const Text(
                                           'Add to list +',
                                           style: TextStyle(
@@ -205,8 +225,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
           errorMessage != null
               ? AlertDialog(
                   title: Text(errorMessage!),
-                  content:
-                      const Text('This product was not found in our catalog.'),
+                  content: Text(AppLocalizations.of(context)!.productNotFound),
                   actions: [
                     TextButton(
                       onPressed: () => Navigator.push(

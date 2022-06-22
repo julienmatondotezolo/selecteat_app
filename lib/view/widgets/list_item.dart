@@ -74,6 +74,7 @@ class _ListItemState extends State<ListItem> {
         itemBuilder: (context, index) {
           var product = productList[index];
           _count = product.quantity;
+    
           return Container(
             decoration: const BoxDecoration(
               border: Border(

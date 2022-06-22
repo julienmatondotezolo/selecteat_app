@@ -152,7 +152,8 @@ class _NearbyStoreScreenState extends State<NearbyStoreScreen> {
                   const SizedBox(height: 20),
                   SizedBox(
                     height: size.height / 2.2,
-                    child: NearbyStoresList(
+                    child: 
+                    NearbyStoresList(
                         nearbyStoresList:
                             nearbyStoreslistViewModel.nearbyStoresList),
                   ),

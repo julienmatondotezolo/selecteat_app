@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:selecteat_app/utils/constants.dart';
 import 'package:selecteat_app/viewmodels/nearbyStores_view_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class NearbyStoresList extends StatelessWidget {
   final List<NearbyStoresViewModel> nearbyStoresList;
 
@@ -10,7 +11,21 @@ class NearbyStoresList extends StatelessWidget {
     required this.nearbyStoresList,
   }) : super(key: key);
 
-  void _focusStoreOnMap() async {
+  void _focusStoreOnMap(NearbyStoresViewModel nearbyStores, context) async {
+    showDialog(context: context, builder: (context) => AlertDialog(
+      title: Text(nearbyStores.properties["commercialName"]),
+      content: Column(
+        children: [
+          Text(nearbyStores.street)
+        ],
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: Text("Go back"),
+        ),
+      ],
+    ));
     return null;
   }
 
@@ -42,15 +57,17 @@ class NearbyStoresList extends StatelessWidget {
                 children: [
                   Text(
                     nearbyStores.properties["commercialName"].length > 28
-                                ? nearbyStores.properties["commercialName"].substring(0, 28) + '...'
-                                : nearbyStores.properties["commercialName"],
+                        ? nearbyStores.properties["commercialName"]
+                                .substring(0, 28) +
+                            '...'
+                        : nearbyStores.properties["commercialName"],
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Text(
-                    nearbyStores.street .length > 30 ? nearbyStores.street.substring(0, 30) + '...' : nearbyStores.street
-                  ),
+                  Text(nearbyStores.street.length > 30
+                      ? nearbyStores.street.substring(0, 30) + '...'
+                      : nearbyStores.street),
                   RichText(
                     text: TextSpan(children: [
                       TextSpan(
@@ -71,21 +88,21 @@ class NearbyStoresList extends StatelessWidget {
                   ),
                 ],
               ),
-               TextButton(
-                onPressed: _focusStoreOnMap,
+              TextButton(
+                onPressed: () => _focusStoreOnMap(nearbyStores, context),
                 child: const Icon(
                   Icons.arrow_forward_rounded,
                   color: Colors.white,
                   size: 20,
                 ),
                 style: TextButton.styleFrom(
-                          backgroundColor: brandPrimaryColor,
-                          padding: EdgeInsets.zero,
-                          minimumSize: const Size(38, 38),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                      ),
+                  backgroundColor: brandPrimaryColor,
+                  padding: EdgeInsets.zero,
+                  minimumSize: const Size(38, 38),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                ),
               ),
             ],
           ),

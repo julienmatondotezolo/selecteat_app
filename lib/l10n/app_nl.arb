@@ -42,12 +42,14 @@
     "economic10": " in jouw buurt zijn.",
     "searchingNearbyStores": "Alle winkels in de buurt zoeken...",
     "meals": "Maaltijden",
-    "distance": "Afstand",
+    "distance": "Afstand: ",
     "addToList": "Toevoegen aan lijst +",
     "removefromList": "Uit de lijst verwijderen",
     "itemsToPick": "Ingredienten bij ",
     "total": "Totaal: ",
     "approximate": "Dit is een geschatte prijs die u zal helpen om de prijs van uw aankopen te schatten.",
     "continueShopping": "Verder winkelen",
-    "pickUpProducts": "Winkel nu →"
+    "pickUpProducts": "Winkel nu →",
+    "productNotFound": "Dit product werd niet gevonden in onze catalogus.",
+    "searchInStore": "Zoeken in de winkels"
 }
