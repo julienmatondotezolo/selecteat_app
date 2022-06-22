@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:selecteat_app/utils/constants.dart';
 import 'package:selecteat_app/view/screens/meal_screen.dart';
 import 'package:selecteat_app/viewmodels/meals_view_model.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MealsSlider extends StatelessWidget {
   final List<MealViewModel> gridList;
@@ -103,8 +104,8 @@ class MealsSlider extends StatelessWidget {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 40, vertical: 15)),
                                 onPressed: () => _mealDetailPage(context, meal),
-                                child: const Text(
-                                  'Start meal',
+                                child: Text(
+                                  AppLocalizations.of(context)!.startMeal,
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                   ),

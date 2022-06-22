@@ -3,7 +3,7 @@ import 'package:selecteat_app/utils/constants.dart';
 import 'package:selecteat_app/view/screens/select_eat_screen.dart';
 import 'package:selecteat_app/view/widgets/ingredient_counter.dart';
 import 'package:selecteat_app/view/widgets/meals_steps.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class MealScreen extends StatelessWidget {
   final dynamic meal;
 
@@ -126,8 +126,8 @@ class MealScreen extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Ingrédients",
+                          Text(
+                            AppLocalizations.of(context)!.ingredients,
                             style: TextStyle(
                               color: brandDarkColor,
                               fontWeight: FontWeight.bold,
@@ -183,8 +183,8 @@ class MealScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 40, vertical: 15)),
                       onPressed: () => _addProductToList(context, meal),
-                      child: const Text(
-                        'Add to ingredients list +',
+                      child: Text(
+                        AppLocalizations.of(context)!.addIngredientsToList,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
@@ -198,8 +198,8 @@ class MealScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 40, vertical: 15)),
                       onPressed: () => _startCooking(context, meal),
-                      child: const Text(
-                        'Start cooking',
+                      child: Text(
+                        AppLocalizations.of(context)!.startCooking,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),

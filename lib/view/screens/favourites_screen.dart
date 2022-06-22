@@ -8,6 +8,7 @@ import 'package:selecteat_app/view/components/bottomnav.dart';
 import 'package:selecteat_app/view/components/myappbar.dart';
 import 'package:selecteat_app/view/widgets/favourites_item.dart';
 import 'package:selecteat_app/viewmodels/products_view_model.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FavouritesScreen extends StatelessWidget {
   const FavouritesScreen({Key? key}) : super(key: key);
@@ -30,7 +31,7 @@ class FavouritesScreen extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(20.0),
               child: Text(
-                "Favourites",
+                AppLocalizations.of(context)!.favourites,
                 softWrap: false,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 4,
@@ -58,8 +59,8 @@ class FavouritesScreen extends StatelessWidget {
                         fontSize: 18,
                       ),
                       tabs: [
-                        Tab(text: "Products"),
-                        Tab(text: "Meals"),
+                        Tab(text: AppLocalizations.of(context)!.products),
+                        Tab(text: AppLocalizations.of(context)!.meals),
                       ],
                     ),
                     Expanded(

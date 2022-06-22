@@ -7,6 +7,7 @@ import 'package:selecteat_app/view/components/myappbar.dart';
 import 'package:selecteat_app/view/widgets/list_store_price_total.dart';
 import 'package:selecteat_app/view/widgets/list_item.dart';
 import 'package:selecteat_app/viewmodels/products_view_model.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ListScreen extends StatelessWidget {
   const ListScreen({Key? key}) : super(key: key);
@@ -167,10 +168,10 @@ class ListScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
-                      children: const [
+                      children: [
                         Expanded(
                           child: Text(
-                              "This is an approximate price that will help you estimate the price of your purchases.",
+                              AppLocalizations.of(context)!.approximate,
                               // softWrap: false,
                               // overflow: TextOverflow.ellipsis,
                               // maxLines: 4,
@@ -185,7 +186,7 @@ class ListScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Total:",
+                          AppLocalizations.of(context)!.total,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: brandDarkColor,
@@ -218,8 +219,8 @@ class ListScreen extends StatelessWidget {
                                 horizontal: 20, vertical: 15),
                           ),
                           onPressed: () => _continueShopping(context),
-                          child: const Text(
-                            'Continue shopping',
+                          child: Text(
+                            AppLocalizations.of(context)!.continueShopping,
                             style: TextStyle(
                               color: brandDarkColor,
                               fontWeight: FontWeight.bold,
@@ -233,8 +234,8 @@ class ListScreen extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 20, vertical: 15)),
                           onPressed: () => _pickup(context),
-                          child: const Text(
-                            'Pick up products',
+                          child: Text(
+                            AppLocalizations.of(context)!.pickUpProducts,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                             ),

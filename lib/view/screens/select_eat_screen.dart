@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:selecteat_app/utils/constants.dart';
 import 'package:selecteat_app/view/components/myappbar.dart';
 import 'package:selecteat_app/view/widgets/select_eat_stores.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class SelectEatScreen extends StatelessWidget {
   final dynamic meal;
   const SelectEatScreen({Key? key, required this.meal}) : super(key: key);
@@ -51,7 +51,7 @@ class SelectEatScreen extends StatelessWidget {
                     text: TextSpan(
                       children: [
                         TextSpan(
-                          text: 'Select between the 2 options to add the ingredients for ',
+                          text: AppLocalizations.of(context)!.selectEat1,
                           style: const TextStyle(
                             color: brandDarkColor,
                             fontWeight: FontWeight.bold,
@@ -67,7 +67,7 @@ class SelectEatScreen extends StatelessWidget {
                           ),
                         ),
                         TextSpan(
-                          text: ' to your cart.',
+                          text: AppLocalizations.of(context)!.selectEat2,
                           style: const TextStyle(
                             color: brandDarkColor,
                             fontWeight: FontWeight.bold,
@@ -115,19 +115,19 @@ class SelectEatScreen extends StatelessWidget {
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
-                                        text: 'The ',
+                                        text: AppLocalizations.of(context)!.balanced,
                                       ),
                                       TextSpan(
-                                        text: 'healthiest ingredients',
+                                        text: AppLocalizations.of(context)!.balanced1,
                                         style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
                                       TextSpan(
-                                        text: ' based on the nutri-score to ',
+                                        text: AppLocalizations.of(context)!.balanced2,
                                       ),
                                       TextSpan(
-                                        text: 'compose a balanced cart.',
+                                        text: AppLocalizations.of(context)!.balanced3,
                                         style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                         ),
@@ -142,31 +142,31 @@ class SelectEatScreen extends StatelessWidget {
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
-                                        text: 'The ingredients',
+                                        text: AppLocalizations.of(context)!.balanced5,
                                         style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
                                       TextSpan(
-                                        text: ' will be from ',
+                                        text: AppLocalizations.of(context)!.balanced6,
                                       ),
                                       TextSpan(
-                                        text: 'one',
+                                        text: AppLocalizations.of(context)!.balanced7,
                                         style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
                                       TextSpan(
-                                        text: ' or ',
+                                        text: AppLocalizations.of(context)!.balanced8,
                                       ),
                                       TextSpan(
-                                        text: 'different stores',
+                                        text: AppLocalizations.of(context)!.balanced9,
                                         style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
                                       TextSpan(
-                                        text: 'near you.',
+                                        text: AppLocalizations.of(context)!.balanced10,
                                       ),
                                     ]
                                   )
@@ -229,26 +229,26 @@ class SelectEatScreen extends StatelessWidget {
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
-                                        text: 'The ',
+                                        text: AppLocalizations.of(context)!.economic,
                                         style: const TextStyle(
                                           color: brandDarkColor,
                                         ),
                                       ),
                                       TextSpan(
-                                        text: 'cheapest ingredients',
+                                        text: AppLocalizations.of(context)!.economic1,
                                         style: const TextStyle(
                                           color: brandDarkColor,
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
                                       TextSpan(
-                                        text: ' from ',
+                                        text: AppLocalizations.of(context)!.economic2,
                                         style: const TextStyle(
                                           color: brandDarkColor,
                                         ),
                                       ),
                                       TextSpan(
-                                        text: 'different stores.',
+                                        text: AppLocalizations.of(context)!.economic3,
                                         style: const TextStyle(
                                           color: brandDarkColor,
                                           fontWeight: FontWeight.bold,
@@ -264,48 +264,42 @@ class SelectEatScreen extends StatelessWidget {
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
-                                        text: 'The ',
+                                        text: AppLocalizations.of(context)!.economic5,
                                         style: const TextStyle(
                                           color: brandDarkColor,
                                         ),
                                       ),
                                       TextSpan(
-                                        text: 'ingredients',
+                                        text: AppLocalizations.of(context)!.economic6,
                                         style: const TextStyle(
                                           color: brandDarkColor,
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
                                       TextSpan(
-                                        text: ' will be from ',
+                                        text: AppLocalizations.of(context)!.economic7,
                                         style: const TextStyle(
                                           color: brandDarkColor,
                                         ),
                                       ),
                                       TextSpan(
-                                        text: 'one',
+                                        text: AppLocalizations.of(context)!.economic8,
                                         style: const TextStyle(
                                           color: brandDarkColor,
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
                                       TextSpan(
-                                        text: ' or ',
+                                        text: AppLocalizations.of(context)!.economic9,
                                         style: const TextStyle(
                                           color: brandDarkColor,
                                         ),
                                       ),
                                       TextSpan(
-                                        text: 'different stores',
+                                        text: AppLocalizations.of(context)!.economic10,
                                         style: const TextStyle(
                                           color: brandDarkColor,
                                           fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      TextSpan(
-                                        text: 'near you.',
-                                        style: const TextStyle(
-                                          color: brandDarkColor,
                                         ),
                                       ),
                                     ]

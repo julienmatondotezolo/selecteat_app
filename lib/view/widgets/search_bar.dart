@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:selecteat_app/utils/constants.dart';
 import 'package:selecteat_app/view/components/searchdelegate.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class SearchBar extends StatelessWidget {
   const SearchBar({
     Key? key,
@@ -32,7 +32,7 @@ class SearchBar extends StatelessWidget {
                 width: 10,
               ),
               Text(
-                "Que recherchez-vous ?",
+                AppLocalizations.of(context)!.search,
                 style: TextStyle(color: Colors.grey),
               )
             ],

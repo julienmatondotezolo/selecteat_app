@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:selecteat_app/controllers/navigation.dart';
 import 'package:selecteat_app/utils/constants.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class BottomNav extends StatefulWidget {
   const BottomNav({Key? key}) : super(key: key);
 
@@ -46,10 +46,10 @@ class _BottomNavState extends State<BottomNav> {
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         type: BottomNavigationBarType.fixed,
-        items: const [
+        items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.room_outlined),
-            label: 'Map',
+            label: AppLocalizations.of(context)!.mapPage,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.qr_code_2),
@@ -61,11 +61,11 @@ class _BottomNavState extends State<BottomNav> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite_border),
-            label: 'Favourites',
+            label: AppLocalizations.of(context)!.favourites,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_outline),
-            label: 'Profile',
+            label: AppLocalizations.of(context)!.profilePage,
           ),
         ],
       ),

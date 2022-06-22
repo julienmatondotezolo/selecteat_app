@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:selecteat_app/utils/constants.dart';
 import 'package:selecteat_app/view/components/searchdelegate.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
@@ -35,7 +36,7 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
               SizedBox(width: 10,),
               Text(
-              "Que recherchez-vous ?",
+              AppLocalizations.of(context)!.search,
               style: TextStyle(
                 color: Colors.grey
               ),

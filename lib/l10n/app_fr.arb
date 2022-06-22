@@ -3,6 +3,38 @@
     "@helloWorld": {
       "description": "The conventional newborn programmer greeting"
     },
+    "description": "Explorez des nouvelles recettes et sélectionnez les meilleurs ingrédients qui vous convient.",
+    "@description": {
+      "description": "description"
+    },
+    "search": "Que recherchez-vous ?",
+    "@search": {
+      "description": "search"
+    },
+    "topMeals": "Repas de la semaine",
+    "@topMeals": {
+      "description": "topMeals"
+    },
+    "products": "Produits",
+    "@products": {
+      "description": "products"
+    },
+    "allProducts": "Tous les produits",
+    "@allProducts": {
+      "description": "allProducts"
+    },
+    "seeAll": "voir tous",
+    "@seeAll": {
+      "description": "seeAll"
+    },
+    "mapPage": "Carte",
+    "@mapPage": {
+      "description": "mapPage"
+    },
+    "favourites": "Favoris",
+    "@favourites": {
+      "description": "favourites"
+    },
     "profilePage": "Profil",
     "@profilePage": {
       "description": "Profile page"
@@ -10,5 +42,169 @@
     "editPassword": "Modifier le mot de passe",
     "@editPassword": {
       "description": "editPassword"
+    },
+    "language": "Langue",
+    "@language": {
+      "description": "language"
+    },
+    "logout": "Se déconnecter",
+    "@logout": {
+      "description": "logout"
+    },
+    "startMeal": "Voir le repas",
+    "@startMeal": {
+      "description": "startMeal"
+    },
+    "steps": "Étapes",
+    "@steps": {
+      "description": "steps"
+    },
+    "ingredients": "Ingrédients",
+    "@ingredients": {
+      "description": "ingredients"
+    },
+    "people": "Personne(s)",
+    "@people": {
+      "description": "people"
+    },
+    "addIngredientsToList": "Ajouter les ingredients à la liste",
+    "@addIngredientsToList": {
+      "description": "addIngredientsToList"
+    },
+    "startCooking": "Démarrer la cuisson",
+    "@startCooking": {
+      "description": "startCooking"
+    },
+    "selectEat1": "Sélectionnez entre les 2 options pour ajouter les ingrédients de ",
+    "@selectEat1": {
+      "description": "selectEat1"
+    },
+    "selectEat2": " dans votre liste.",
+    "@selectEat2": {
+      "description": "selectEat2"
+    },
+    "balanced": "Les ",
+    "@balanced": {
+      "description": "balanced"
+    },
+    "balanced1": "ingrédients les plus sains",
+    "@balanced1": {
+      "description": "balanced1"
+    },
+    "balanced2": " sur la base du nutri-score pour ",
+    "@balanced2": {
+      "description": "balanced2"
+    },
+    "balanced3": "composer un panier équilibré.",
+    "@balanced3": {
+      "description": "balanced3"
+    },
+    "balanced5": "Les ingrédients",
+    "@balanced5": {
+      "description": "balanced5"
+    },
+    "balanced6": " seront de ",
+    "@balanced6": {
+      "description": "balanced6"
+    },
+    "balanced7": "un",
+    "@balanced7": {
+      "description": "balanced7"
+    },
+    "balanced8": " ou ",
+    "@balanced8": {
+      "description": "balanced8"
+    },
+    "balanced9": "différents magasins",
+    "@balanced9": {
+      "description": "balanced9"
+    },
+    "balanced10": " à proximité de chez vous.",
+    "@balanced10": {
+      "description": "balanced10"
+    },
+    "economic": "Les ",
+    "@economic": {
+      "description": "economic"
+    },
+    "economic1": "ingrédients les moins chers",
+    "@economic1": {
+      "description": "economic1"
+    },
+    "economic2": " des ",
+    "@economic2": {
+      "description": "economic2"
+    },
+    "economic3": "différents magasins.",
+    "@economic3": {
+      "description": "economic3"
+    },
+    "economic5": "Les ingrédients",
+    "@economic5": {
+      "description": "economic5"
+    },
+    "economic6": " seront de ",
+    "@economic6": {
+      "description": "economic6"
+    },
+    "economic7": "un",
+    "@economic7": {
+      "description": "economic7"
+    },
+    "economic8": " ou ",
+    "@economic8": {
+      "description": "economic8"
+    },
+    "economic9": "différents magasins",
+    "@economic9": {
+      "description": "economic9"
+    },
+    "economic10": " à proximité de chez vous.",
+    "@economic10": {
+      "description": "economic10"
+    },
+    "searchingNearbyStores": "Recherche de tous les magasins à proximité...",
+    "@searchingNearbyStores": {
+      "description": "searchingNearbyStores"
+    },
+    "meals": "Recettes",
+    "@meals": {
+      "description": "meals"
+    },
+    "distance": "Distance",
+    "@distance": {
+      "description": "distance"
+    },
+    "addToList": "Ajouter à la liste +",
+    "@addToList": {
+      "description": "addToList"
+    },
+    "removefromList": "Retirer de la liste",
+    "@removefromList": {
+      "description": "removefromList"
+    },
+    "itemsToPick": "Ingrédient au ",
+    "@itemsToPick": {
+      "description": "itemsToPick"
+    },
+    "total": "Total: ",
+    "@total": {
+      "description": "total"
+    },
+    "total": "Total: ",
+    "@total": {
+      "description": "total"
+    },
+    "approximate": "Il s'agit d'un prix approximatif qui vous aidera à estimer le prix de vos achats.",
+    "@approximate": {
+      "description": "approximate"
+    },
+    "continueShopping": "Continuer les achats",
+    "@continueShopping": {
+      "description": "continueShopping"
+    },
+    "pickUpProducts": "Faites vos achats →",
+    "@pickUpProducts": {
+      "description": "pickUpProducts"
     }
 }

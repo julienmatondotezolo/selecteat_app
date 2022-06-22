@@ -11,6 +11,7 @@ import 'package:selecteat_app/view/components/bottomnav.dart';
 import 'package:selecteat_app/view/widgets/nearby_stores_list.dart';
 import 'package:selecteat_app/viewmodels/nearby_stores_list_view_model.dart';
 import 'package:location/location.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NearbyStoreScreen extends StatefulWidget {
   const NearbyStoreScreen({Key? key}) : super(key: key);
@@ -78,13 +79,13 @@ class _NearbyStoreScreenState extends State<NearbyStoreScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
   crossAxisAlignment: CrossAxisAlignment.center,
-            children: const [
+            children: [
               CircularProgressIndicator(color: brandPrimaryColor),
               SizedBox(
                 height: 40,
               ),
               Text(
-                "Searching all nearby stores..",
+                AppLocalizations.of(context)!.searchingNearbyStores,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 18,

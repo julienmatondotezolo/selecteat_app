@@ -5,6 +5,7 @@ import 'package:selecteat_app/view/components/bottomnav.dart';
 import 'package:selecteat_app/view/components/myappbar.dart';
 import 'package:selecteat_app/view/widgets/products_grid.dart';
 import 'package:selecteat_app/viewmodels/products_list_view_model.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProductScreen extends StatefulWidget {
   const ProductScreen({Key? key}) : super(key: key);
@@ -67,7 +68,7 @@ class _ProductScreenState extends State<ProductScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Products",
+                    Text(AppLocalizations.of(context)!.products,
                         style: Theme.of(context)
                             .textTheme
                             .headline6!

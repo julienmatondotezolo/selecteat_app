@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:selecteat_app/auth/provider/user_provider.dart';
 import 'package:selecteat_app/utils/constants.dart';
 import 'package:selecteat_app/view/components/bottomnav.dart';
-import 'package:selecteat_app/view/widgets/cart.dart';
 import 'package:selecteat_app/view/widgets/cart_home.dart';
 import 'package:selecteat_app/view/widgets/meals_slider.dart';
 import 'package:selecteat_app/view/widgets/products_grid.dart';
@@ -88,8 +87,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           .headline6!
                           .copyWith(fontWeight: FontWeight.bold)),
                   const SizedBox(height: 10),
-                  const Text(
-                    "Explore new meals and select the best ingredients for you.",
+                  Text(
+                    AppLocalizations.of(context)!.description,
                   ),
                   const SizedBox(height: 20),
                   const SearchBar(),
@@ -119,15 +118,15 @@ class _HomeScreenState extends State<HomeScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("Top meals this week",
+                            Text(AppLocalizations.of(context)!.topMeals,
                                 style: Theme.of(context)
                                     .textTheme
                                     .headline6!
                                     .copyWith(fontWeight: FontWeight.bold)),
                             GestureDetector(
                               onTap: () => _allMeals(context),
-                              child: const Text(
-                                "see all",
+                              child: Text(
+                                AppLocalizations.of(context)!.seeAll,
                                 style: TextStyle(
                                     fontSize: 12, color: brandPrimaryColor),
                               ),
@@ -143,15 +142,15 @@ class _HomeScreenState extends State<HomeScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("Products",
+                            Text(AppLocalizations.of(context)!.products,
                                 style: Theme.of(context)
                                     .textTheme
                                     .headline6!
                                     .copyWith(fontWeight: FontWeight.bold)),
                             GestureDetector(
                               onTap: () => _allProducts(context),
-                              child: const Text(
-                                "see all",
+                              child: Text(
+                                AppLocalizations.of(context)!.seeAll,
                                 style: TextStyle(
                                     fontSize: 12, color: brandPrimaryColor),
                               ),
@@ -161,8 +160,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         ProductsGrid(
                           productsList: productListViewModel.productsList,
                         ),
+                        SizedBox(height: 20,),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             TextButton(
                               style: TextButton.styleFrom(
@@ -174,8 +174,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     horizontal: 20, vertical: 15),
                               ),
                               onPressed: () => _allProducts(context),
-                              child: const Text(
-                                'all products',
+                              child: Text(
+                                AppLocalizations.of(context)!.allProducts,
                                 style: TextStyle(
                                   color: brandDarkColor,
                                   fontWeight: FontWeight.bold,
@@ -187,7 +187,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                     SizedBox(
-                      height: size.height / 8,
+                      height: 150,
                     )
                   ],
                 ),

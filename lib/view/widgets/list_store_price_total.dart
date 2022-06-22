@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:selecteat_app/utils/constants.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class ListStorePriceTotal extends StatelessWidget {
   const ListStorePriceTotal({
     Key? key,
@@ -28,8 +28,8 @@ class ListStorePriceTotal extends StatelessWidget {
           RichText(
             text: TextSpan(
               children: [
-              const TextSpan(
-                text: "Items to pick at ",
+              TextSpan(
+                text: AppLocalizations.of(context)!.itemsToPick,
                 style: TextStyle(
                   color: brandDarkColor,
                 ),
@@ -46,7 +46,7 @@ class ListStorePriceTotal extends StatelessWidget {
           RichText(
             text: TextSpan(children: [
               TextSpan(
-                text: "Total: ",
+                text: AppLocalizations.of(context)!.total,
                 style: TextStyle(
                   color: brandDarkColor,
                 ),

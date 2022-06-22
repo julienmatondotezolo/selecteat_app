@@ -7,6 +7,7 @@ import 'package:selecteat_app/controllers/local.dart';
 import 'package:selecteat_app/utils/constants.dart';
 import 'package:selecteat_app/view/components/bottomnav.dart';
 import 'package:selecteat_app/view/components/myappbar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -63,7 +64,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: size.height / 40),
-                      Text("Profile",
+                      Text(AppLocalizations.of(context)!.profilePage,
                           style: Theme.of(context)
                               .textTheme
                               .headline6!
@@ -144,7 +145,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text("Edit password",
+                                      Text(AppLocalizations.of(context)!.editPassword,
                                           style: Theme.of(context)
                                               .textTheme
                                               .headline6!
@@ -166,7 +167,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("Language",
+                              Text(AppLocalizations.of(context)!.language,
                                   style: Theme.of(context)
                                       .textTheme
                                       .headline6!
@@ -210,27 +211,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ],
                           ),
                           SizedBox(height: size.height / 30),
-                          SwitchListTile(
-                              value: _lights,
-                              activeColor: brandPrimaryColor,
-                              contentPadding: EdgeInsets.zero,
-                              onChanged: (bool value) {
-                                setState(() {
-                                  _lights = value;
-                                });
-                              },
-                              secondary: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text("Dark Mode",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline6!
-                                          .copyWith(
-                                              fontWeight: FontWeight.w500)),
-                                ],
-                              )),
+                          // SwitchListTile(
+                          //     value: _lights,
+                          //     activeColor: brandPrimaryColor,
+                          //     contentPadding: EdgeInsets.zero,
+                          //     onChanged: (bool value) {
+                          //       setState(() {
+                          //         _lights = value;
+                          //       });
+                          //     },
+                          //     secondary: Column(
+                          //       crossAxisAlignment: CrossAxisAlignment.start,
+                          //       mainAxisAlignment: MainAxisAlignment.center,
+                          //       children: [
+                          //         Text("Dark Mode",
+                          //             style: Theme.of(context)
+                          //                 .textTheme
+                          //                 .headline6!
+                          //                 .copyWith(
+                          //                     fontWeight: FontWeight.w500)),
+                          //       ],
+                          //     )),
                         ],
                       ),
                       const Spacer(),
@@ -248,8 +249,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 40, vertical: 15)),
                               onPressed: _signOut,
-                              child: const Text(
-                                'Sign out',
+                              child: Text(
+                                AppLocalizations.of(context)!.logout,
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                 ),

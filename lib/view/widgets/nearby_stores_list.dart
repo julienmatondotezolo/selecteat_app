@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:selecteat_app/utils/constants.dart';
 import 'package:selecteat_app/viewmodels/nearbyStores_view_model.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class NearbyStoresList extends StatelessWidget {
   final List<NearbyStoresViewModel> nearbyStoresList;
 
@@ -53,8 +53,8 @@ class NearbyStoresList extends StatelessWidget {
                   ),
                   RichText(
                     text: TextSpan(children: [
-                      const TextSpan(
-                        text: "Distance: ",
+                      TextSpan(
+                        text: AppLocalizations.of(context)!.distance,
                         style: TextStyle(
                           color: brandDarkColor,
                         ),

@@ -7,6 +7,7 @@ import 'package:selecteat_app/auth/provider/user_provider.dart';
 import 'package:selecteat_app/controllers/favourites.dart';
 import 'package:selecteat_app/controllers/list.dart';
 import 'package:selecteat_app/utils/constants.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProductDetail extends StatefulWidget {
   final dynamic productList;
@@ -190,8 +191,8 @@ class _ProductDetailState extends State<ProductDetail> {
                                         horizontal: 40, vertical: 15)),
                                 onPressed: () => _addProductToList(
                                     widget.productList, context),
-                                child: const Text(
-                                  'Add to list +',
+                                child: Text(
+                                  AppLocalizations.of(context)!.addToList,
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -205,8 +206,8 @@ class _ProductDetailState extends State<ProductDetail> {
                                         horizontal: 40, vertical: 15)),
                                 onPressed: () => _removeFromList(
                                     widget.productList, context),
-                                child: const Text(
-                                  'Remove from list +',
+                                child: Text(
+                                  AppLocalizations.of(context)!.removefromList,
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                   ),
